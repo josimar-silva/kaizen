@@ -1,3 +1,4 @@
+use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use regex::Regex;
@@ -31,47 +32,49 @@ pub fn parse_commits(
     commits: &[Commit],
     repo_path: &str,
 ) -> Result<HashMap<String, Vec<CommitData>>, regex::Error> {
-    let mut commits_by_date: HashMap<String, Vec<CommitData>> = HashMap::new();
-
     let commit_re = Regex::new(r"^(?P<type>algo|sysdes)\((?P<date>\d{4}-\d{2}-\d{2})\): (?P<title>.*)")?;
     let notes_re = Regex::new(r"(?ms)^notes: (?P<notes>.*?)(?:^\w+:|\z)")?;
     let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
 
-    for commit in commits {
-        if let Some(commit_caps) = commit_re.captures(&commit.message) {
-            let date = commit_caps["date"].to_string();
-            let title = commit_caps["title"].to_string();
-            let type_of = commit_caps["type"].to_string();
+    let intermediate_data: Vec<(String, CommitData)> = commits
+        .par_iter()
+        .filter_map(|commit| {
+            commit_re.captures(&commit.message).map(|commit_caps| {
+                let date = commit_caps["date"].to_string();
+                let title = commit_caps["title"].to_string();
+                let type_of = commit_caps["type"].to_string();
 
-            let notes = notes_re
-                .captures(&commit.message)
-                .map(|c| c["notes"].trim().to_string())
-                .unwrap_or_default();
+                let notes = notes_re
+                    .captures(&commit.message)
+                    .map(|c| c["notes"].trim().to_string())
+                    .unwrap_or_default();
 
-            let language = lang_re
-                .captures(&commit.message)
-                .map(|c| c["language"].to_string())
-                .unwrap_or_default();
+                let language = lang_re
+                    .captures(&commit.message)
+                    .map(|c| c["language"].to_string())
+                    .unwrap_or_default();
 
-            let link = format!(
-                "https://github.com/{}/commit/{}",
-                repo_path,
-                commit.id
-            );
+                let link = format!(
+                    "https://github.com/{}/commit/{}",
+                    repo_path,
+                    commit.id
+                );
 
-            let commit_data = CommitData {
-                title,
-                notes,
-                link,
-                language,
-                type_of,
-            };
+                let commit_data = CommitData {
+                    title,
+                    notes,
+                    link,
+                    language,
+                    type_of,
+                };
+                (date, commit_data)
+            })
+        })
+        .collect();
 
-            commits_by_date
-                .entry(date)
-                .or_default()
-                .push(commit_data);
-        }
+    let mut commits_by_date: HashMap<String, Vec<CommitData>> = HashMap::new();
+    for (date, commit_data) in intermediate_data {
+        commits_by_date.entry(date).or_default().push(commit_data);
     }
 
     Ok(commits_by_date)
