@@ -22,6 +22,9 @@ git2 = "0.20.2"
 regex = "1.10.5"
 rayon = "1.11.0"
 
+[dev-dependencies]
+kaizen = { path = ".", version = "0.1.0-snapshot" }
+
 [profile.release]
 lto = "fat"
 codegen-units = 1

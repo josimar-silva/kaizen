@@ -247,6 +247,7 @@ name = "kaizen"
 version = "0.1.0-snapshot"
 dependencies = [
  "git2",
+ "kaizen",
  "rayon",
  "regex",
  "serde",
