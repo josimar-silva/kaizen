@@ -27,6 +27,8 @@ url = "2.5"
 
 [dev-dependencies]
 kaizen = { path = ".", version = "0.1.0-snapshot" }
+assert_cmd = "2.0"
+predicates = "3.0"
 
 [profile.release]
 lto = "fat"

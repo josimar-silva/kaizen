@@ -1,5 +1,6 @@
 use clap::{Parser, Subcommand};
-use kaizen::adapters::{GitCommitProvider, JsonFileOutputWriter};
+use kaizen::adapters::git_provider::GitCommitProvider;
+use kaizen::adapters::json_writer::JsonFileOutputWriter;
 use kaizen::domain::parser::parse_commits;
 use kaizen::domain::ports::{CommitProvider, OutputWriter};
 use std::path::PathBuf;
@@ -39,24 +40,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Command::Parse(args) => {
             println!("Parsing repository: {}", args.repository);
 
-            // 1. Instantiate Adapters
             let commit_provider = GitCommitProvider { url: args.repository.clone() };
             let output_writer = JsonFileOutputWriter { path: args.output };
 
-            // 2. Fetch raw commits using the provider
             let commits = commit_provider.fetch()?;
 
             // 3. Extract repo path for link generation
-            let url = Url::parse(&args.repository)?;
-            let repo_path = url.path().trim_start_matches('/').trim_end_matches(".git").to_string();
+            let repo_path = if args.repository.starts_with("http") {
+                let url = Url::parse(&args.repository)?;
+                url.path().trim_start_matches('/').trim_end_matches(".git").to_string()
+            } else {
+                args.repository
+            };
 
-            // 4. Parse commits using the pure domain function
             let data = parse_commits(&commits, &repo_path)?;
 
-            // 5. Write output using the writer
             output_writer.write(&data)?;
 
-            println!("Successfully generated data file.");
+            println!("Repository parsed successfully!");
         }
     }
 

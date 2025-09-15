@@ -58,7 +58,7 @@ pub fn parse_commits(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::domain::commit::{Commit, CommitData};
+    use crate::domain::commit::Commit;
 
     #[test]
     fn test_parse_commits() {
@@ -99,12 +99,24 @@ mod tests {
         let day1_commits = result.get("2025-09-08").unwrap();
         assert_eq!(day1_commits.len(), 2);
         assert_eq!(day1_commits[0].title, "Two Sum");
+        assert_eq!(day1_commits[0].language, "Rust");
+        assert_eq!(day1_commits[0].type_of, "algo");
+        assert_eq!(day1_commits[0].notes, "Solved with hash map.");
+        assert_eq!(day1_commits[0].link, "https://github.com/owner/repo/commit/abc001");
+
         assert_eq!(day1_commits[1].title, "Web Crawler");
+        assert_eq!(day1_commits[1].language, "Go");
+        assert_eq!(day1_commits[1].type_of, "sysdes");
         assert_eq!(day1_commits[1].notes, "First draft.\nWill improve it later.");
+        assert_eq!(day1_commits[1].link, "https://github.com/owner/repo/commit/abc002");
 
         // Check 2025-09-09
         let day2_commits = result.get("2025-09-09").unwrap();
         assert_eq!(day2_commits.len(), 1);
         assert_eq!(day2_commits[0].title, "Binary Search");
+        assert_eq!(day2_commits[0].language, "Python");
+        assert_eq!(day2_commits[0].type_of, "algo");
+        assert_eq!(day2_commits[0].notes, "Recursive solution.");
+        assert_eq!(day2_commits[0].link, "https://github.com/owner/repo/commit/abc004");
     }
 }
