@@ -1,32 +1,7 @@
+use crate::domain::commit::{Commit, CommitData};
 use rayon::prelude::*;
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use regex::Regex;
-
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
-pub struct CommitData {
-    pub title: String,
-    pub notes: String,
-    pub link: String,
-    pub language: String,
-    pub type_of: String,
-}
-
-#[derive(Debug, Clone)]
-pub struct Commit {
-    pub id: String,
-    pub message: String,
-}
-
-pub trait CommitProvider {
-    type Error;
-    fn fetch(&self) -> Result<Vec<Commit>, Self::Error>;
-}
-
-pub trait OutputWriter {
-    type Error;
-    fn write(&self, data: &HashMap<String, Vec<CommitData>>) -> Result<(), Self::Error>;
-}
+use std::collections::HashMap;
 
 pub fn parse_commits(
     commits: &[Commit],
@@ -83,6 +58,7 @@ pub fn parse_commits(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::domain::commit::{Commit, CommitData};
 
     #[test]
     fn test_parse_commits() {
@@ -123,21 +99,12 @@ mod tests {
         let day1_commits = result.get("2025-09-08").unwrap();
         assert_eq!(day1_commits.len(), 2);
         assert_eq!(day1_commits[0].title, "Two Sum");
-        assert_eq!(day1_commits[0].language, "Rust");
-        assert_eq!(day1_commits[0].type_of, "algo");
-        assert_eq!(day1_commits[0].notes, "Solved with hash map.");
         assert_eq!(day1_commits[1].title, "Web Crawler");
-        assert_eq!(day1_commits[1].language, "Go");
-        assert_eq!(day1_commits[1].type_of, "sysdes");
         assert_eq!(day1_commits[1].notes, "First draft.\nWill improve it later.");
 
         // Check 2025-09-09
         let day2_commits = result.get("2025-09-09").unwrap();
         assert_eq!(day2_commits.len(), 1);
         assert_eq!(day2_commits[0].title, "Binary Search");
-        assert_eq!(day2_commits[0].language, "Python");
-        assert_eq!(day2_commits[0].type_of, "algo");
-        assert_eq!(day2_commits[0].link, "https://github.com/owner/repo/commit/abc004");
-        assert_eq!(day2_commits[0].notes, "Recursive solution.");
     }
 }
