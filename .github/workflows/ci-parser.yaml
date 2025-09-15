@@ -1,0 +1,147 @@
+name: Continuous Integration [kaizen-parser]
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'kaizen-parser/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'kaizen-parser/**'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 🛠️ Install toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: 📦 Checkout
+        uses: actions/checkout@v5
+
+      - name: ✅ Check
+        run: cargo check --locked --verbose
+        working-directory: kaizen-parser/
+
+      - name: ✅ Check without default features
+        run: cargo check --locked --no-default-features --verbose
+        working-directory: kaizen-parser/
+
+  clippy:
+    name: Lints
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+          
+      - name: 🛠️ Install toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy
+      
+      - name: 📦 Checkout
+        uses: actions/checkout@v5
+      
+      - name: 🔍 Check the lints
+        run: cargo clippy --tests --verbose -- -D warnings
+        working-directory: kaizen-parser/
+      
+      - name: 🔍 Check the pedantic lints
+        run: cargo clippy --all-targets --verbose -- -W clippy::pedantic
+        working-directory: kaizen-parser/
+
+  rustfmt:
+    name: Formatting
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+          
+      - name: 🛠️ Install toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt
+      
+      - name: 📦 Checkout
+        uses: actions/checkout@v5
+      
+      - name: 📝 Check the formatting
+        run: cargo fmt --all -- --check --verbose
+        working-directory: kaizen-parser/
+
+  test:
+    name: Test 
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+          
+      - name: 🛠️ Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: clippy
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: ⚙️ Setup cargo-tarpaulin
+        uses: taiki-e/install-action@cargo-tarpaulin
+
+      - name: 💾 Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: 🧪 Run tests 
+        run: |
+          cargo tarpaulin --out Lcov --all-features \
+            -- --skip "repo::test::git_upstream_remote"
+        working-directory: kaizen-parser/
+        env:
+          RUST_LOG: info
+
+      - name: 📊 Generate clippy report
+        run: cargo clippy --message-format json > clippy-report.json
+        working-directory: kaizen-parser/
+        env:
+          RUST_LOG: info
+
+      - name: 💾 Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: 🔎 SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        with:
+          projectBaseDir: kaizen-parser
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_KAIZEN_CLI }}
