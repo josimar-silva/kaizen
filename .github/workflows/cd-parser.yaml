@@ -1,8 +1,8 @@
-name: Continuous Delivery [kaizen-parser]
+name: "Continuous Delivery (parser)"
 
 on:
   workflow_run:
-    workflows: ["Continuous Integration [kaizen-parser]"]
+    workflows: ["Continuous Integration (parser)"]
     types: [completed]
     branches: [main]
 

@@ -1,4 +1,4 @@
-name: Continuous Integration [kaizen-parser]
+name: "Continuous Integration (parser)"
 
 on:
   workflow_dispatch:
