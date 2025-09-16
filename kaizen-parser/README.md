@@ -147,3 +147,11 @@ To run all tests (unit, integration, and end-to-end):
 ```bash
 cargo test 
 ```
+
+## Want to contribute?
+
+Check the [contributing](CONTRIBUTING.md) guidelines.
+
+## Releasing
+
+For details on how to release a new version of this project, see the [releasing](RELEASING.md) guidelines.
