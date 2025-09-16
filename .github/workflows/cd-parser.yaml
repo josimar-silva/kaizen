@@ -69,30 +69,30 @@ jobs:
               TOOLCHAIN: stable,
               TARGET: x86_64-unknown-linux-musl
             }
-          - {
-              NAME: linux-x86-glibc,
-              OS: ubuntu-22.04,
-              TOOLCHAIN: stable,
-              TARGET: i686-unknown-linux-gnu
-            }
-          - {
-              NAME: linux-x86-musl,
-              OS: ubuntu-22.04,
-              TOOLCHAIN: stable,
-              TARGET: i686-unknown-linux-musl
-            }
-          - {
-              NAME: linux-arm64-glibc,
-              OS: ubuntu-22.04,
-              TOOLCHAIN: stable,
-              TARGET: aarch64-unknown-linux-gnu
-            }
-          - {
-              NAME: linux-arm64-musl,
-              OS: ubuntu-22.04,
-              TOOLCHAIN: stable,
-              TARGET: aarch64-unknown-linux-musl
-            }
+          # - {
+          #     NAME: linux-x86-glibc,
+          #     OS: ubuntu-22.04,
+          #     TOOLCHAIN: stable,
+          #     TARGET: i686-unknown-linux-gnu
+          #   }
+          # - {
+          #     NAME: linux-x86-musl,
+          #     OS: ubuntu-22.04,
+          #     TOOLCHAIN: stable,
+          #     TARGET: i686-unknown-linux-musl
+          #   }
+          # - {
+          #     NAME: linux-arm64-glibc,
+          #     OS: ubuntu-22.04,
+          #     TOOLCHAIN: stable,
+          #     TARGET: aarch64-unknown-linux-gnu
+          #   }
+          # - {
+          #     NAME: linux-arm64-musl,
+          #     OS: ubuntu-22.04,
+          #     TOOLCHAIN: stable,
+          #     TARGET: aarch64-unknown-linux-musl
+          #   }
           - {
               NAME: win32-x64-mingw,
               OS: windows-2022,
@@ -279,12 +279,15 @@ jobs:
         run: cargo set-version ${{ env.NEXT_PLUGIN_VERSION }}
         working-directory: kaizen-parser/
 
+      - name: ⬆️ Update Cargo.lock
+        run: cargo clippy --all-targets -- -D warnings
+        working-directory: kaizen-parser/
+
       - name: 📤 Push new package version to repo
         working-directory: kaizen-parser/
         run: |
           git config user.name "radagastbot[bot]"
           git config user.email "radagastbot[bot]@users.noreply.github.com"
-          git add Cargo.toml 
-          git add Cargo.lock 
+          git add Cargo.toml Cargo.lock 
           git commit -m "chore(release): set next snapshot version"
           git push
