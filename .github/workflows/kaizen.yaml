@@ -1,0 +1,65 @@
+name: Kaizen
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "42 23 * * *" # every day at 23:42 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  consolidate-data:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout code
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.RELEASE_PAT }}
+
+      - name: 🛠️ Setup git
+        run: |
+          git config --global user.name "radagastbot[bot]"
+          git config --global user.email "radagastbot[bot]@users.noreply.github.com"
+
+      - name: ⬇️ Get latest parser asset URL
+        id: get_asset
+        run: |
+          ASSET_URL=$(curl -sL -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/josimar-silva/kaizen/releases" | \
+            jq -r '[.[] | select(.tag_name | startswith("kaizen-parser/"))][0].assets[] | select(.name | test("kaizen-.*-x86_64-unknown-linux-musl.tar.gz$")).browser_download_url')
+          echo "url=$ASSET_URL" >> "$GITHUB_OUTPUT"
+
+      - name: ⬇️ Download parser
+        run: curl -L -o kaizen-parser.tar.gz '${{ steps.get_asset.outputs.url }}'
+
+      - name: 📦 Unzip parser
+        run: tar -xzf kaizen-parser.tar.gz
+
+      - name: ⚙️ Install parser
+        run: mv kaizen-*/parser .
+
+      - name: 📝 Generate kaizen data
+        run: |
+          ./parser parse \
+            --repository https://github.com/josimar-silva/kaizen \
+            --output data.json
+
+      - name: ⬆️ Update website data
+        run: mv -f data.json website/public
+
+      - name: 📤 Push new data to repo
+        run: |
+          git add website/public/data.json
+          git commit -m "kaizen: publish data of $(date +'%d/%m/%Y')"
+          git push
