@@ -5,7 +5,6 @@ use kaizen::adapters::git_provider::GitCommitProvider;
 use kaizen::adapters::json_writer::JsonFileOutputWriter;
 use kaizen::domain::parser::parse_commits;
 use kaizen::domain::ports::{CommitProvider, OutputWriter};
-use url::Url;
 
 pub mod adapters;
 pub mod domain;
@@ -47,17 +46,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			let output_writer = JsonFileOutputWriter { path: args.output };
 
 			let commits = commit_provider.fetch()?;
-
-			// 3. Extract repo path for link generation
-			let repo_path = if args.repository.starts_with("http") {
-				let url = Url::parse(&args.repository)?;
-				url.path()
-					.trim_start_matches('/')
-					.trim_end_matches(".git")
-					.to_string()
-			} else {
-				args.repository
-			};
+			
+			let repo_path = commit_provider.get_repo_path()?;
 
 			let data = parse_commits(&commits, &repo_path)?;
 
