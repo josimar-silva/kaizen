@@ -59,6 +59,16 @@ You can download pre-compiled binaries for various platforms directly from the [
         --output kaizen.json
     ```
 
+#### Choosing the right binary
+
+On Linux, we provide binaries compiled against both `glibc` and `musl`.
+
+*   **`glibc` binaries (e.g., `kaizen-*-linux-x64-glibc.tar.gz`)**: These are smaller and are the standard for most Linux distributions like Ubuntu, Fedora, and Debian. However, they are dynamically linked to `glibc`, so you might encounter a `GLIBC` version mismatch error if you run them on a very old Linux distribution. We build them on Ubuntu 20.04 to ensure compatibility with a wide range of systems.
+
+*   **`musl` binaries (e.g., `kaizen-*-linux-x64-musl.tar.gz`)**: These are fully static binaries with no external dependencies. They are larger but offer maximum portability and should work on any Linux distribution, regardless of its age.
+
+**Recommendation:** If you are unsure, or if you encounter any library-related errors with the `glibc` binary, we recommend using the `musl` binary.
+
 ### From Source
 
 #### Build the Project
