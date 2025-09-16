@@ -72,8 +72,10 @@ trim = true
 # Parse commits according to the conventional commits specification.
 # See https://www.conventionalcommits.org
 conventional_commits = true
+
 # Exclude commits that do not match the conventional commits specification.
-filter_unconventional = false
+filter_unconventional = true
+
 # An array of regex based parsers to modify commit messages prior to further processing.
 commit_preprocessors = [
   # Remove issue numbers.
@@ -97,6 +99,7 @@ commit_parsers = [
     { message = "^chore|^ci", group = "<!-- 7 -->⚙️ Miscellaneous Tasks" },
     { body = ".*security", group = "<!-- 8 -->🛡️ Security" },
     { message = "^revert", group = "<!-- 9 -->◀️ Revert" },
+    { message = "^(algo|sysdes)", skip = true },
     { message = ".*", group = "<!-- 10 -->💼 Other" },
 ]
 # Exclude commits that are not matched by any commit parser.
@@ -106,3 +109,12 @@ topo_order = false
 # Order of commits in each group/release within the changelog.
 # Allowed values: newest, oldest
 sort_commits = "newest"
+
+# A regex pattern to match tags against.
+# This is useful for monorepos where you might have tags like `v1.0.0` and `sub-project/v1.0.0`.
+tag_pattern = "(kaizen-parser|website)/v[0-9].*"
+
+[bump]
+features_always_bump_minor = true
+breaking_always_bump_major = true
+initial_tag = "0.1.0"
