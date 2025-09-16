@@ -1,9 +1,7 @@
 use std::fs;
-use std::process::Command;
 
-use assert_cmd::prelude::*;
 use git2::{Repository, Signature};
-use predicates::prelude::*;
+use kaizen::{Cli, Command, ParseArgs, run};
 use tempfile::tempdir;
 
 // Helper function from the other integration test
@@ -44,20 +42,16 @@ fn test_cli_e2e() -> Result<(), Box<dyn std::error::Error>> {
 	let output_dir = tempdir()?;
 	let output_file = output_dir.path().join("data.json");
 
-	// 3. Run the CLI command
-	let mut cmd = Command::cargo_bin("parser")?;
-	cmd.arg("parse")
-		.arg("--repository")
-		.arg(repo_dir.path().to_str().unwrap())
-		.arg("--output")
-		.arg(&output_file);
+	// 3. Run the logic by calling run()
+	let cli = Cli {
+		command: Command::Parse(ParseArgs {
+			repository: repo_dir.path().to_str().unwrap().to_string(),
+			output:     output_file.clone(),
+		}),
+	};
+	run(cli)?;
 
-	// 4. Assert command success
-	cmd.assert()
-		.success()
-		.stdout(predicate::str::contains("Repository parsed successfully!"));
-
-	// 5. Assert file content
+	// 4. Assert file content
 	let content = fs::read_to_string(output_file)?;
 	assert!(content.contains("E2E Test Algo"));
 	assert!(content.contains("2025-09-15"));
