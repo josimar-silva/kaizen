@@ -237,8 +237,8 @@ jobs:
 
       - name: 🔖 Create Git Tag
         run: |
-          git tag "v${{ env.RELEASE_VERSION }}"
-          git push origin "v${{ env.RELEASE_VERSION }}"
+          git tag "kaizen-parser/v${{ env.RELEASE_VERSION }}"
+          git push origin "kaizen-parser/v${{ env.RELEASE_VERSION }}"
 
       - name: 📝 Generate a changelog
         uses: orhun/git-cliff-action@v4
@@ -258,8 +258,8 @@ jobs:
         uses: softprops/action-gh-release@v2.3.2
         with:
           files: artifacts/*/kaizen-${{ env.RELEASE_VERSION }}-*
-          tag_name: v${{ env.RELEASE_VERSION }}
-          name: Release kaizen v${{ env.RELEASE_VERSION }}
+          tag_name: kaizen-parser/v${{ env.RELEASE_VERSION }}
+          name: kaizen-parser v${{ env.RELEASE_VERSION }}
           body_path: CHANGELOG.md
           draft: false
           prerelease: true
@@ -283,7 +283,7 @@ jobs:
         working-directory: kaizen-parser/
 
       - name: ⬆️ Update Cargo.lock
-        run: cargo clippy --all-targets -- -D warnings
+        run: cargo update
         working-directory: kaizen-parser/
 
       - name: 📤 Push new package version to repo
