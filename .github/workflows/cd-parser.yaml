@@ -175,7 +175,7 @@ jobs:
           mkdir -p release
           cp {../LICENSE,README.md} release/
 
-          for bin in 'kaizen'; do
+          for bin in 'parser'; do
             if [ "${{ matrix.build.OS }}" = "windows-2022" ]; then
               bin="${bin}.exe"
             fi
