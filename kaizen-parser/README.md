@@ -36,7 +36,32 @@ language: <programming language>
 
 ## Usage
 
-### Build the Project
+### From a Release
+
+You can download pre-compiled binaries for various platforms directly from the [GitHub Releases page](https://github.com/josimar-silva/kaizen/releases).
+
+1.  Go to the releases page and find the version you want to use.
+2.  Under the "Assets" section, download the archive (`.zip` for Windows, `.tar.gz` for Linux/macOS) that matches your operating system and architecture.
+3.  Extract the archive. You will find the `parser` executable inside.
+4.  (For Linux/macOS) Make the binary executable:
+    ```bash
+    chmod +x parser
+    ```
+5.  Run the parser:
+    ```bash
+    ./parser parse --repository <repository_url_or_path> --output <output_file_path>
+    ```
+
+    **Example:**
+    ```bash
+    ./parser parse \
+        --repository https://github.com/josimar-silva/kaizen \
+        --output kaizen.json
+    ```
+
+### From Source
+
+#### Build the Project
 
 Navigate to the `kaizen-parser` directory and build the project using Cargo:
 
@@ -46,7 +71,7 @@ cargo build
 cargo build --release
 ```
 
-### Run the CLI
+#### Run the CLI
 
 The executable will be located in `target/debug/parser` (or `target/release/parser` for release builds).
 
@@ -69,6 +94,7 @@ The executable will be located in `target/debug/parser` (or `target/release/pars
     --repository /path/to/your/local/git/repo \
     --output data.json
 ```
+
 
 ## Output Format
 
