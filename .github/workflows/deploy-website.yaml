@@ -10,8 +10,8 @@ on:
       - main
     paths:
       - 'website/public/data.json'
-  release:
-    types: [published]
+    tags:
+      - "kaizen-website/v*.*.*"
 
 permissions:
   contents: read
@@ -43,14 +43,21 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22.19.0"
-          cache: 'pnpm'
-          cache-dependency-path: 'website/pnpm-lock.yaml'
 
-      - name: ⚒️ Setup pnpm
-        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda #v4
+      - name: ⚒️ Instal pnpm
+        run: npm install -g pnpm
+
+      - name: 🔍 Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Cache pnpm store
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
         with:
-          version: 10
-          run_install: false
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
 
       - name: ⚒️ Setup just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -64,9 +71,16 @@ jobs:
         run: just build
       
       - name:  🚀 Deploy to Cloudflare Pages
+        id: deploy
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           command: pages deploy website/dist/website --project-name=kaizen-website
+      
+      - name: 🔍 Log Deployment URLs
+        run: |
+          echo "Deployment URL: ${{ steps.deploy.outputs.deployment-url }}"
+          echo "Deployment Alias: ${{ steps.deploy.outputs.pages-deployment-alias-url }}"
+          echo "Deployment ID: ${{ steps.deploy.outputs.command-output }}"

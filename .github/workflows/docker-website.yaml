@@ -6,7 +6,7 @@ on:
     branches:
       - main
     tags:
-      - "v*.*.*"
+      - "kaizen-website/v*.*.*"
     paths:
       - "website/src/**"
       - "website/Dockerfile"
