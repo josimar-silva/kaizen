@@ -1,0 +1,118 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import { KaizenClientWrapper } from "@/components/kaizen-client-wrapper";
+import { ScrollHeader } from "@/components/scroll-header";
+import { calculateStats, getKaizenData } from "@/lib/stats-service";
+
+export default async function HomePage() {
+  const data = await getKaizenData();
+  const stats = calculateStats(data);
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <ScrollHeader>
+        <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+          <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
+            {/* Logo and Title Row */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="flex items-center justify-center gap-3 sm:gap-4">
+                <Link
+                  href="/public"
+                  className="flex-shrink-0 hover:opacity-80 transition-opacity"
+                >
+                  <Image
+                    src="/images/kaizen-logo.png"
+                    alt="Kaizen Logo"
+                    width={40}
+                    height={40}
+                    className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full p-1 shadow-sm"
+                    priority
+                  />
+                </Link>
+                <div className="text-center">
+                  <h1 className="text-2xl sm:text-4xl font-bold text-foreground font-mono">
+                    Kaizen
+                  </h1>
+                </div>
+              </div>
+
+              {/* Subtitle and Description */}
+              <div className="text-center space-y-2">
+                <p className="text-base sm:text-lg text-muted-foreground font-sans">
+                  Continuous Improvement Journal
+                </p>
+                <p className="text-xs sm:text-sm text-muted-foreground italic">
+                  One algorithm a day, keeps the rust away
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
+                <span>{stats.totalAlgorithms} algorithms</span>
+                <span className="hidden sm:inline">•</span>
+                <span>{stats.totalDays} active days</span>
+                <span className="hidden sm:inline">•</span>
+                <span>{stats.currentStreak} day streak</span>
+              </div>
+            </div>
+          </div>
+        </header>
+      </ScrollHeader>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8 sm:space-y-12">
+        {/* Calendar Heatmap Section */}
+        <section className="space-y-4 sm:space-y-6">
+          <div className="text-center space-y-2">
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+              Activity Overview
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              My daily algorithm practice journey
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <KaizenClientWrapper data={data} showTimeline={false} />
+          </div>
+        </section>
+
+        {/* Timeline Section */}
+        <section className="space-y-4 sm:space-y-6">
+          <div className="text-center space-y-2">
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+              Recent Activity
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Latest algorithms and notes
+            </p>
+          </div>
+          <KaizenClientWrapper data={data} showTimeline={true} />
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card/30 mt-12 sm:mt-16">
+        <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center">
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            Built with viele ☕️ by{" "}
+            <a
+              href="https://josimar-silva.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 font-medium hover:text-purple-300 transition-colors duration-200 underline decoration-purple-400/50 hover:decoration-purple-300"
+              data-testid="footer-author-link"
+            >
+              Josimar Silva
+            </a>
+          </p>
+          <p data-testid="footer-copyright" className="text-xs text-slate-500">
+            &copy; {new Date().getFullYear()} Josimar Silva. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}

@@ -1,0 +1,92 @@
+# justfile
+
+# Install dependencies
+install:
+	pnpm install
+
+# Install dependencies for CI environment
+ci:
+    pnpm install --frozen-lockfile --legacy-peer-deps
+
+# Start the development server
+dev:
+	pnpm dev
+
+# Build the project for production
+build:
+	pnpm build
+
+# Build the app docker image
+build-image:
+    docker build -t kaizen-website:dev .
+
+# Start the production server
+start:
+	pnpm start
+
+# Start the dockerized application
+start-container:
+    docker run -p 3000:3000 kaizen-website:dev
+
+# Run linting
+lint:
+	pnpm lint
+
+# Checks code for linting and formatting issues
+check:
+    just lint
+    npx prettier . --check
+
+# Format the source code using prettier
+format:
+    pnpm lint:fix
+    npx prettier . --write
+
+# Run unit tests
+test:
+	npm run test
+
+# Run UI tests for all browsers
+test-e2e: build
+	rm -rf test-results
+	pnpm test-e2e # Run playwright test
+
+# Run UI tests on a specific
+test-e2e-on BROWSER:
+	rm -rf test-results
+	pnpm test-e2e -- --project="{{BROWSER}}"
+
+# Prepare for a new release
+pre-release:
+    #!/usr/bin/env bash
+    set -e
+
+    if [[ -n $(git status --porcelain) ]]; then
+      echo "Git working directory is not clean. Please commit or stash your changes."
+      exit 1
+    fi
+
+    echo "Running checks and tests..."
+    just check
+    just test
+    just test-e2e
+
+    current_version=$(node -p "require('./package.json').version")
+    echo "Current version is ${current_version}"
+
+    if [[ $current_version != *"-SNAPSHOT"* ]]; then
+      echo "Error: Current version is not a SNAPSHOT version."
+      exit 1
+    fi
+
+    new_version=$(echo ${current_version} | sed 's/-SNAPSHOT//')
+    echo "Bumping version to ${new_version}..."
+    pnpm version --no-git-tag-version ${new_version}
+
+    echo "Committing version bump..."
+    git add package.json pnpm-lock.yaml
+    git commit -m "chore(release): prepare for release v${new_version}"
+
+    echo "Pre-release for version ${new_version} is ready."
+    echo "You can now push the changes to trigger the release workflow."
+
