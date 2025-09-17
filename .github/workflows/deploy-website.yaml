@@ -1,0 +1,72 @@
+name: "Deploy Website"
+
+concurrency:
+  group: deploy-website-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'website/public/data.json'
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website/
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 1
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+          cache: 'pnpm'
+          cache-dependency-path: 'website/pnpm-lock.yaml'
+
+      - name: ⚒️ Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda #v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: ⚒️ Setup just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
+        with:
+          just-version: "1.40.0"            
+
+      - name: ⚙️ Install dependencies
+        run: just ci
+      
+      - name: 🏗️ Build production output
+        run: just build
+      
+      - name:  🚀 Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy website/dist/website --project-name=kaizen-website
