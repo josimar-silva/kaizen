@@ -85,7 +85,7 @@ pre-release:
 
     echo "Committing version bump..."
     git add package.json pnpm-lock.yaml
-    git commit -m "chore(release): prepare for release v${new_version}"
+    git commit -m "chore(release): prepare website for release v${new_version}"
 
     echo "Pre-release for version ${new_version} is ready."
     echo "You can now push the changes to trigger the release workflow."
