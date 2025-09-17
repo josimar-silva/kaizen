@@ -25,7 +25,7 @@ git clone git@github.com:josimar-silva/kaizen && cd kaizen
 2. Build the project. Make sure you have [Rust](https://www.rust-lang.org/) `1.88.0` or later installed;
 
 ```sh
-cargo build
+just build
 ```
 
 3. Create a new branch: `git checkout -b your-branch-name`;
@@ -33,7 +33,7 @@ cargo build
 4. Add your contribution and appropriate tests. Make sure all tests are green;
 
 ```sh
-cargo test
+just test
 ```
 
 5. Push to your fork and [submit a pull request](https://github.com/josimar-silva/kaizen/compare);
