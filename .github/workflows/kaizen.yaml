@@ -61,5 +61,9 @@ jobs:
       - name: 📤 Push new data to repo
         run: |
           git add website/public/data.json
-          git commit -m "kaizen: publish data of $(date +'%d/%m/%Y')"
-          git push
+          if git diff --staged --quiet; then
+            echo "もう!"
+          else
+            git commit -m "kaizen: publish data of $(date +'%d/%m/%Y')"
+            git push
+          fi
