@@ -1,0 +1,160 @@
+name: "Continuous Delivery (website)"
+
+on:
+  workflow_run:
+    workflows: ["Continuous Integration (website)"]
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website/  
+
+jobs:
+  fetch-version:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-24.04
+    outputs:
+      release_version: ${{ steps.get_version.outputs.VERSION }}
+      is_release: ${{ steps.check_snapshot.outputs.RELEASE }}
+
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: 🏷️ Get package version
+        id: get_version
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: 🔍 Check if version is SNAPSHOT
+        id: check_snapshot
+        run: |
+          VERSION="${{ steps.get_version.outputs.VERSION }}"
+          if [[ "$VERSION" == *"-SNAPSHOT"* ]]; then
+            echo "RELEASE=false" >> $GITHUB_OUTPUT
+          else
+            echo "RELEASE=true" >> $GITHUB_OUTPUT
+          fi
+          echo "Release Version: $VERSION"
+
+  release:
+    needs: [fetch-version]
+    if: ${{ github.event.workflow_run.conclusion == 'success' && needs.fetch-version.outputs.is_release == 'true' }}
+    runs-on: ubuntu-24.04
+    concurrency:
+      group: website-release-${{ needs.fetch-version.outputs.release_version }}
+      cancel-in-progress: false
+
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+      actions: read
+
+    env:
+      RELEASE_VERSION: ${{ needs.fetch-version.outputs.release_version }}
+
+    steps:
+      - name: 📦 Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          token: ${{ secrets.RELEASE_PAT }}
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: ⬇️ Download build artifact
+        uses: dawidd6/action-download-artifact@ac66b43f0e6a346234dd65d4d0c8fbb31cb316e5 # v11
+        with:
+          workflow: ci-website.yaml
+          name: website-${{ github.event.workflow_run.head_sha }}
+          path: website/dist
+          github_token: ${{ github.token }}
+          run_id: ${{ github.event.workflow_run.id }}
+
+      - name: 📝 Add license
+        run: |
+           cp "${{ github.workspace }}/LICENSE" dist/LICENSE
+
+      - name: 📦 Create archive
+        run: |
+          tar -czvf website-${{ env.RELEASE_VERSION }}.tar.gz -C dist .
+          shasum -a 512 website-${{ env.RELEASE_VERSION }}.tar.gz > website-${{ env.RELEASE_VERSION }}.tar.gz.sha512
+
+      - name: 📝 Attest release provenance
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
+        with:
+          subject-path: "${{ github.workspace }}/website/website-${{ env.RELEASE_VERSION }}.tar.gz"
+
+      - name: 🔖 Create Git Tag
+        run: |
+          git config user.name "radagastbot[bot]"
+          git config user.email "radagastbot[bot]@users.noreply.github.com"
+          git fetch --no-tags --depth=1 origin ${{ github.event.workflow_run.head_sha }}
+          git tag "kaizen-website/v${{ env.RELEASE_VERSION }}" "${{ github.event.workflow_run.head_sha }}"
+          git push origin "v${{ env.RELEASE_VERSION }}"
+
+      - name: 📝 Generate changelog
+        uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea # v4
+        with:
+          config: cliff.toml
+          args: -v --current --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2
+        with:
+          files: |
+            website/website-${{ env.RELEASE_VERSION }}.tar.gz
+            website/website-${{ env.RELEASE_VERSION }}.tar.gz.sha512
+          tag_name: kaizen-website/v${{ env.RELEASE_VERSION }}
+          name: kaizen-website v${{ env.RELEASE_VERSION }}
+          body_path: CHANGELOG.md
+          draft: false
+          prerelease: true
+
+      - name: 🔢 Generate next package Version
+        run: |
+          MAJOR=$(echo ${{ env.RELEASE_VERSION }} | cut -d. -f1)
+          MINOR=$(echo ${{ env.RELEASE_VERSION }} | cut -d. -f2)
+          PATCH=$(echo ${{ env.RELEASE_VERSION }} | cut -d. -f3)
+          PATCH=$((PATCH + 1))
+          NEXT_PACKAGE_VERSION="$MAJOR.$MINOR.$PATCH-SNAPSHOT"
+          echo "Next Version will be: ${NEXT_PACKAGE_VERSION}"
+          echo "NEXT_PACKAGE_VERSION=${NEXT_PACKAGE_VERSION}" >> $GITHUB_ENV
+
+      - name: ⬆️ Increment package version
+        run: |
+          corepack enable
+          pnpm version ${{ env.NEXT_PACKAGE_VERSION }} --no-git-tag-version
+
+      - name: 📤 Push new package version to repo
+        run: |
+          git config user.name "radagastbot[bot]"
+          git config user.email "radagastbot[bot]@users.noreply.github.com"
+          git add package.json pnpm-lock.json
+          git commit -m "chore(release): set next website SNAPSHOT version"
+          git push
