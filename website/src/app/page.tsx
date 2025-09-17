@@ -19,7 +19,7 @@ export default async function HomePage() {
             <div className="flex flex-col items-center space-y-4">
               <div className="flex items-center justify-center gap-3 sm:gap-4">
                 <Link
-                  href="/public"
+                  href="/"
                   className="flex-shrink-0 hover:opacity-80 transition-opacity"
                 >
                   <Image
@@ -32,7 +32,10 @@ export default async function HomePage() {
                   />
                 </Link>
                 <div className="text-center">
-                  <h1 className="text-2xl sm:text-4xl font-bold text-foreground font-mono">
+                  <h1
+                    data-testid="title"
+                    className="text-2xl sm:text-4xl font-bold text-foreground font-mono"
+                  >
                     Kaizen
                   </h1>
                 </div>
@@ -40,10 +43,16 @@ export default async function HomePage() {
 
               {/* Subtitle and Description */}
               <div className="text-center space-y-2">
-                <p className="text-base sm:text-lg text-muted-foreground font-sans">
+                <p
+                  data-testid="subtitle"
+                  className="text-base sm:text-lg text-muted-foreground font-sans"
+                >
                   Continuous Improvement Journal
                 </p>
-                <p className="text-xs sm:text-sm text-muted-foreground italic">
+                <p
+                  data-testid="description"
+                  className="text-xs sm:text-sm text-muted-foreground italic"
+                >
                   One algorithm a day, keeps the rust away
                 </p>
               </div>
