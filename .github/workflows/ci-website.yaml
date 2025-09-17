@@ -1,0 +1,354 @@
+name: "Continuous Integration (website)"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'website/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'website/**'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website/
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: ⚒️ Instal pnpm
+        run: npm install -g pnpm
+
+      - name: 🔍 Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Cache pnpm store
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
+
+      - name: ⚒️ Setup just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
+        with:
+          just-version: "1.40.0"            
+
+      - name: ⚙️ Install dependencies
+        run: just ci
+
+      - name: 🔍 Check lints and formatting
+        run: just check
+
+  test:
+    name: Test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: ⚒️ Instal pnpm
+        run: npm install -g pnpm
+
+      - name: 🔍 Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Cache pnpm store
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-          
+
+      - name: ⚒️ Setup just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
+        with:
+          just-version: "1.40.0"
+
+      - name: ⚙️ Install dependencies
+        run: just ci
+
+      - name: 🧪 Run tests
+        run: just test
+
+      - name: ⬆️ Upload coverage report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: test-coverage
+          path: website/coverage/
+
+  build:
+    needs: [test, check]
+    name: Build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: ⚒️ Instal pnpm
+        run: npm install -g pnpm
+
+      - name: 🔍 Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Cache pnpm store
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-
+
+      - name: ⚒️ Setup just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
+        with:
+          just-version: "1.40.0"            
+
+      - name: ⚙️ Install dependencies
+        run: just ci
+
+      - name: 🏗️ Build production output
+        run: just build
+
+      - name: ⬆️ Upload static website artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: website-${{ github.sha }}
+          path: website/dist/website/
+
+  test-e2e:
+    name: Test E2E (${{ matrix.browser }})
+    runs-on: ubuntu-24.04
+    needs: build
+    container:
+      image: mcr.microsoft.com/playwright:v1.55.0-noble@sha256:b27e719ecbfef153e13fd24e8341736733bf2658b229677eb21ff57ff5d7fb29
+    strategy:
+      fail-fast: false
+      matrix:
+        browser:
+          [
+            chromium,
+            firefox,
+            webkit,
+            mobile-chrome,
+            mobile-safari,
+            microsoft-edge,
+            google-chrome,
+          ]
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: 🇳 Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.19.0"
+
+      - name: ⚒️ Instal pnpm
+        run: npm install -g pnpm
+
+      - name: 🔍 Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 💾 Cache pnpm store
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-store-               
+
+      - name: ⚒️ Setup just
+        uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
+        with:
+          just-version: "1.40.0"
+
+      - name: ⚙️ Install dependencies
+        run: just ci
+
+      - name: 💾 Cache Playwright browsers
+        id: cache-playwright-browsers
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/playwright.config.ts') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: ⚙️ Setup Microsoft Edge
+        if: matrix.browser == 'microsoft-edge'
+        run: npx playwright install msedge
+
+      - name: ⚙️ Setup Google Chrome
+        if: matrix.browser == 'google-chrome'
+        run: npx playwright install chrome
+
+      - name: ⬇️ Download generated distribution
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: website-${{ github.sha }}
+          path: website/dist/website
+
+      - name: 🧪 Run E2E tests
+        run: just test-e2e-on ${{ matrix.browser }}
+        env:
+          CI: "true"
+          HOME: /root
+
+      - name: ⬆️ Upload coverage report
+        if: matrix.browser == 'chromium'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: test-e2e-coverage-${{ matrix.browser }}
+          path: website/e2e-tests-report/coverage/ui-lcov.info
+
+  sonar:
+    needs: [test, test-e2e, check]
+    name: Sonar
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Checkout
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: ⬇️ Download test coverage report
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: test-coverage
+          path: website/coverage/
+
+      - name: ⬇️ Download test-e2e coverage report
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: test-e2e-coverage-chromium
+          path: website/e2e-tests-report/coverage
+
+      - name: 💾 Cache SonarCloud packages
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: 🏷️ Get package version
+        id: get_version
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: 🔍 SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25 # v5.3.1
+        with:
+          projectBaseDir: website
+          args: >
+            -Dsonar.scm.revision=${{ github.sha }}
+            -Dsonar.projectVersion=${{ steps.get_version.outputs.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_KAIZEN_WEBSITE }}

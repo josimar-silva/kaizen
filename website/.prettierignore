@@ -44,3 +44,6 @@ yarn-error.log*
 next-env.d.ts
 
 .idea/
+
+public/data.json
+src/lib/db.ts
