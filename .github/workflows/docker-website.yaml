@@ -1,0 +1,85 @@
+name: "Docker Builds (website)"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+    paths:
+      - "website/src/**"
+      - "website/Dockerfile"
+      - "website/package.json"
+      - "website/pnpm-lock.yaml"
+      - "website/nginx.conf"
+  schedule:
+    - cron: "0 04 * * 1-5"
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: website/
+
+jobs:
+  docker:
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 🛡️ Harden the runner
+        uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: audit
+
+      - name: 📦 Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          fetch-depth: 0
+
+      - name: 🔑 Log in to GitHub Container Registry
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏷️ Get package version
+        id: get_package_version
+        run: |
+          VERSION=$(node -p 'require("./package.json").version')
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: 🔍 Check if version is SNAPSHOT
+        id: check_snapshot
+        run: |
+          VERSION="${{ steps.get_package_version.outputs.VERSION }}"
+          if [[ "$VERSION" == *"-SNAPSHOT"* ]]; then
+            echo "IS_SNAPSHOT=true" >> $GITHUB_OUTPUT
+          else
+            echo "IS_SNAPSHOT=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 🐳 Build Docker metadata
+        id: meta
+        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f # v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=${{ steps.get_package_version.outputs.VERSION }}
+            type=raw,value=latest,enable=${{ steps.check_snapshot.outputs.IS_SNAPSHOT == 'false' }}
+
+      - name: 🏗️ Build and push production image
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        with:
+          context: ./website
+          file: ./website/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
