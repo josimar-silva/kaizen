@@ -54,7 +54,7 @@ test-e2e: build
 # Run UI tests on a specific
 test-e2e-on BROWSER:
 	rm -rf test-results
-	pnpm test-e2e -- --project="{{BROWSER}}"
+	pnpm exec playwright test --project "{{BROWSER}}"
 
 # Prepare for a new release
 pre-release:
