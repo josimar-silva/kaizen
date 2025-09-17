@@ -7,20 +7,20 @@ import type React from "react";
 import { Suspense } from "react";
 
 export const viewport: Viewport = {
-    themeColor: "purple",
-    width: "device-width",
-    initialScale: 1,
+  themeColor: "purple",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export const metadata: Metadata = {
   title: "Kaizen – Continuous Improvement Journal",
   description: "One algorithm a day, keeps the rust away",
-    keywords: ["kaizen", "algorithms", "system-design"],
-    authors: [{ name: "Josimar Silva" }],
-    icons: {
-        icon: "/favicon/favicon.png",
-        apple: "/favicon/apple-touch-icon.png",
-    },
+  keywords: ["kaizen", "algorithms", "system-design"],
+  authors: [{ name: "Josimar Silva" }],
+  icons: {
+    icon: "/favicon/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
