@@ -2,7 +2,7 @@
   "2025-09-15": [
     {
       "title": "calculate multiples of 3 or 5",
-      "notes": "First problem of Project Euler list. \nRef.: https://projecteuler.net/problem=1",
+      "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
       "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
       "language": "Kotlin",
       "type_of": "algo"
