@@ -113,7 +113,7 @@ jobs:
           git config user.email "radagastbot[bot]@users.noreply.github.com"
           git fetch --no-tags --depth=1 origin ${{ github.event.workflow_run.head_sha }}
           git tag "kaizen-website/v${{ env.RELEASE_VERSION }}" "${{ github.event.workflow_run.head_sha }}"
-          git push origin "v${{ env.RELEASE_VERSION }}"
+          git push origin "kaizen-website/v${{ env.RELEASE_VERSION }}"
 
       - name: 📝 Generate changelog
         uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea # v4
@@ -155,6 +155,6 @@ jobs:
         run: |
           git config user.name "radagastbot[bot]"
           git config user.email "radagastbot[bot]@users.noreply.github.com"
-          git add package.json pnpm-lock.json
+          git add package.json
           git commit -m "chore(release): set next website SNAPSHOT version"
           git push
