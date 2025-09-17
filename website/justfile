@@ -44,7 +44,7 @@ format:
 
 # Run unit tests
 test:
-	npm run test
+	pnpm test
 
 # Run UI tests for all browsers
 test-e2e: build
