@@ -6,7 +6,7 @@ install:
 
 # Install dependencies for CI environment
 ci:
-    pnpm install --strict-peer-dependencies
+    pnpm install --no-frozen-lockfile --strict-peer-dependencies
 
 # Start the development server
 dev:
