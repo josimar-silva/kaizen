@@ -1,4 +1,8 @@
 # Kaizen CLI
+[![Continuous Integration (parser)](https://github.com/josimar-silva/kaizen/actions/workflows/ci-parser.yaml/badge.svg)](https://github.com/josimar-silva/kaizen/actions/workflows/ci-parser.yaml)
+[![Continuous Delivery (parser)](https://github.com/josimar-silva/kaizen/actions/workflows/cd-parser.yaml/badge.svg)](https://github.com/josimar-silva/kaizen/actions/workflows/cd-parser.yaml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=josimar-silva_kaizen-parser&metric=alert_status&token=b04f2f9e2bd2a58071b93466287ea404774ba719)](https://sonarcloud.io/summary/new_code?id=josimar-silva_kaizen-parser)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=josimar-silva_kaizen-parser&metric=coverage&token=b04f2f9e2bd2a58071b93466287ea404774ba719)](https://sonarcloud.io/summary/new_code?id=josimar-silva_kaizen-parser)
 
 `kaizen` is a Rust-based command-line interface (CLI) tool designed to parse Git commit messages from a specified repository and generate a structured JSON data file.
 
