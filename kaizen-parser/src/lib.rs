@@ -1,6 +1,7 @@
 pub mod adapters;
 pub mod domain;
 
+use std::fs;
 use std::path::PathBuf;
 
 use clap::{Parser, Subcommand};
@@ -9,6 +10,7 @@ use crate::adapters::git_provider::GitCommitProvider;
 use crate::adapters::json_writer::JsonFileOutputWriter;
 use crate::domain::parser::parse_commits;
 use crate::domain::ports::{CommitProvider, OutputWriter};
+use crate::domain::stats::{calculate_stats, KaizenData};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -21,6 +23,8 @@ pub struct Cli {
 pub enum Command {
 	/// Parses a git repository and generates a JSON data file.
 	Parse(ParseArgs),
+	/// Calculates statistics from a generated JSON data file.
+	Stats(StatsArgs),
 }
 
 #[derive(Parser, Debug)]
@@ -30,6 +34,17 @@ pub struct ParseArgs {
 	pub repository: String,
 
 	/// The output file path for the generated JSON.
+	#[arg(long)]
+	pub output: PathBuf,
+}
+
+#[derive(Parser, Debug)]
+pub struct StatsArgs {
+	/// The input JSON data file to calculate statistics from.
+	#[arg(long)]
+	pub input: PathBuf,
+
+	/// The output file path for the generated statistics JSON.
 	#[arg(long)]
 	pub output: PathBuf,
 }
@@ -53,6 +68,19 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 			output_writer.write(&data)?;
 
 			println!("Repository parsed successfully!");
+		}
+		Command::Stats(args) => {
+			println!("Calculating stats for: {:?}", args.input);
+
+			let file_content = fs::read_to_string(args.input)?;
+			let data: KaizenData = serde_json::from_str(&file_content)?;
+
+			let stats = calculate_stats(&data);
+
+			let stats_json = serde_json::to_string_pretty(&stats)?;
+			fs::write(args.output, stats_json)?;
+
+			println!("Statistics calculated successfully!");
 		}
 	}
 
