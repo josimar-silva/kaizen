@@ -3,11 +3,10 @@ import Link from "next/link";
 
 import { KaizenClientWrapper } from "@/components/kaizen-client-wrapper";
 import { ScrollHeader } from "@/components/scroll-header";
-import { calculateStats, getKaizenData } from "@/lib/stats-service";
+import { getKaizenData } from "@/lib/stats-service";
 
 export default async function HomePage() {
   const data = await getKaizenData();
-  const stats = calculateStats(data);
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,15 +54,6 @@ export default async function HomePage() {
                 >
                   One algorithm a day, keeps the rust away
                 </p>
-              </div>
-
-              {/* Stats */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
-                <span>{stats.totalAlgorithms} algorithms</span>
-                <span className="hidden sm:inline">•</span>
-                <span>{stats.totalDays} active days</span>
-                <span className="hidden sm:inline">•</span>
-                <span>{stats.currentStreak} day streak</span>
               </div>
             </div>
           </div>
