@@ -1,4 +1,8 @@
-# Kaizen - Continuous Improvement Journal (Frontend)
+# Kaizen Website
+[![Continuous Integration (website)](https://github.com/josimar-silva/kaizen/actions/workflows/ci-website.yaml/badge.svg)](https://github.com/josimar-silva/kaizen/actions/workflows/ci-website.yaml)
+[![Continuous Delivery (website)](https://github.com/josimar-silva/kaizen/actions/workflows/cd-website.yaml/badge.svg)](https://github.com/josimar-silva/kaizen/actions/workflows/cd-website.yaml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=josimar-silva_kaizen&metric=alert_status&token=1f8759fd6f5423af2e4ff724229f3a680daab6ba)](https://sonarcloud.io/summary/new_code?id=josimar-silva_kaizen)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=josimar-silva_kaizen&metric=coverage&token=1f8759fd6f5423af2e4ff724229f3a680daab6ba)](https://sonarcloud.io/summary/new_code?id=josimar-silva_kaizen)
 
 This is the frontend for the Kaizen project, a clean and minimalist journal designed to visualize a daily history of algorithm and system design practice. 
 It consumes a `data.json` file to render a GitHub-style activity calendar and a detailed timeline.
@@ -108,6 +112,10 @@ just build
 
 The output will be generated in the `dist/website` directory. You can serve this directory with any static file server.
 
+### Cloudflare Pages
+
+Check the [Releasing](./RELEASING.md) doc for information about releasing to Clouflare Pages.
+
 ### Docker
 
 A `Dockerfile` is included for containerized deployments using Nginx.
@@ -122,6 +130,10 @@ A `Dockerfile` is included for containerized deployments using Nginx.
     ```
 The application will be available at [http://localhost:3000](http://localhost:3000).
 
+## Want to contribute?
+
+Check the [contributing](CONTRIBUTING.md) guidelines.
+
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.

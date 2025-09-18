@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/images/logo.svg" height="300px" weight="300px" alt="homelab logo"></p>
+<p align="center"><img src="docs/images/logo.svg" height="400" width="400" alt="Kaizen logo"></p>
 
 <h1 align="center">Kaizen</h1>
 <div align="center"> 
@@ -36,15 +36,15 @@
   </a>
   <!-- CodeQL Advanced -->
   <a href="https://github.com/josimar-silva/kaizen/actions/workflows/codeql.yaml">
-    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/codeql.yaml/badge.svg" alt="Code QL" />
+    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/codeql.yaml/badge.svg" alt="CodeQL" />
   </a>
   <!-- Docker Builds -->
   <a href="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml">
-    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml/badge.svg" alt="docker" />
+    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/docker.yaml/badge.svg" alt="Docker" />
   </a>
 </div>
 <div align="center">
-  <strong>Continous Improvement Journal</strong>
+  <strong>Continuous Improvement Journal</strong>
 </div>
 
 <div align="center">
