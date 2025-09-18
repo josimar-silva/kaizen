@@ -182,7 +182,7 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
                   <div className="flex flex-col gap-1 w-4 sm:w-6 flex-shrink-0">
                     {dayLabels.map((day, index) => (
                       <div
-                        key={day}
+                        key={`${day}-${index}`}
                         className="text-xs text-muted-foreground heatmap-day-label flex items-center justify-end pr-1"
                       >
                         {index % 2 === 1 ? day : ""}
@@ -229,13 +229,12 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
                               <Tooltip key={date}>
                                 <TooltipTrigger asChild>
                                   <motion.div
-                                    className={`heatmap-cell heatmap-level-${level} cursor-pointer relative touch-manipulation ${
+                                    className={`heatmap-cell heatmap-level-${level} cursor-default relative touch-manipulation ${
                                       isToday
                                         ? "ring-1 ring-accent ring-offset-1 ring-offset-background"
                                         : ""
                                     }`}
                                     whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
                                     transition={{
                                       type: "spring",
                                       stiffness: 400,
@@ -304,7 +303,7 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <div className="flex items-right gap-2 text-xs text-muted-foreground">
+          <div className="flex justify-end gap-2 text-xs text-muted-foreground">
             <span className="hidden sm:inline">Less</span>
             <div className="flex gap-1">
               {[0, 1, 2, 3, 4].map((level) => (
