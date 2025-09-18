@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { KaizenClientWrapper } from "@/components/kaizen-client-wrapper";
+import { CalendarHeatmap } from "@/components/calendar-heatmap";
 import { ScrollHeader } from "@/components/scroll-header";
+import { Timeline } from "@/components/timeline";
 import { getKaizenData } from "@/lib/stats-service";
 
 export default async function HomePage() {
@@ -73,7 +74,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="flex justify-center">
-            <KaizenClientWrapper data={data} showTimeline={false} />
+            <CalendarHeatmap data={data} />
           </div>
         </section>
 
@@ -87,7 +88,7 @@ export default async function HomePage() {
               Latest algorithms and notes
             </p>
           </div>
-          <KaizenClientWrapper data={data} showTimeline={true} />
+          <Timeline data={data} />
         </section>
       </main>
 

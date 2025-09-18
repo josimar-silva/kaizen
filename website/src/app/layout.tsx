@@ -7,10 +7,7 @@ import type React from "react";
 import { Suspense } from "react";
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#000000" }],
   width: "device-width",
   initialScale: 1,
 };
@@ -37,8 +34,8 @@ export default function RootLayout({
         <title>Kaizen – Continuous Improvement Journal</title>
         <link
           rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/devicon.min.css"
+          integrity="/* add SRI hash */"
         />
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>

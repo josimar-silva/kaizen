@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { AlgorithmDetailModal } from "@/components/algorithm-detail-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -30,16 +31,29 @@ import { formatDate, formatRelativeDate } from "@/lib/utils";
 
 interface TimelineProps {
   data: KaizenData;
-  // eslint-disable-next-line no-unused-vars
-  onAlgorithmClick?: (date: string, algorithmIndex: number) => void;
 }
 
-export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
+export function Timeline({ data }: Readonly<TimelineProps>) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [selectedType, setSelectedType] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"date" | "language" | "title">("date");
   const [itemsToShow, setItemsToShow] = useState(10);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedAlgorithmIndex, setSelectedAlgorithmIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAlgorithmClick = (date: string, algorithmIndex: number) => {
+    setSelectedDate(date);
+    setSelectedAlgorithmIndex(algorithmIndex);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedDate(null);
+    setSelectedAlgorithmIndex(0);
+  };
 
   const filteredAndSortedData = useMemo(() => {
     let entries = Object.entries(data).flatMap(([date, algorithms]) =>
@@ -118,7 +132,7 @@ export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
 
           <div className="flex flex-col sm:flex-row gap-2">
             <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger className="w-full sm:w-45 bg-background">
+              <SelectTrigger className="w-full sm:w-44 bg-background">
                 <Layers className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
@@ -137,7 +151,7 @@ export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
               value={selectedLanguage}
               onValueChange={setSelectedLanguage}
             >
-              <SelectTrigger className="w-full sm:w-45 bg-background">
+              <SelectTrigger className="w-full sm:w-44 bg-background">
                 <Filter className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Language" />
               </SelectTrigger>
@@ -268,7 +282,7 @@ export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                         className="border border-border rounded-lg p-3 sm:p-4 bg-muted/10 hover:bg-muted/20 transition-all duration-200 cursor-pointer group"
-                        onClick={() => onAlgorithmClick?.(date, index)}
+                        onClick={() => handleAlgorithmClick(date, index)}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
                           <div className="flex-1 space-y-3 min-w-0">
@@ -347,6 +361,17 @@ export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
             Load More ({filteredAndSortedData.length - itemsToShow} remaining)
           </Button>
         </motion.div>
+      )}
+
+      {/* Algorithm Detail Modal */}
+      {selectedDate && data[selectedDate] && (
+        <AlgorithmDetailModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          date={selectedDate}
+          algorithms={data[selectedDate]}
+          initialAlgorithmIndex={selectedAlgorithmIndex}
+        />
       )}
     </div>
   );

@@ -127,7 +127,7 @@
 }
 
 .heatmap-cell {
-  @apply rounded-sm border border-border/50 transition-all duration-200 hover:scale-110;
+  @apply rounded-sm border border-border/50 transition-all duration-200;
   width: clamp(8px, 2.5vw, 14px);
   height: clamp(8px, 2.5vw, 14px);
   aspect-ratio: 1;
@@ -200,10 +200,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.5);
+  background-color: color-mix(
+    in oklch,
+    var(--muted-foreground) 50%,
+    transparent
+  );
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+  background-color: var(--muted-foreground);
 }
