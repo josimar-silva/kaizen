@@ -1,0 +1,83 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+    "abandonments:recommended",
+    "group:recommended",
+    "replacements:all",
+    "workarounds:all",
+    "mergeConfidence:age-confidence-badges",
+    ":configMigration",
+    ":pinDevDependencies",
+    ":pinAllExceptPeerDependencies",
+    ":dependencyDashboard",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":ignoreModulesAndTests"
+  ],
+  "prHourlyLimit": 30,
+  "prConcurrentLimit": 15,
+  "reviewers": [
+    "josimar-silva"
+  ],
+  "labels": [
+    "automated",
+    "dependencies"
+  ],
+  "npmrcMerge": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": "after 10pm on sunday"
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "eslint",
+        "/^eslint-plugin/",
+        "/^@typescript-eslint//"
+      ],
+      "groupName": "eslint packages"
+    },
+    {
+      "matchPackageNames": [
+        "typescript",
+        "ts-node",
+        "ts-jest",
+        "/^@tsconfig//"
+      ],
+      "groupName": "typescript packages"
+    },
+    {
+      "matchPackageNames": [
+        "jest",
+        "@types/jest"
+      ],
+      "groupName": "jest packages"
+    },
+    {
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "labels": [
+        "dependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "labels": [
+        "dev-dependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
+    }
+  ]
+}
