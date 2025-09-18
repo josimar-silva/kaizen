@@ -1,4 +1,4 @@
-FROM node:22.19.0-trixie-slim@sha256:ba533b824f504e19137d3c961f8f6ef5278b02d8bfa7010eabb1b836d3125ce4 AS deps
+FROM node:22.19.0-trixie-slim@sha256:a174cf99ada4707fb5a81a9233af04db83911c68b6bf58199f956fbdf8389926 AS deps
 WORKDIR /app
 
 # Install pnpm globally
