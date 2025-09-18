@@ -74,7 +74,7 @@
     "@playwright/test": "1.55.0",
     "@swc/core": "1.13.5",
     "@swc/jest": "0.2.39",
-    "@tailwindcss/postcss": "4.1.12",
+    "@tailwindcss/postcss": "4.1.13",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "16.3.0",
@@ -94,7 +94,7 @@
     "postcss": "^8.5",
     "prettier": "3.6.2",
     "serve": "14.2.4",
-    "tailwindcss": "4.1.12",
+    "tailwindcss": "4.1.13",
     "tw-animate-css": "1.3.8",
     "typescript": "5.9.2"
   },
