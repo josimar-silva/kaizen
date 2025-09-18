@@ -111,7 +111,6 @@ jobs:
         run: |
           git config user.name "radagastbot[bot]"
           git config user.email "radagastbot[bot]@users.noreply.github.com"
-          git fetch --no-tags --depth=1 origin ${{ github.event.workflow_run.head_sha }}
           git tag "kaizen-website/v${{ env.RELEASE_VERSION }}" "${{ github.event.workflow_run.head_sha }}"
           git push origin "kaizen-website/v${{ env.RELEASE_VERSION }}"
 
@@ -119,7 +118,7 @@ jobs:
         uses: orhun/git-cliff-action@98c93442bb05a455a77bee982867857ae748eeea # v4
         with:
           config: cliff.toml
-          args: -v --current --strip header
+          args: -v --latest --strip header
         env:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
