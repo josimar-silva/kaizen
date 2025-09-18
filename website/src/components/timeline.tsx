@@ -103,7 +103,7 @@ export function Timeline({ data, onAlgorithmClick }: Readonly<TimelineProps>) {
   const hasMore = filteredAndSortedData.length > itemsToShow;
 
   return (
-    <div className="space-y-4 sm:space-y-6 max-w-4xl mx-auto">
+    <div className="space-y-4 sm:space-y-6 max-w-5xl mx-auto">
       <Card className="p-3 sm:p-4 bg-card/50 border-border">
         <div className="flex flex-col gap-3 sm:gap-4">
           <div className="relative flex-1">

@@ -7,7 +7,10 @@ import type React from "react";
 import { Suspense } from "react";
 
 export const viewport: Viewport = {
-  themeColor: "purple",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+  ],
   width: "device-width",
   initialScale: 1,
 };

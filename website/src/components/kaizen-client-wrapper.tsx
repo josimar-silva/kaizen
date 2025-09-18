@@ -20,12 +20,6 @@ export function KaizenClientWrapper({
   const [selectedAlgorithmIndex, setSelectedAlgorithmIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDateClick = (date: string) => {
-    setSelectedDate(date);
-    setSelectedAlgorithmIndex(0);
-    setIsModalOpen(true);
-  };
-
   const handleAlgorithmClick = (date: string, algorithmIndex: number) => {
     setSelectedDate(date);
     setSelectedAlgorithmIndex(algorithmIndex);
@@ -43,7 +37,7 @@ export function KaizenClientWrapper({
       {showTimeline ? (
         <Timeline data={data} onAlgorithmClick={handleAlgorithmClick} />
       ) : (
-        <CalendarHeatmap data={data} onDateClick={handleDateClick} />
+        <CalendarHeatmap data={data} />
       )}
 
       {/* Algorithm Detail Modal */}
