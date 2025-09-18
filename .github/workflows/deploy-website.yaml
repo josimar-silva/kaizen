@@ -77,7 +77,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: pages deploy website/dist/website --project-name=kaizen-website
+          command: pages deploy website/dist/website --project-name=kaizen-website --branch=main --commit-hash=${{ github.sha }} --commit-dirty=true
       
       - name: 🔍 Log Deployment URLs
         run: |
