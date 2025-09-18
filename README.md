@@ -40,7 +40,11 @@
   </a>
   <!-- Docker Builds -->
   <a href="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml">
-    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/docker.yaml/badge.svg" alt="Docker" />
+    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/docker-website.yaml/badge.svg" alt="Docker" />
+  </a>
+  <!-- Deploy -->
+  <a href="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml">
+    <img src="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml/badge.svg" alt="Deploy" />
   </a>
 </div>
 <div align="center">
