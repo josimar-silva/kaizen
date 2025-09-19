@@ -1,0 +1,13 @@
+[package]
+name = "codewars"
+version = "0.1.1"
+description = "Codewars katas in Rust"
+authors = ["Josimar Silva <me@josimar-silva.com>"]
+edition = "2024"
+rust-version = "1.88.0"
+license = "MIT"
+homepage = "https://github.com/josimar-silva/kaizen"
+repository = "https://github.com/josimar-silva/kaizen"
+keywords = ["kaizen", "algorithms", "codewars"]
+
+[dependencies]
