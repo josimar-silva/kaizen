@@ -85,9 +85,11 @@ pre-release:
     echo "Updating APP_VERSION in next.config.mjs"
     sed -i "s/APP_VERSION: \"[0-9.]*\"/APP_VERSION: \"${new_version}\"/" next.config.mjs
 
+    echo "Updating kaizen_website version in README.md"
+    sed -i "s/kaizen_website-v[0-9.]*/kaizen_website-v${new_version}/" ../README.md
 
     echo "Committing version bump..."
-    git add package.json next.config.mjs
+    git add package.json next.config.mjs ../README.md
     git commit -m "chore(release): prepare website for release v${new_version}"
 
     echo "Pre-release for version ${new_version} is ready."
