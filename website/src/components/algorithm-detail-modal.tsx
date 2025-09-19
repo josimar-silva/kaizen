@@ -188,7 +188,7 @@ export function AlgorithmDetailModal({
                     <Separator />
 
                     <div className="prose prose-sm max-w-none">
-                      <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm sm:text-base">
+                      <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap text-sm sm:text-base break-words">
                         {currentAlgorithm.notes}
                       </p>
                     </div>
