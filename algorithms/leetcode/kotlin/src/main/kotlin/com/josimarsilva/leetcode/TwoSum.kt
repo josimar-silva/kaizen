@@ -1,0 +1,29 @@
+package com.josimarsilva.leetcode
+
+/**
+ * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+ *
+ * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+ *
+ * You can return the answer in any order.
+ *
+ * Ref.: https://leetcode.com/problems/two-sum/description/
+ *
+ */
+class TwoSum {
+
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        val hash = HashMap<Int, Int>()
+
+        for ((index, currentNumber) in nums.withIndex()) {
+            val remainder = target - currentNumber
+            if(hash[remainder] != null) {
+                return intArrayOf(hash[remainder]!!, index)
+            } else {
+                hash[currentNumber] = index
+            }
+        }
+
+        return IntArray(0)
+    }
+}
