@@ -131,8 +131,15 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2">
-            <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger className="w-full sm:w-44 bg-background">
+            <Select
+              value={selectedType}
+              onValueChange={setSelectedType}
+              data-testid="type-select"
+            >
+              <SelectTrigger
+                aria-label="Filter by type"
+                className="w-full sm:w-44 bg-background"
+              >
                 <Layers className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
@@ -150,8 +157,12 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
             <Select
               value={selectedLanguage}
               onValueChange={setSelectedLanguage}
+              data-testid="language-select"
             >
-              <SelectTrigger className="w-full sm:w-44 bg-background">
+              <SelectTrigger
+                aria-label="Filter by language"
+                className="w-full sm:w-44 bg-background"
+              >
                 <Filter className="w-4 h-4 mr-2" />
                 <SelectValue placeholder="Language" />
               </SelectTrigger>
@@ -173,8 +184,12 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
               onValueChange={(value: "date" | "language" | "title") =>
                 setSortBy(value)
               }
+              data-testid="sort-select"
             >
-              <SelectTrigger className="w-full sm:w-32 bg-background">
+              <SelectTrigger
+                aria-label="Sort entries"
+                className="w-full sm:w-32 bg-background"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
