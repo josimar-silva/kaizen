@@ -57,6 +57,16 @@ const mockAlgorithms = [
   },
 ];
 
+const mockAlgorithmsWithLongNote = [
+  {
+    title: "Algo 1",
+    notes: "longword".repeat(50),
+    link: "link1",
+    language: "Java",
+    type: "algorithm",
+  },
+];
+
 describe("AlgorithmDetailModal", () => {
   const defaultProps = {
     isOpen: true,
@@ -146,5 +156,15 @@ describe("AlgorithmDetailModal", () => {
     // Check if the icon is rendered with the correct class
     const languageBadge = screen.getByTestId("main-language-badge");
     expect(languageBadge.querySelector("i")).toHaveClass("icon-Java");
+  });
+
+  it("should have break-words class for long notes", () => {
+    const props = {
+      ...defaultProps,
+      algorithms: mockAlgorithmsWithLongNote,
+    };
+    render(<AlgorithmDetailModal {...props} />);
+    const notes = screen.getByText("longword".repeat(50));
+    expect(notes).toHaveClass("break-words");
   });
 });
