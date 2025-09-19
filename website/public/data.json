@@ -1,6 +1,13 @@
 {
   "2025-09-19": [
     {
+      "title": "Two Sum",
+      "notes": "Classic Two Sum challenge from LeetCode.\nA reminder of the power of hash tables.\nRef.: https://leetcode.com/problems/two-sum/description/",
+      "link": "https://github.com/josimar-silva/kaizen/commit/e4765a632d1676f89d73242cb06fe098fb15dd78",
+      "language": "Kotlin",
+      "type_of": "algo"
+    },
+    {
       "title": "find the sum of integer combinations",
       "notes": "Good introduction to dynamic programming\nRef.: https://www.codewars.com/kata/59f3178e3640cef6d90000d5",
       "link": "https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb",
