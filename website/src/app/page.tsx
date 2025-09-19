@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CalendarHeatmap } from "@/components/calendar-heatmap";
+import { Footer } from "@/components/footer";
 import { ScrollHeader } from "@/components/scroll-header";
 import { Timeline } from "@/components/timeline";
 import { getKaizenData } from "@/lib/stats-service";
@@ -92,27 +93,7 @@ export default async function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card/30 mt-12 sm:mt-16">
-        <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 text-center">
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            Built with viele ☕️ by{" "}
-            <a
-              href="https://josimar-silva.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-purple-400 font-medium hover:text-purple-300 transition-colors duration-200 underline decoration-purple-400/50 hover:decoration-purple-300"
-              data-testid="footer-author-link"
-            >
-              Josimar Silva
-            </a>
-          </p>
-          <p data-testid="footer-copyright" className="text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} Josimar Silva. All rights
-            reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
