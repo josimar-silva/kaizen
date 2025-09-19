@@ -88,6 +88,7 @@ export function AlgorithmDetailModal({
                   size="sm"
                   onClick={goToPrevious}
                   className="h-8 w-8 p-0 bg-transparent"
+                  aria-label="previous algorithm"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </Button>
@@ -99,6 +100,7 @@ export function AlgorithmDetailModal({
                   size="sm"
                   onClick={goToNext}
                   className="h-8 w-8 p-0 bg-transparent"
+                  aria-label="next algorithm"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </Button>
@@ -152,7 +154,10 @@ export function AlgorithmDetailModal({
                           <Code2 className="w-4 h-4 shrink-0" />
                           <span>Algorithm</span>
                         </div>
-                        <div className={`language-badge w-fit`}>
+                        <div
+                          className={`language-badge w-fit`}
+                          data-testid="main-language-badge"
+                        >
                           <i
                             className={StyleService.getLanguageIcon(
                               currentAlgorithm.language,
