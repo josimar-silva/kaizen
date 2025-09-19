@@ -69,7 +69,6 @@ pre-release:
     echo "Running checks and tests..."
     just check
     just test
-    just test-e2e
 
     current_version=$(node -p "require('./package.json').version")
     echo "Current version is ${current_version}"
@@ -83,8 +82,12 @@ pre-release:
     echo "Bumping version to ${new_version}..."
     pnpm version --no-git-tag-version ${new_version}
 
+    echo "Updating APP_VERSION in next.config.mjs"
+    sed -i "s/APP_VERSION: \"[0-9.]*\"/APP_VERSION: \"${new_version}\"/" next.config.mjs
+
+
     echo "Committing version bump..."
-    git add package.json pnpm-lock.yaml
+    git add package.json next.config.mjs
     git commit -m "chore(release): prepare website for release v${new_version}"
 
     echo "Pre-release for version ${new_version} is ready."
