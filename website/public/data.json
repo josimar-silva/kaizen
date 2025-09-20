@@ -1,19 +1,19 @@
 {
-  "2025-09-14": [
-    {
-      "title": "intro to Knuth's method",
-      "notes": "First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1",
-      "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
-      "language": "Java",
-      "type_of": "algo"
-    }
-  ],
   "2025-09-15": [
     {
       "title": "calculate multiples of 3 or 5",
       "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
       "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
       "language": "Kotlin",
+      "type_of": "algo"
+    }
+  ],
+  "2025-09-14": [
+    {
+      "title": "intro to Knuth's method",
+      "notes": "First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1",
+      "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
+      "language": "Java",
       "type_of": "algo"
     }
   ],
