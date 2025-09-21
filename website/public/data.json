@@ -1,16 +1,16 @@
 {
   "stats": {
-    "totalAlgorithms": 4,
-    "totalDays": 3,
-    "currentStreak": 0,
+    "totalAlgorithms": 5,
+    "totalDays": 4,
+    "currentStreak": 1,
     "longestStreak": 2,
     "languageDistribution": {
-      "Rust": 1,
-      "Kotlin": 2,
-      "Java": 1
+      "Kotlin": 3,
+      "Java": 1,
+      "Rust": 1
     },
     "monthlyActivity": {
-      "2025-09": 4
+      "2025-09": 5
     }
   },
   "commits": {
@@ -23,11 +23,11 @@
         "type_of": "algo"
       }
     ],
-    "2025-09-15": [
+    "2025-09-21": [
       {
-        "title": "calculate multiples of 3 or 5",
-        "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
-        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
+        "title": "Two Numbers",
+        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
         "language": "Kotlin",
         "type_of": "algo"
       }
@@ -45,6 +45,15 @@
         "notes": "Good introduction to dynamic programming\nRef.: https://www.codewars.com/kata/59f3178e3640cef6d90000d5",
         "link": "https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb",
         "language": "Rust",
+        "type_of": "algo"
+      }
+    ],
+    "2025-09-15": [
+      {
+        "title": "calculate multiples of 3 or 5",
+        "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
+        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
+        "language": "Kotlin",
         "type_of": "algo"
       }
     ]
