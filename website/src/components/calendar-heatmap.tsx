@@ -10,13 +10,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { KaizenData } from "@/interfaces/kaizen-data";
-import { calculateStats } from "@/lib/stats-service";
 
 interface CalendarHeatmapProps {
   data: KaizenData;
 }
 
-export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
+export function CalendarHeatmap({
+  data: { stats, commits },
+}: Readonly<CalendarHeatmapProps>) {
   // Generate the last 365 days
   const generateDates = () => {
     const dates = [];
@@ -32,7 +33,7 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
   const dates = generateDates();
 
   const getActivityLevel = (date: string): number => {
-    const algorithms = data[date];
+    const algorithms = commits[date];
     if (!algorithms) return 0;
     if (algorithms.length === 1) return 1;
     if (algorithms.length === 2) return 2;
@@ -124,7 +125,6 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
     return labels;
   };
 
-  const stats = calculateStats(data);
   const yearMonthLabels = getMonthLabelsForYear();
 
   return (
@@ -221,7 +221,7 @@ export function CalendarHeatmap({ data }: Readonly<CalendarHeatmapProps>) {
                             }
 
                             const level = getActivityLevel(date);
-                            const algorithms = data[date] || [];
+                            const algorithms = commits[date] || [];
                             const isToday =
                               date === new Date().toISOString().split("T")[0];
 

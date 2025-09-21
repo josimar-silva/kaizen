@@ -25,15 +25,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { KaizenData } from "@/interfaces/kaizen-data";
+import { Commits } from "@/interfaces/kaizen-data";
 import StyleService from "@/lib/style-service";
 import { formatDate, formatRelativeDate } from "@/lib/utils";
 
 interface TimelineProps {
-  data: KaizenData;
+  commits: Commits;
 }
 
-export function Timeline({ data }: Readonly<TimelineProps>) {
+export function Timeline({ commits }: Readonly<TimelineProps>) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
   const [selectedType, setSelectedType] = useState<string>("all");
@@ -56,7 +56,7 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
   };
 
   const filteredAndSortedData = useMemo(() => {
-    let entries = Object.entries(data).flatMap(([date, algorithms]) =>
+    let entries = Object.entries(commits).flatMap(([date, algorithms]) =>
       algorithms.map((algorithm, index) => ({
         date,
         algorithm,
@@ -103,15 +103,15 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
     });
 
     return entries;
-  }, [data, searchQuery, selectedLanguage, selectedType, sortBy]);
+  }, [commits, searchQuery, selectedLanguage, selectedType, sortBy]);
 
   const availableLanguages = useMemo(() => {
     const languages = new Set<string>();
-    Object.values(data).forEach((algorithms) => {
+    Object.values(commits).forEach((algorithms) => {
       algorithms.forEach((algorithm) => languages.add(algorithm.language));
     });
     return Array.from(languages).sort();
-  }, [data]);
+  }, [commits]);
 
   const visibleEntries = filteredAndSortedData.slice(0, itemsToShow);
   const hasMore = filteredAndSortedData.length > itemsToShow;
@@ -329,7 +329,7 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
 
                             <Separator />
 
-                            <p className="text-muted-foreground leading-relaxed text-sm">
+                            <p className="text-muted-foreground leading-relaxed text-sm break-words">
                               {algorithm.notes}
                             </p>
                           </div>
@@ -379,12 +379,12 @@ export function Timeline({ data }: Readonly<TimelineProps>) {
       )}
 
       {/* Algorithm Detail Modal */}
-      {selectedDate && data[selectedDate] && (
+      {selectedDate && commits[selectedDate] && (
         <AlgorithmDetailModal
           isOpen={isModalOpen}
           onClose={handleModalClose}
           date={selectedDate}
-          algorithms={data[selectedDate]}
+          algorithms={commits[selectedDate]}
           initialAlgorithmIndex={selectedAlgorithmIndex}
         />
       )}
