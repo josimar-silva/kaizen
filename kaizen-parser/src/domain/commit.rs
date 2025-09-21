@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
@@ -14,3 +16,5 @@ pub struct Commit {
 	pub id:      String,
 	pub message: String,
 }
+
+pub type CommitsByDate = HashMap<String, Vec<CommitData>>;
