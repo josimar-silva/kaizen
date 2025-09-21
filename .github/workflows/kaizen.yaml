@@ -3,7 +3,7 @@ name: Kaizen
 on:
   workflow_dispatch:
   schedule:
-    - cron: "42 23 * * *" # every day at 23:42 UTC
+    - cron: "42 12,23 * * *" # every day at [12,23]:42 UTC
 
 permissions:
   contents: read
