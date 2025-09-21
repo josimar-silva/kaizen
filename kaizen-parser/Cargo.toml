@@ -1,6 +1,6 @@
 [package]
 name = "kaizen"
-version = "0.2.0"
+version = "0.2.1-snapshot"
 description = "Parser for Kaizen journal commits"
 authors = ["Josimar Silva <me@josimar-silva.com>"]
 edition = "2024"
@@ -29,7 +29,7 @@ chrono = { version = "0.4", features = ["serde"] }
 openssl = { version = "0.10.73", features = ["vendored"] }
 
 [dev-dependencies]
-kaizen = { path = ".", version = "0.2.0" }
+kaizen = { path = ".", version = "0.2.1-snapshot" }
 assert_cmd = "2.0"
 predicates = "3.0"
 
