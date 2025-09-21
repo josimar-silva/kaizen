@@ -3,12 +3,12 @@ use std::collections::HashMap;
 use rayon::prelude::*;
 use regex::Regex;
 
-use crate::domain::commit::{Commit, CommitData};
+use crate::domain::commit::{Commit, CommitData, CommitsByDate};
 
 pub fn parse_commits(
 	commits: &[Commit],
 	repo_path: &str,
-) -> Result<HashMap<String, Vec<CommitData>>, regex::Error> {
+) -> Result<CommitsByDate, regex::Error> {
 	let commit_re = Regex::new(
 		r"^(?P<type>algo|sysdes)\((?P<date>\d{4}-\d{2}-\d{2})\): (?P<title>.*)",
 	)?;

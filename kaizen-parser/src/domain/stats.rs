@@ -13,7 +13,7 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 
 	let mut language_distribution: HashMap<String, usize> = HashMap::new();
 	for (_, algorithms) in &entries {
-		for algorithm in *algorithms {
+		for algorithm in algorithms.iter() {
 			*language_distribution
 				.entry(algorithm.language.clone())
 				.or_insert(0) += 1;
@@ -40,18 +40,22 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	}
 }
 
-fn calculate_current_streak(data: &CommitsByDate, today: NaiveDate) -> i64 {
+fn calculate_current_streak(commits: &CommitsByDate, today: NaiveDate) -> i64 {
 	let mut streak = 0;
 	let mut current_day = today;
 
-	for _ in 0..365 {
+	loop {
 		let date_string = current_day.format("%Y-%m-%d").to_string();
-		if data.contains_key(&date_string) {
+		if commits.contains_key(&date_string) {
 			streak += 1;
 		} else {
 			break;
 		}
-		current_day = current_day.pred_opt().unwrap();
+		if let Some(prev) = current_day.pred_opt() {
+			current_day = prev;
+		} else {
+			break;
+		}
 	}
 
 	streak
@@ -85,9 +89,10 @@ fn calculate_longest_streak(data: &CommitsByDate) -> i64 {
 
 #[cfg(test)]
 mod tests {
+	use std::collections::HashMap;
+
 	use super::*;
 	use crate::domain::commit::CommitData;
-	use std::collections::HashMap;
 
 	fn create_commit_data(language: &str) -> CommitData {
 		CommitData {
@@ -102,14 +107,11 @@ mod tests {
 	#[test]
 	fn test_calculate_stats_basic() {
 		let mut data: CommitsByDate = HashMap::new();
-		data.insert(
-			"2025-09-20".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-21".to_string(),
-			vec![create_commit_data("Go"), create_commit_data("Rust")],
-		);
+		data.insert("2025-09-20".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-21".to_string(), vec![
+			create_commit_data("Go"),
+			create_commit_data("Rust"),
+		]);
 
 		let stats = calculate_stats(&data);
 
@@ -123,26 +125,11 @@ mod tests {
 	#[test]
 	fn test_calculate_longest_streak() {
 		let mut data: CommitsByDate = HashMap::new();
-		data.insert(
-			"2025-09-18".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-19".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-21".to_string(),
-			vec![create_commit_data("Rust")],
-		); // break
-		data.insert(
-			"2025-09-22".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-23".to_string(),
-			vec![create_commit_data("Rust")],
-		);
+		data.insert("2025-09-18".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-19".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-21".to_string(), vec![create_commit_data("Rust")]); // break
+		data.insert("2025-09-22".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-23".to_string(), vec![create_commit_data("Rust")]);
 
 		let longest_streak = calculate_longest_streak(&data);
 		assert_eq!(longest_streak, 3);
@@ -158,10 +145,7 @@ mod tests {
 	#[test]
 	fn test_calculate_longest_streak_single_day() {
 		let mut data: CommitsByDate = HashMap::new();
-		data.insert(
-			"2025-09-21".to_string(),
-			vec![create_commit_data("Rust")],
-		);
+		data.insert("2025-09-21".to_string(), vec![create_commit_data("Rust")]);
 		let longest_streak = calculate_longest_streak(&data);
 		assert_eq!(longest_streak, 1);
 	}
@@ -172,23 +156,11 @@ mod tests {
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 
 		// Streak of 3
-		data.insert(
-			"2025-09-21".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-20".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-19".to_string(),
-			vec![create_commit_data("Rust")],
-		);
+		data.insert("2025-09-21".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-20".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-19".to_string(), vec![create_commit_data("Rust")]);
 		// Break in streak
-		data.insert(
-			"2025-09-17".to_string(),
-			vec![create_commit_data("Rust")],
-		);
+		data.insert("2025-09-17".to_string(), vec![create_commit_data("Rust")]);
 
 		let current_streak = calculate_current_streak(&data, today);
 		assert_eq!(current_streak, 3);
@@ -199,14 +171,8 @@ mod tests {
 		let mut data: CommitsByDate = HashMap::new();
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 
-		data.insert(
-			"2025-09-20".to_string(),
-			vec![create_commit_data("Rust")],
-		);
-		data.insert(
-			"2025-09-19".to_string(),
-			vec![create_commit_data("Rust")],
-		);
+		data.insert("2025-09-20".to_string(), vec![create_commit_data("Rust")]);
+		data.insert("2025-09-19".to_string(), vec![create_commit_data("Rust")]);
 
 		let current_streak = calculate_current_streak(&data, today);
 		assert_eq!(current_streak, 0);

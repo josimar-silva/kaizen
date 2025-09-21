@@ -7,8 +7,10 @@ use clap::{Parser, Subcommand};
 
 use crate::adapters::git_provider::GitCommitProvider;
 use crate::adapters::json_writer::JsonFileOutputWriter;
+use crate::domain::kaizen::KaizenData;
 use crate::domain::parser::parse_commits;
 use crate::domain::ports::{CommitProvider, OutputWriter};
+use crate::domain::stats::calculate_stats;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -48,9 +50,18 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 
 			let repo_path = commit_provider.get_repo_path()?;
 
-			let data = parse_commits(&commits, &repo_path)?;
+			let commits_by_date = parse_commits(&commits, &repo_path)?;
 
-			output_writer.write(&data)?;
+			println!("Calculating stats...");
+			let stats = calculate_stats(&commits_by_date);
+			println!("Stats calculated!");
+
+			let kaizen_data = KaizenData {
+				stats,
+				commits: commits_by_date,
+			};
+
+			output_writer.write(&kaizen_data)?;
 
 			println!("Repository parsed successfully!");
 		}
