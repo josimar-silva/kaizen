@@ -78,9 +78,3 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           command: pages deploy website/dist/website --project-name=kaizen-website --branch=main --commit-hash=${{ github.sha }} --commit-dirty=true
-      
-      - name: 🔍 Log Deployment URLs
-        run: |
-          echo "Deployment URL: ${{ steps.deploy.outputs.deployment-url }}"
-          echo "Deployment Alias: ${{ steps.deploy.outputs.pages-deployment-alias-url }}"
-          echo "Deployment ID: ${{ steps.deploy.outputs.command-output }}"
