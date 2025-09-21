@@ -106,11 +106,14 @@ jobs:
         uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
         with:
           subject-path: "${{ github.workspace }}/website/website-${{ env.RELEASE_VERSION }}.tar.gz"
+      
+      - name: 🛠️ Setup git
+        run: |
+          git config --global user.name "radagastbot[bot]"
+          git config --global user.email "radagastbot[bot]@users.noreply.github.com"
 
       - name: 🔖 Create Git Tag
         run: |
-          git config user.name "radagastbot[bot]"
-          git config user.email "radagastbot[bot]@users.noreply.github.com"
           git tag "kaizen-website/v${{ env.RELEASE_VERSION }}" "${{ github.event.workflow_run.head_sha }}"
           git push origin "kaizen-website/v${{ env.RELEASE_VERSION }}"
 
