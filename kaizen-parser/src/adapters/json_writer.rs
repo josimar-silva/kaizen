@@ -1,9 +1,8 @@
-use std::collections::HashMap;
 use std::fs::File;
 use std::io::{self, Write};
 use std::path::PathBuf;
 
-use crate::domain::commit::CommitData;
+use crate::domain::kaizen::KaizenData;
 use crate::domain::ports::OutputWriter;
 
 pub struct JsonFileOutputWriter {
@@ -13,10 +12,7 @@ pub struct JsonFileOutputWriter {
 impl OutputWriter for JsonFileOutputWriter {
 	type Error = io::Error;
 
-	fn write(
-		&self,
-		data: &HashMap<String, Vec<CommitData>>,
-	) -> Result<(), Self::Error> {
+	fn write(&self, data: &KaizenData) -> Result<(), Self::Error> {
 		let json_output =
 			serde_json::to_string_pretty(data).map_err(io::Error::other)?;
 		let mut file = File::create(&self.path)?;

@@ -1,6 +1,5 @@
-use std::collections::HashMap;
-
-use crate::domain::commit::{Commit, CommitData};
+use crate::domain::commit::Commit;
+use crate::domain::kaizen::KaizenData;
 
 pub trait CommitProvider {
 	type Error;
@@ -10,8 +9,5 @@ pub trait CommitProvider {
 
 pub trait OutputWriter {
 	type Error;
-	fn write(
-		&self,
-		data: &HashMap<String, Vec<CommitData>>,
-	) -> Result<(), Self::Error>;
+	fn write(&self, data: &KaizenData) -> Result<(), Self::Error>;
 }
