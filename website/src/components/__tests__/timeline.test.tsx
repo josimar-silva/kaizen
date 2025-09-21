@@ -86,7 +86,7 @@ jest.mock("@/components/ui/select", () => {
   };
 });
 
-const mockKaizenData = {
+const mockCommits = {
   "2023-01-03": [
     {
       title: "Algo 3",
@@ -125,7 +125,7 @@ const mockKaizenData = {
 
 describe("Timeline", () => {
   const defaultProps = {
-    data: mockKaizenData,
+    commits: mockCommits,
   };
 
   it("should render search and filter controls", () => {

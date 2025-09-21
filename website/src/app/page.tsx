@@ -5,10 +5,10 @@ import { CalendarHeatmap } from "@/components/calendar-heatmap";
 import { Footer } from "@/components/footer";
 import { ScrollHeader } from "@/components/scroll-header";
 import { Timeline } from "@/components/timeline";
-import { getKaizenData } from "@/lib/stats-service";
+import { kaizenData } from "@/lib/db";
 
-export default async function HomePage() {
-  const data = await getKaizenData();
+export default function HomePage() {
+  const data = kaizenData;
 
   return (
     <div className="min-h-screen bg-background">
@@ -89,7 +89,7 @@ export default async function HomePage() {
               Latest algorithms and notes
             </p>
           </div>
-          <Timeline data={data} />
+          <Timeline commits={data.commits} />
         </section>
       </main>
 
