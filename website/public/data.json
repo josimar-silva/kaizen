@@ -5,33 +5,15 @@
     "currentStreak": 1,
     "longestStreak": 2,
     "languageDistribution": {
+      "Rust": 1,
       "Kotlin": 3,
-      "Java": 1,
-      "Rust": 1
+      "Java": 1
     },
     "monthlyActivity": {
       "2025-09": 5
     }
   },
   "commits": {
-    "2025-09-14": [
-      {
-        "title": "intro to Knuth's method",
-        "notes": "First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1",
-        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
-        "language": "Java",
-        "type_of": "algo"
-      }
-    ],
-    "2025-09-21": [
-      {
-        "title": "Two Numbers",
-        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
-        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
-        "language": "Kotlin",
-        "type_of": "algo"
-      }
-    ],
     "2025-09-19": [
       {
         "title": "Two Sum",
@@ -45,6 +27,24 @@
         "notes": "Good introduction to dynamic programming\nRef.: https://www.codewars.com/kata/59f3178e3640cef6d90000d5",
         "link": "https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb",
         "language": "Rust",
+        "type_of": "algo"
+      }
+    ],
+    "2025-09-21": [
+      {
+        "title": "Two Numbers",
+        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
+    "2025-09-14": [
+      {
+        "title": "intro to Knuth's method",
+        "notes": "First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1",
+        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
+        "language": "Java",
         "type_of": "algo"
       }
     ],
