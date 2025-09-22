@@ -1,19 +1,28 @@
 {
   "stats": {
-    "totalAlgorithms": 5,
-    "totalDays": 4,
-    "currentStreak": 0,
+    "totalAlgorithms": 6,
+    "totalDays": 5,
+    "currentStreak": 2,
     "longestStreak": 2,
     "languageDistribution": {
       "Java": 1,
-      "Kotlin": 3,
-      "Rust": 1
+      "Rust": 1,
+      "Kotlin": 4
     },
     "monthlyActivity": {
-      "2025-09": 5
+      "2025-09": 6
     }
   },
   "commits": {
+    "2025-09-22": [
+      {
+        "title": "Palindrome Number",
+        "notes": "Math everywhere =)\nRef.: https://leetcode.com/problems/palindrome-number",
+        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
     "2025-09-14": [
       {
         "title": "intro to Knuth's method",
