@@ -5,9 +5,9 @@
     "currentStreak": 3,
     "longestStreak": 3,
     "languageDistribution": {
-      "Java": 1,
       "Kotlin": 5,
-      "Rust": 1
+      "Rust": 1,
+      "Java": 1
     },
     "monthlyActivity": {
       "2025-09": 7
@@ -19,6 +19,15 @@
         "title": "Regular Expression Matching v1",
         "notes": "Basic solution using a Map. Not the fastest, but it is what it is.\nRef.: https://leetcode.com/problems/regular-expression-matching",
         "link": "https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
+    "2025-09-22": [
+      {
+        "title": "Palindrome Number",
+        "notes": "Math everywhere =)\nRef.: https://leetcode.com/problems/palindrome-number",
+        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
         "language": "Kotlin",
         "type_of": "algo"
       }
@@ -36,15 +45,6 @@
         "notes": "Good introduction to dynamic programming\nRef.: https://www.codewars.com/kata/59f3178e3640cef6d90000d5",
         "link": "https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb",
         "language": "Rust",
-        "type_of": "algo"
-      }
-    ],
-    "2025-09-22": [
-      {
-        "title": "Palindrome Number",
-        "notes": "Math everywhere =)\nRef.: https://leetcode.com/problems/palindrome-number",
-        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
-        "language": "Kotlin",
         "type_of": "algo"
       }
     ],
