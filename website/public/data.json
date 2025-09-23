@@ -1,19 +1,28 @@
 {
   "stats": {
-    "totalAlgorithms": 6,
-    "totalDays": 5,
-    "currentStreak": 2,
-    "longestStreak": 2,
+    "totalAlgorithms": 7,
+    "totalDays": 6,
+    "currentStreak": 3,
+    "longestStreak": 3,
     "languageDistribution": {
-      "Rust": 1,
       "Java": 1,
-      "Kotlin": 4
+      "Kotlin": 5,
+      "Rust": 1
     },
     "monthlyActivity": {
-      "2025-09": 6
+      "2025-09": 7
     }
   },
   "commits": {
+    "2025-09-23": [
+      {
+        "title": "Regular Expression Matching v1",
+        "notes": "Basic solution using a Map. Not the fastest, but it is what it is.\nRef.: https://leetcode.com/problems/regular-expression-matching",
+        "link": "https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
     "2025-09-19": [
       {
         "title": "Two Sum",
@@ -39,6 +48,15 @@
         "type_of": "algo"
       }
     ],
+    "2025-09-21": [
+      {
+        "title": "Two Numbers",
+        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
     "2025-09-15": [
       {
         "title": "calculate multiples of 3 or 5",
@@ -54,15 +72,6 @@
         "notes": "First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1",
         "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
         "language": "Java",
-        "type_of": "algo"
-      }
-    ],
-    "2025-09-21": [
-      {
-        "title": "Two Numbers",
-        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
-        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
-        "language": "Kotlin",
         "type_of": "algo"
       }
     ]
