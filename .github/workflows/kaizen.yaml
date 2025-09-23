@@ -4,6 +4,12 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "42 12,23 * * *" # every day at [12,23]:42 UTC
+  push:
+    branches:
+      - main
+    paths:
+      - 'algorithms/**'
+      - 'system-design/**'
 
 permissions:
   contents: read
@@ -64,6 +70,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "もう!"
           else
-            git commit -m "kaizen: publish data of $(date +'%d/%m/%Y')"
+            git commit -m "kaizen($(date +'%Y-%m-%d')): publish data for ${{ github.sha }}"
             git push
           fi
