@@ -1,4 +1,4 @@
-package com.josimarsilva.leetcode
+package com.josimarsilva.leetcode.medium
 
 /**
  *

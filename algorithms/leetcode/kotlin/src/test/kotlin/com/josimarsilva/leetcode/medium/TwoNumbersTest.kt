@@ -1,6 +1,8 @@
-package com.josimarsilva.leetcode
+package com.josimarsilva.leetcode.medium
 
 
+import com.josimarsilva.leetcode.medium.ListNode
+import com.josimarsilva.leetcode.medium.TwoNumbers
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments

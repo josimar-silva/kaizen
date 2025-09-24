@@ -1,4 +1,4 @@
-package com.josimarsilva.leetcode
+package com.josimarsilva.leetcode.easy
 
 import java.util.stream.Stream
 import org.assertj.core.api.Assertions.assertThat
