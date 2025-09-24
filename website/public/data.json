@@ -1,33 +1,33 @@
 {
   "stats": {
-    "totalAlgorithms": 7,
-    "totalDays": 6,
-    "currentStreak": 0,
-    "longestStreak": 3,
+    "totalAlgorithms": 8,
+    "totalDays": 7,
+    "currentStreak": 4,
+    "longestStreak": 4,
     "languageDistribution": {
-      "Kotlin": 5,
+      "Rust": 1,
       "Java": 1,
-      "Rust": 1
+      "Kotlin": 6
     },
     "monthlyActivity": {
-      "2025-09": 7
+      "2025-09": 8
     }
   },
   "commits": {
-    "2025-09-22": [
-      {
-        "title": "Palindrome Number",
-        "notes": "Math everywhere =)\nRef.: https://leetcode.com/problems/palindrome-number",
-        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
-        "language": "Kotlin",
-        "type_of": "algo"
-      }
-    ],
     "2025-09-21": [
       {
         "title": "Two Numbers",
         "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.\nRef.: https://leetcode.com/problems/add-two-numbers",
         "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
+    "2025-09-22": [
+      {
+        "title": "Palindrome Number",
+        "notes": "Math everywhere =)\nRef.: https://leetcode.com/problems/palindrome-number",
+        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
         "language": "Kotlin",
         "type_of": "algo"
       }
@@ -48,6 +48,15 @@
         "type_of": "algo"
       }
     ],
+    "2025-09-15": [
+      {
+        "title": "calculate multiples of 3 or 5",
+        "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
+        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
     "2025-09-14": [
       {
         "title": "intro to Knuth's method",
@@ -57,20 +66,20 @@
         "type_of": "algo"
       }
     ],
+    "2025-09-24": [
+      {
+        "title": "Valid Parentheses",
+        "notes": "Stacks for the rescue! Interesting challenge.\nRef.: https://leetcode.com/problems/valid-parentheses",
+        "link": "https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9",
+        "language": "Kotlin",
+        "type_of": "algo"
+      }
+    ],
     "2025-09-23": [
       {
         "title": "Regular Expression Matching v1",
         "notes": "Basic solution using a Map. Not the fastest, but it is what it is.\nRef.: https://leetcode.com/problems/regular-expression-matching",
         "link": "https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c",
-        "language": "Kotlin",
-        "type_of": "algo"
-      }
-    ],
-    "2025-09-15": [
-      {
-        "title": "calculate multiples of 3 or 5",
-        "notes": "First problem of Project Euler list. Ref.: https://projecteuler.net/problem=1",
-        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
         "language": "Kotlin",
         "type_of": "algo"
       }
