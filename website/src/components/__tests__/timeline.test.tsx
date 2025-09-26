@@ -110,6 +110,7 @@ const mockCommits = {
       link: "link1",
       language: "Rust",
       type: "algorithm",
+      reference: "https://example.com/link1",
     },
   ],
   "2023-01-02": [
@@ -127,6 +128,18 @@ describe("Timeline", () => {
   const defaultProps = {
     commits: mockCommits,
   };
+
+  it("should render the solution and problem buttons when links are available", () => {
+    render(<Timeline {...defaultProps} />);
+    const solutionButton = screen.getByTestId("solution-button-2023-01-01-0");
+    const problemButton = screen.getByTestId("problem-button-2023-01-01-0");
+
+    expect(solutionButton).toBeInTheDocument();
+    expect(solutionButton).toHaveAttribute("href", "link1");
+
+    expect(problemButton).toBeInTheDocument();
+    expect(problemButton).toHaveAttribute("href", "https://example.com/link1");
+  });
 
   it("should render search and filter controls", () => {
     render(<Timeline {...defaultProps} />);
