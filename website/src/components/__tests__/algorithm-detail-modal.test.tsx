@@ -47,6 +47,7 @@ const mockAlgorithms = [
     link: "link1",
     language: "Java",
     type: "algorithm",
+    reference: "https://example.com/link1",
   },
   {
     title: "Algo 2",
@@ -86,9 +87,13 @@ describe("AlgorithmDetailModal", () => {
       screen.getByRole("heading", { name: "FormattedDate(2023-10-26)" }),
     ).toBeInTheDocument();
     expect(screen.getByText("RelativeDate(2023-10-26)")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Code/i })).toHaveAttribute(
+    expect(screen.getByTestId("solution-button")).toHaveAttribute(
       "href",
       "link1",
+    );
+    expect(screen.getByTestId("problem-button")).toHaveAttribute(
+      "href",
+      "https://example.com/link1",
     );
   });
 

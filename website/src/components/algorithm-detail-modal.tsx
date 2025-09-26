@@ -134,17 +134,42 @@ export function AlgorithmDetailModal({
                         <h2 className="text-xl sm:text-2xl font-bold text-foreground leading-tight">
                           {currentAlgorithm.title}
                         </h2>
-                        <Button asChild className="shrink-0 w-full sm:w-auto">
-                          <a
-                            href={currentAlgorithm.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2"
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-2">
+                          {currentAlgorithm.reference && (
+                            <Button
+                              asChild
+                              variant="ghost"
+                              className="shrink-0 w-full sm:w-auto"
+                            >
+                              <a
+                                href={currentAlgorithm.reference}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2"
+                                data-testid="problem-button"
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                                Problem
+                              </a>
+                            </Button>
+                          )}
+                          <Button
+                            asChild
+                            variant="default"
+                            className="shrink-0 w-full sm:w-auto hover:bg-accent/90"
                           >
-                            <ExternalLink className="w-4 h-4" />
-                            Code
-                          </a>
-                        </Button>
+                            <a
+                              href={currentAlgorithm.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center gap-2"
+                              data-testid="solution-button"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              Solution
+                            </a>
+                          </Button>
+                        </div>
                       </div>
 
                       <Separator />
