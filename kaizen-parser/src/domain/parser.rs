@@ -16,9 +16,10 @@ pub fn parse_commits(
 	let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
 	let ref_re = Regex::new(r"Ref\.:\s*(?P<reference>https?://\S+)")?;
 
-	let commits_by_date: CommitsByDate = commits
+	let intermediate_data: HashMap<String, Vec<(usize, CommitData)>> = commits
 		.par_iter()
-		.filter_map(|commit| {
+		.enumerate()
+		.filter_map(|(index, commit)| {
 			commit_re.captures(&commit.message).map(|commit_caps| {
 				let date = commit_caps["date"].to_string();
 				let title = commit_caps["title"].to_string();
@@ -48,20 +49,26 @@ pub fn parse_commits(
 				let link =
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
 
-				(date, CommitData {
-					title,
-					notes,
-					link,
-					language,
-					type_of,
-					reference,
-				})
+				(
+					date,
+					(index, CommitData {
+						title,
+						notes,
+						link,
+						language,
+						type_of,
+						reference,
+					}),
+				)
 			})
 		})
-		.fold(HashMap::new, |mut acc: CommitsByDate, (date, data)| {
-			acc.entry(date).or_default().push(data);
-			acc
-		})
+		.fold(
+			HashMap::new,
+			|mut acc: HashMap<String, Vec<(usize, CommitData)>>, (date, data)| {
+				acc.entry(date).or_default().push(data);
+				acc
+			},
+		)
 		.reduce(HashMap::new, |mut a, b| {
 			for (k, v) in b {
 				a.entry(k).or_default().extend(v);
@@ -69,7 +76,31 @@ pub fn parse_commits(
 			a
 		});
 
-	Ok(commits_by_date)
+	Ok(sort_and_map_commits_by_date(intermediate_data))
+}
+
+fn sort_and_map_commits_by_date(
+	intermediate_data: HashMap<String, Vec<(usize, CommitData)>>,
+) -> CommitsByDate {
+	let mut commits_by_date_vec: Vec<(String, Vec<(usize, CommitData)>)> =
+		intermediate_data.into_iter().collect();
+	commits_by_date_vec.sort_by(|(date_a, _), (date_b, _)| {
+		let date_a_parsed =
+			chrono::NaiveDate::parse_from_str(date_a, "%Y-%m-%d").unwrap();
+		let date_b_parsed =
+			chrono::NaiveDate::parse_from_str(date_b, "%Y-%m-%d").unwrap();
+		date_a_parsed.cmp(&date_b_parsed)
+	});
+
+	let mut commits_by_date: CommitsByDate = HashMap::new();
+	for (date, mut indexed_commits) in commits_by_date_vec {
+		indexed_commits.sort_by_key(|(index, _)| *index);
+		let sorted_commits =
+			indexed_commits.into_iter().map(|(_, data)| data).collect();
+		commits_by_date.insert(date, sorted_commits);
+	}
+
+	commits_by_date
 }
 
 #[cfg(test)]
@@ -136,6 +167,7 @@ mod tests {
 		// Check 2025-09-08
 		let day1_commits = result.get("2025-09-08").unwrap();
 		assert_eq!(day1_commits.len(), 2);
+		// Assert order for 2025-09-08
 		assert_eq!(day1_commits[0].title, "Two Sum");
 		assert_eq!(day1_commits[0].language, "Rust");
 		assert_eq!(day1_commits[0].type_of, "algo");
