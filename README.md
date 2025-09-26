@@ -8,7 +8,7 @@
   </a>
   <!-- CLI -->
   <a href="./kaizen-parser">
-    <img src="https://img.shields.io/badge/kaizen_parser-v0.2.0-orange.svg" alt="kaizen cli" />
+    <img src="https://img.shields.io/badge/kaizen_parser-v0.3.0-orange.svg" alt="kaizen cli" />
   </a>
   <!-- WEBSITE -->
   <a href="./website">
