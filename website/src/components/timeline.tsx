@@ -33,6 +33,16 @@ interface TimelineProps {
   commits: Commits;
 }
 
+/**
+ * Renders a searchable, filterable, and paginated timeline of algorithm entries.
+ *
+ * Displays search and filter controls, grouped date cards showing algorithm items
+ * (with notes, language/type badges, Problem/Solution actions), a "Load More" control,
+ * and an algorithm detail modal for inspecting individual entries.
+ *
+ * @param commits - Mapping from date string to arrays of algorithm entries to display for that date.
+ * @returns A React element containing the timeline UI.
+ */
 export function Timeline({ commits }: Readonly<TimelineProps>) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("all");
