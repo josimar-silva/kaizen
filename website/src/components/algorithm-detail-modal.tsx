@@ -34,6 +34,18 @@ interface AlgorithmDetailModalProps {
   initialAlgorithmIndex?: number;
 }
 
+/**
+ * Render a modal showing details for a selected algorithm from a given date and allow navigation between multiple algorithms.
+ *
+ * Displays algorithm title, links (problem and solution), language badge, notes, and — when multiple algorithms are present — previous/next controls and a selectable list of other algorithms from the same date.
+ *
+ * @param isOpen - Whether the dialog is open
+ * @param onClose - Callback invoked when the dialog is closed
+ * @param date - ISO date string representing the day for the shown algorithms
+ * @param algorithms - Array of algorithms available for the given date
+ * @param initialAlgorithmIndex - Index of the initially selected algorithm (defaults to 0)
+ * @returns The modal's rendered JSX or `null` when no algorithm is available
+ */
 export function AlgorithmDetailModal({
   isOpen,
   onClose,
