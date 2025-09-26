@@ -12,8 +12,9 @@ pub fn parse_commits(
 	let commit_re = Regex::new(
 		r"^(?P<type>algo|sysdes)\((?P<date>\d{4}-\d{2}-\d{2})\): (?P<title>.*)",
 	)?;
-	let notes_re = Regex::new(r"(?ms)^notes: (?P<notes>.*?)(?:^\w+:|\z)")?;
+	let notes_re = Regex::new(r"(?ms)^notes: (?P<notes>.*?)(?:^Ref\.:|^\w+:|\z)")?;
 	let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
+	let ref_re = Regex::new(r"(?m)^Ref\.: (?P<reference>.*)")?;
 
 	let intermediate_data: Vec<(String, CommitData)> = commits
 		.par_iter()
@@ -33,6 +34,10 @@ pub fn parse_commits(
 					.map(|c| c["language"].to_string())
 					.unwrap_or_default();
 
+				let reference = ref_re
+					.captures(&commit.message)
+					.map(|c| c["reference"].to_string());
+
 				let link =
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
 
@@ -42,6 +47,7 @@ pub fn parse_commits(
 					link,
 					language,
 					type_of,
+					reference,
 				};
 				(date, commit_data)
 			})
@@ -93,11 +99,23 @@ mod tests {
 					 solution.\nlanguage: Python",
 				),
 			},
+            Commit {
+				id:      String::from("abc005"),
+				message: String::from(
+					"algo(2025-09-10): Bubble Sort\nnotes: Simple but inefficient.\nlanguage: C++\nRef.: https://example.com/bubble-sort",
+				),
+			},
+            Commit {
+				id:      String::from("abc006"),
+				message: String::from(
+					"algo(2025-09-11): Quick Sort\nnotes: A more complex solution.\nRef.: https://example.com/quick-sort\nlanguage: Rust",
+				),
+			},
 		];
 
 		let result = parse_commits(&commits, "owner/repo").unwrap();
 
-		assert_eq!(result.len(), 2);
+		assert_eq!(result.len(), 4);
 
 		// Check 2025-09-08
 		let day1_commits = result.get("2025-09-08").unwrap();
@@ -110,6 +128,7 @@ mod tests {
 			day1_commits[0].link,
 			"https://github.com/owner/repo/commit/abc001"
 		);
+		assert_eq!(day1_commits[0].reference, None);
 
 		assert_eq!(day1_commits[1].title, "Web Crawler");
 		assert_eq!(day1_commits[1].language, "Go");
@@ -122,6 +141,7 @@ mod tests {
 			day1_commits[1].link,
 			"https://github.com/owner/repo/commit/abc002"
 		);
+		assert_eq!(day1_commits[1].reference, None);
 
 		// Check 2025-09-09
 		let day2_commits = result.get("2025-09-09").unwrap();
@@ -133,6 +153,39 @@ mod tests {
 		assert_eq!(
 			day2_commits[0].link,
 			"https://github.com/owner/repo/commit/abc004"
+		);
+		assert_eq!(day2_commits[0].reference, None);
+
+		// Check 2025-09-10
+		let day3_commits = result.get("2025-09-10").unwrap();
+		assert_eq!(day3_commits.len(), 1);
+		assert_eq!(day3_commits[0].title, "Bubble Sort");
+		assert_eq!(day3_commits[0].language, "C++");
+		assert_eq!(day3_commits[0].type_of, "algo");
+		assert_eq!(day3_commits[0].notes, "Simple but inefficient.");
+		assert_eq!(
+			day3_commits[0].link,
+			"https://github.com/owner/repo/commit/abc005"
+		);
+		assert_eq!(
+			day3_commits[0].reference,
+			Some("https://example.com/bubble-sort".to_string())
+		);
+
+		// Check 2025-09-11
+		let day4_commits = result.get("2025-09-11").unwrap();
+		assert_eq!(day4_commits.len(), 1);
+		assert_eq!(day4_commits[0].title, "Quick Sort");
+		assert_eq!(day4_commits[0].language, "Rust");
+		assert_eq!(day4_commits[0].type_of, "algo");
+		assert_eq!(day4_commits[0].notes, "A more complex solution.");
+		assert_eq!(
+			day4_commits[0].link,
+			"https://github.com/owner/repo/commit/abc006"
+		);
+		assert_eq!(
+			day4_commits[0].reference,
+			Some("https://example.com/quick-sort".to_string())
 		);
 	}
 }

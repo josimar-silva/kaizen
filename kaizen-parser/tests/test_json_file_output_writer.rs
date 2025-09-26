@@ -18,11 +18,12 @@ fn test_json_file_output_writer() -> Result<(), io::Error> {
 
 	let mut commits: HashMap<String, Vec<CommitData>> = HashMap::new();
 	commits.insert("2025-01-01".to_string(), vec![CommitData {
-		title:    "Test Title".to_string(),
-		notes:    "Test notes.".to_string(),
-		link:     "http://example.com".to_string(),
-		language: "Rust".to_string(),
-		type_of:  "algo".to_string(),
+		title:     "Test Title".to_string(),
+		notes:     "Test notes.".to_string(),
+		link:      "http://example.com".to_string(),
+		language:  "Rust".to_string(),
+		type_of:   "algo".to_string(),
+		reference: None,
 	}]);
 
 	let mut stats = KaizenStats {

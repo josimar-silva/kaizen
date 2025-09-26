@@ -96,11 +96,12 @@ mod tests {
 
 	fn create_commit_data(language: &str) -> CommitData {
 		CommitData {
-			title:    "Test".to_string(),
-			notes:    "Test notes".to_string(),
-			link:     "http://example.com".to_string(),
-			language: language.to_string(),
-			type_of:  "algo".to_string(),
+			title:     "Test".to_string(),
+			notes:     "Test notes".to_string(),
+			link:      "http://example.com".to_string(),
+			language:  language.to_string(),
+			type_of:   "algo".to_string(),
+			reference: None,
 		}
 	}
 
