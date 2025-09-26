@@ -332,25 +332,50 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                             <p className="text-muted-foreground leading-relaxed text-sm break-words">
                               {algorithm.notes}
                             </p>
-                          </div>
 
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            asChild
-                            className="shrink-0 bg-transparent group-hover:bg-accent/10 group-hover:border-accent/50 transition-all w-full sm:w-auto"
-                          >
-                            <a
-                              href={algorithm.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-2"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <ExternalLink className="w-3 h-3" />
-                              Code
-                            </a>
-                          </Button>
+                            <Separator />
+
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-2">
+                              {algorithm.reference && (
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  asChild
+                                  className="shrink-0 bg-transparent group-hover:bg-accent/10 group-hover:border-accent/50 hover:bg-accent/70 transition-all w-full sm:w-auto"
+                                >
+                                  <a
+                                    href={algorithm.reference}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2"
+                                    onClick={(e) => e.stopPropagation()}
+                                    data-testid={`problem-button-${date}-${index}`}
+                                  >
+                                    <ExternalLink className="w-3 h-3" />
+                                    Problem
+                                  </a>
+                                </Button>
+                              )}
+                              <Button
+                                variant="default"
+                                size="sm"
+                                asChild
+                                className="shrink-0 group-hover:bg-accent/10 group-hover:border-accent/50 hover:bg-accent/90 transition-all w-full sm:w-auto"
+                              >
+                                <a
+                                  href={algorithm.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center justify-center gap-2"
+                                  onClick={(e) => e.stopPropagation()}
+                                  data-testid={`solution-button-${date}-${index}`}
+                                >
+                                  <ExternalLink className="w-3 h-3" />
+                                  Solution
+                                </a>
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       </motion.div>
                     ))}
