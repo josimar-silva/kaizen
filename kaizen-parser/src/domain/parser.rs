@@ -14,7 +14,7 @@ pub fn parse_commits(
 	)?;
 	let notes_re = Regex::new(r"(?ms)^notes: (?P<notes>.*?)(?:^Ref\.:|^\w+:|\z)")?;
 	let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
-	let ref_re = Regex::new(r"(?m)^Ref\.: (?P<reference>.*)")?;
+	let ref_re = Regex::new(r"Ref\.:\s*(?P<reference>https?://\S+)")?;
 
 	let commits_by_date: CommitsByDate = commits
 		.par_iter()
@@ -23,19 +23,31 @@ pub fn parse_commits(
 				let date = commit_caps["date"].to_string();
 				let title = commit_caps["title"].to_string();
 				let type_of = commit_caps["type"].to_string();
-				let notes = notes_re
+
+				let mut notes = notes_re
 					.captures(&commit.message)
 					.map(|c| c["notes"].trim().to_string())
 					.unwrap_or_default();
+
+				let reference = ref_re
+					.captures(&commit.message)
+					.map(|c| c["reference"].trim().to_string());
+
+				if let Some(ref_link) = &reference {
+					notes = notes
+						.replace(&format!("Ref.: {ref_link}"), "")
+						.trim()
+						.to_string();
+				}
+
 				let language = lang_re
 					.captures(&commit.message)
 					.map(|c| c["language"].to_string())
 					.unwrap_or_default();
-				let reference = ref_re
-					.captures(&commit.message)
-					.map(|c| c["reference"].trim().to_string());
+
 				let link =
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
+
 				(date, CommitData {
 					title,
 					notes,
@@ -50,7 +62,7 @@ pub fn parse_commits(
 			acc.entry(date).or_default().push(data);
 			acc
 		})
-		.reduce(CommitsByDate::new, |mut a, b| {
+		.reduce(HashMap::new, |mut a, b| {
 			for (k, v) in b {
 				a.entry(k).or_default().extend(v);
 			}
@@ -109,11 +121,17 @@ mod tests {
 					"algo(2025-09-11): Quick Sort\nnotes: A more complex solution.\nRef.: https://example.com/quick-sort\nlanguage: Rust",
 				),
 			},
+            Commit {
+				id:      String::from("abc007"),
+				message: String::from(
+					"algo(2025-09-12): Coursera Assignment\nnotes: First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1\nlanguage: Java",
+				),
+			},
 		];
 
 		let result = parse_commits(&commits, "owner/repo").unwrap();
 
-		assert_eq!(result.len(), 4);
+		assert_eq!(result.len(), 5);
 
 		// Check 2025-09-08
 		let day1_commits = result.get("2025-09-08").unwrap();
@@ -184,6 +202,25 @@ mod tests {
 		assert_eq!(
 			day4_commits[0].reference,
 			Some("https://example.com/quick-sort".to_string())
+		);
+
+		// Check 2025-09-12
+		let day5_commits = result.get("2025-09-12").unwrap();
+		assert_eq!(day5_commits.len(), 1);
+		assert_eq!(day5_commits[0].title, "Coursera Assignment");
+		assert_eq!(day5_commits[0].language, "Java");
+		assert_eq!(day5_commits[0].type_of, "algo");
+		assert_eq!(
+			day5_commits[0].notes,
+			"First assignment of Coursera's Algorithms Part 1 course."
+		);
+		assert_eq!(
+			day5_commits[0].link,
+			"https://github.com/owner/repo/commit/abc007"
+		);
+		assert_eq!(
+			day5_commits[0].reference,
+			Some("https://www.coursera.org/learn/algorithms-part1".to_string())
 		);
 	}
 }
