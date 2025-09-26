@@ -16,48 +16,46 @@ pub fn parse_commits(
 	let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
 	let ref_re = Regex::new(r"(?m)^Ref\.: (?P<reference>.*)")?;
 
-	let intermediate_data: Vec<(String, CommitData)> = commits
+	let commits_by_date: CommitsByDate = commits
 		.par_iter()
 		.filter_map(|commit| {
 			commit_re.captures(&commit.message).map(|commit_caps| {
 				let date = commit_caps["date"].to_string();
 				let title = commit_caps["title"].to_string();
 				let type_of = commit_caps["type"].to_string();
-
 				let notes = notes_re
 					.captures(&commit.message)
 					.map(|c| c["notes"].trim().to_string())
 					.unwrap_or_default();
-
 				let language = lang_re
 					.captures(&commit.message)
 					.map(|c| c["language"].to_string())
 					.unwrap_or_default();
-
 				let reference = ref_re
 					.captures(&commit.message)
-					.map(|c| c["reference"].to_string());
-
+					.map(|c| c["reference"].trim().to_string());
 				let link =
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
-
-				let commit_data = CommitData {
+				(date, CommitData {
 					title,
 					notes,
 					link,
 					language,
 					type_of,
 					reference,
-				};
-				(date, commit_data)
+				})
 			})
 		})
-		.collect();
-
-	let mut commits_by_date: HashMap<String, Vec<CommitData>> = HashMap::new();
-	for (date, commit_data) in intermediate_data {
-		commits_by_date.entry(date).or_default().push(commit_data);
-	}
+		.fold(HashMap::new, |mut acc: CommitsByDate, (date, data)| {
+			acc.entry(date).or_default().push(data);
+			acc
+		})
+		.reduce(CommitsByDate::new, |mut a, b| {
+			for (k, v) in b {
+				a.entry(k).or_default().extend(v);
+			}
+			a
+		});
 
 	Ok(commits_by_date)
 }
