@@ -5,33 +5,33 @@
     "currentStreak": 7,
     "longestStreak": 7,
     "languageDistribution": {
-      "Java": 3,
+      "Rust": 1,
       "Kotlin": 7,
-      "Rust": 1
+      "Java": 3
     },
     "monthlyActivity": {
       "2025-09": 11
     }
   },
   "commits": {
-    "2025-09-14": [
+    "2025-09-21": [
       {
-        "title": "intro to Knuth's method",
-        "notes": "First assignment of Coursera's Algorithms Part 1 course.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://www.coursera.org/learn/algorithms-part1"
-      }
-    ],
-    "2025-09-15": [
-      {
-        "title": "calculate multiples of 3 or 5",
-        "notes": "First problem of Project Euler list.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
+        "title": "Two Numbers",
+        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
         "language": "Kotlin",
         "type_of": "algo",
-        "reference": "https://projecteuler.net/problem=1"
+        "reference": "https://leetcode.com/problems/add-two-numbers"
+      }
+    ],
+    "2025-09-24": [
+      {
+        "title": "Valid Parentheses",
+        "notes": "Stacks for the rescue! Interesting challenge.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/valid-parentheses"
       }
     ],
     "2025-09-25": [
@@ -44,6 +44,26 @@
         "reference": "https://leetcode.com/problems/longest-common-prefix"
       }
     ],
+    "2025-09-27": [
+      {
+        "title": "Largest Prime Factor",
+        "notes": "I definitly had forgotten what Prime Numbers were 😅.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=3"
+      }
+    ],
+    "2025-09-14": [
+      {
+        "title": "intro to Knuth's method",
+        "notes": "First assignment of Coursera's Algorithms Part 1 course.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://www.coursera.org/learn/algorithms-part1"
+      }
+    ],
     "2025-09-26": [
       {
         "title": "Even Fibonacci Numbers",
@@ -52,26 +72,6 @@
         "language": "Java",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=2"
-      }
-    ],
-    "2025-09-21": [
-      {
-        "title": "Two Numbers",
-        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/add-two-numbers"
-      }
-    ],
-    "2025-09-23": [
-      {
-        "title": "Regular Expression Matching v1",
-        "notes": "Basic solution using a Map. Not the fastest, but it is what it is.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/regular-expression-matching"
       }
     ],
     "2025-09-22": [
@@ -84,24 +84,14 @@
         "reference": "https://leetcode.com/problems/palindrome-number"
       }
     ],
-    "2025-09-27": [
+    "2025-09-15": [
       {
-        "title": "Largest Prime Factor",
-        "notes": "I definitly had forgotten what Prime Numbers were 😅.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://projecteuler.net/problem=3"
-      }
-    ],
-    "2025-09-24": [
-      {
-        "title": "Valid Parentheses",
-        "notes": "Stacks for the rescue! Interesting challenge.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9",
+        "title": "calculate multiples of 3 or 5",
+        "notes": "First problem of Project Euler list.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c",
         "language": "Kotlin",
         "type_of": "algo",
-        "reference": "https://leetcode.com/problems/valid-parentheses"
+        "reference": "https://projecteuler.net/problem=1"
       }
     ],
     "2025-09-19": [
@@ -120,6 +110,16 @@
         "language": "Rust",
         "type_of": "algo",
         "reference": "https://www.codewars.com/kata/59f3178e3640cef6d90000d5"
+      }
+    ],
+    "2025-09-23": [
+      {
+        "title": "Regular Expression Matching v1",
+        "notes": "Basic solution using a Map. Not the fastest, but it is what it is.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/regular-expression-matching"
       }
     ]
   }
