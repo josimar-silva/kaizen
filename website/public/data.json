@@ -1,27 +1,27 @@
 {
   "stats": {
-    "totalAlgorithms": 11,
-    "totalDays": 10,
-    "currentStreak": 7,
-    "longestStreak": 7,
+    "totalAlgorithms": 12,
+    "totalDays": 11,
+    "currentStreak": 8,
+    "longestStreak": 8,
     "languageDistribution": {
-      "Rust": 1,
+      "Java": 4,
       "Kotlin": 7,
-      "Java": 3
+      "Rust": 1
     },
     "monthlyActivity": {
-      "2025-09": 11
+      "2025-09": 12
     }
   },
   "commits": {
-    "2025-09-21": [
+    "2025-09-27": [
       {
-        "title": "Two Numbers",
-        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
-        "language": "Kotlin",
+        "title": "Largest Prime Factor",
+        "notes": "I definitly had forgotten what Prime Numbers were 😅.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e",
+        "language": "Java",
         "type_of": "algo",
-        "reference": "https://leetcode.com/problems/add-two-numbers"
+        "reference": "https://projecteuler.net/problem=3"
       }
     ],
     "2025-09-24": [
@@ -34,26 +34,6 @@
         "reference": "https://leetcode.com/problems/valid-parentheses"
       }
     ],
-    "2025-09-25": [
-      {
-        "title": "Longest Common Prefix v1",
-        "notes": "Solution using horizontal scanning strategy.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/longest-common-prefix"
-      }
-    ],
-    "2025-09-27": [
-      {
-        "title": "Largest Prime Factor",
-        "notes": "I definitly had forgotten what Prime Numbers were 😅.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://projecteuler.net/problem=3"
-      }
-    ],
     "2025-09-14": [
       {
         "title": "intro to Knuth's method",
@@ -64,26 +44,6 @@
         "reference": "https://www.coursera.org/learn/algorithms-part1"
       }
     ],
-    "2025-09-26": [
-      {
-        "title": "Even Fibonacci Numbers",
-        "notes": "Used the iterative approach for the fibonnaci calculation.\nRecursive one seem overkill here.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/0ae136e045e2914b78ef3507e47cf30f9c95d153",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://projecteuler.net/problem=2"
-      }
-    ],
-    "2025-09-22": [
-      {
-        "title": "Palindrome Number",
-        "notes": "Math everywhere =)",
-        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/palindrome-number"
-      }
-    ],
     "2025-09-15": [
       {
         "title": "calculate multiples of 3 or 5",
@@ -92,6 +52,16 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=1"
+      }
+    ],
+    "2025-09-21": [
+      {
+        "title": "Two Numbers",
+        "notes": "Two numbers challenge from LeetCode.\nGreat introduction to Linked Lists.\nReminded me of how I used to sum numbers on a notebook back on middle\nschool.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/add-two-numbers"
       }
     ],
     "2025-09-19": [
@@ -110,6 +80,46 @@
         "language": "Rust",
         "type_of": "algo",
         "reference": "https://www.codewars.com/kata/59f3178e3640cef6d90000d5"
+      }
+    ],
+    "2025-09-22": [
+      {
+        "title": "Palindrome Number",
+        "notes": "Math everywhere =)",
+        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/palindrome-number"
+      }
+    ],
+    "2025-09-25": [
+      {
+        "title": "Longest Common Prefix v1",
+        "notes": "Solution using horizontal scanning strategy.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/longest-common-prefix"
+      }
+    ],
+    "2025-09-26": [
+      {
+        "title": "Even Fibonacci Numbers",
+        "notes": "Used the iterative approach for the fibonnaci calculation.\nRecursive one seem overkill here.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/0ae136e045e2914b78ef3507e47cf30f9c95d153",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=2"
+      }
+    ],
+    "2025-09-28": [
+      {
+        "title": "Largest Palindrome Product",
+        "notes": "Here we go again reversing number 😑.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/40e1dc994b9c8ee310be7620529376c3048574b8",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=4"
       }
     ],
     "2025-09-23": [
