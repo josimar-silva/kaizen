@@ -24,6 +24,7 @@ fn test_json_file_output_writer() -> Result<(), io::Error> {
 		language:  "Rust".to_string(),
 		type_of:   "algo".to_string(),
 		reference: None,
+		analysis:  None,
 	}]);
 
 	let mut stats = KaizenStats {

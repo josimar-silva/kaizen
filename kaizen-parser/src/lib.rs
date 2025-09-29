@@ -7,6 +7,7 @@ use clap::{Parser, Subcommand};
 
 use crate::adapters::git_provider::GitCommitProvider;
 use crate::adapters::json_writer::JsonFileOutputWriter;
+use crate::domain::analysis::AnalysisFiles;
 use crate::domain::kaizen::KaizenData;
 use crate::domain::parser::parse_commits;
 use crate::domain::ports::{CommitProvider, OutputWriter};
@@ -34,6 +35,15 @@ pub struct ParseArgs {
 	/// The output file path for the generated JSON.
 	#[arg(long)]
 	pub output: PathBuf,
+
+	/// Directories to search for analysis markdown files.
+	///
+	/// Expects files to be named like 'NNNN-description-HASH.md', where HASH
+	/// is the 7-character commit ID.
+	///
+	/// Example: --analysis-dirs=algorithms/analysis,docs/system-design
+	#[arg(long, value_delimiter = ',', num_args = 1..)]
+	pub analysis_dirs: Option<Vec<PathBuf>>,
 }
 
 pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
@@ -50,7 +60,19 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 
 			let repo_path = commit_provider.get_repo_path()?;
 
-			let commits_by_date = parse_commits(&commits, &repo_path)?;
+			let analysis_files = AnalysisFiles::new(
+				args.analysis_dirs.as_deref().unwrap_or_default(),
+			)
+			.map_err(|e| {
+				format!(
+					"Failed to list analysis files in {:?}: {e}. Ensure the \
+					 directory exists and is readable.",
+					args.analysis_dirs
+				)
+			})?;
+
+			let commits_by_date =
+				parse_commits(&commits, &repo_path, &analysis_files)?;
 
 			println!("Calculating stats...");
 			let stats = calculate_stats(&commits_by_date);

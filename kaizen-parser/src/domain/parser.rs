@@ -3,11 +3,13 @@ use std::collections::HashMap;
 use rayon::prelude::*;
 use regex::Regex;
 
+use crate::domain::analysis::AnalysisFiles;
 use crate::domain::commit::{Commit, CommitData, CommitsByDate};
 
 pub fn parse_commits(
 	commits: &[Commit],
 	repo_path: &str,
+	analysis_files: &AnalysisFiles,
 ) -> Result<CommitsByDate, regex::Error> {
 	let commit_re = Regex::new(
 		r"^(?P<type>algo|sysdes)\((?P<date>\d{4}-\d{2}-\d{2})\): (?P<title>.*)",
@@ -49,6 +51,8 @@ pub fn parse_commits(
 				let link =
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
 
+				let analysis = analysis_files.get(&commit.id).cloned();
+
 				(
 					date,
 					(index, CommitData {
@@ -58,6 +62,7 @@ pub fn parse_commits(
 						language,
 						type_of,
 						reference,
+						analysis,
 					}),
 				)
 			})
@@ -105,6 +110,10 @@ fn sort_and_map_commits_by_date(
 
 #[cfg(test)]
 mod tests {
+	use std::fs;
+
+	use tempfile::tempdir;
+
 	use super::*;
 	use crate::domain::commit::Commit;
 
@@ -160,7 +169,8 @@ mod tests {
 			},
 		];
 
-		let result = parse_commits(&commits, "owner/repo").unwrap();
+		let analysis_files = AnalysisFiles::new(&[]).unwrap();
+		let result = parse_commits(&commits, "owner/repo", &analysis_files).unwrap();
 
 		assert_eq!(result.len(), 5);
 
@@ -254,5 +264,40 @@ mod tests {
 			day5_commits[0].reference,
 			Some("https://www.coursera.org/learn/algorithms-part1".to_string())
 		);
+	}
+
+	#[test]
+	fn test_parse_commits_with_analysis_file()
+	-> Result<(), Box<dyn std::error::Error>> {
+		// Arrange
+		let commit_id = "abc1234def5678";
+		let commits = vec![Commit {
+			id:      commit_id.to_string(),
+			message: String::from(
+				"algo(2025-09-15): Test with Analysis\nlanguage: Rust",
+			),
+		}];
+
+		let analysis_dir = tempdir()?;
+		let analysis_file_name =
+			format!("0001-test-with-analysis-{}.md", &commit_id[0..7]);
+		let analysis_file_path = analysis_dir.path().join(&analysis_file_name);
+		fs::write(&analysis_file_path, "## Test Analysis")?;
+
+		let analysis_files =
+			AnalysisFiles::new(&[analysis_dir.path().to_path_buf()])?;
+
+		// Act
+		let result = parse_commits(&commits, "owner/repo", &analysis_files)?;
+
+		// Assert
+		let day_commits = result.get("2025-09-15").unwrap();
+		assert_eq!(day_commits.len(), 1);
+		assert_eq!(
+			day_commits[0].analysis,
+			Some(analysis_file_path.to_str().unwrap().to_string())
+		);
+
+		Ok(())
 	}
 }

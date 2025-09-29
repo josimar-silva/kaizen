@@ -45,8 +45,9 @@ fn test_cli_parse_command_commits() -> Result<(), Box<dyn std::error::Error>> {
 	// Act
 	let cli = Cli {
 		command: Command::Parse(ParseArgs {
-			repository: repo_dir.path().to_str().unwrap().to_string(),
-			output:     output_file.clone(),
+			repository:    repo_dir.path().to_str().unwrap().to_string(),
+			output:        output_file.clone(),
+			analysis_dirs: None,
 		}),
 	};
 	run(cli)?;
@@ -61,6 +62,7 @@ fn test_cli_parse_command_commits() -> Result<(), Box<dyn std::error::Error>> {
 	assert_eq!(day_commits[0].title, "E2E Test Algo");
 	assert_eq!(day_commits[0].notes, "A test note.");
 	assert_eq!(day_commits[0].language, "Rust");
+	assert_eq!(day_commits[0].analysis, None);
 
 	Ok(())
 }
@@ -108,8 +110,9 @@ fn test_cli_parse_command_stats() -> Result<(), Box<dyn std::error::Error>> {
 	// Act
 	let cli = Cli {
 		command: Command::Parse(ParseArgs {
-			repository: repo_dir.path().to_str().unwrap().to_string(),
-			output:     output_file.clone(),
+			repository:    repo_dir.path().to_str().unwrap().to_string(),
+			output:        output_file.clone(),
+			analysis_dirs: None,
 		}),
 	};
 	run(cli)?;
@@ -134,6 +137,53 @@ fn test_cli_parse_command_stats() -> Result<(), Box<dyn std::error::Error>> {
 
 	assert_eq!(kaizen_data.stats.monthly_activity.get("2025-08"), Some(&1));
 	assert_eq!(kaizen_data.stats.monthly_activity.get("2025-09"), Some(&4));
+
+	Ok(())
+}
+
+#[test]
+fn test_cli_parse_command_with_analysis_file()
+-> Result<(), Box<dyn std::error::Error>> {
+	// Arrange
+	let repo_dir = tempdir()?;
+	let repo = Repository::init(repo_dir.path())?;
+	let commit_oid = create_commit(
+		&repo,
+		"algo(2025-09-15): Test Algo with Analysis\nlanguage: Rust",
+		None,
+	);
+
+	let analysis_dir = repo_dir.path().join("algorithms").join("analysis");
+	fs::create_dir_all(&analysis_dir)?;
+
+	let commit_hash = commit_oid.to_string();
+	let short_hash = &commit_hash[0..7];
+	let analysis_file_name = format!("0001-test-algo-with-analysis-{short_hash}.md");
+	let analysis_file_path = analysis_dir.join(&analysis_file_name);
+	fs::write(&analysis_file_path, "## Test Analysis")?;
+
+	let output_dir = tempdir()?;
+	let output_file = output_dir.path().join("data.json");
+
+	// Act
+	let cli = Cli {
+		command: Command::Parse(ParseArgs {
+			repository:    repo_dir.path().to_str().unwrap().to_string(),
+			output:        output_file.clone(),
+			analysis_dirs: Some(vec![analysis_dir.to_path_buf()]),
+		}),
+	};
+	run(cli)?;
+
+	let content = fs::read_to_string(output_file)?;
+	let kaizen_data: KaizenData = serde_json::from_str(&content)?;
+
+	// Assert
+	let day_commits = kaizen_data.commits.get("2025-09-15").unwrap();
+	assert!(day_commits[0].analysis.is_some());
+	let analysis_path =
+		std::path::Path::new(day_commits[0].analysis.as_ref().unwrap());
+	assert!(analysis_path.ends_with(analysis_file_name));
 
 	Ok(())
 }
