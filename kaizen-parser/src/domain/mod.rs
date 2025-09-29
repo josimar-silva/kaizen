@@ -1,3 +1,4 @@
+pub mod analysis;
 pub mod commit;
 pub mod kaizen;
 pub mod parser;

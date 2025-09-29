@@ -102,9 +102,9 @@ mod tests {
 			language:  language.to_string(),
 			type_of:   "algo".to_string(),
 			reference: None,
+			analysis:  None,
 		}
 	}
-
 	#[test]
 	fn test_calculate_stats_basic() {
 		let mut data: CommitsByDate = HashMap::new();
