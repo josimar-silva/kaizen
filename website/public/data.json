@@ -6,14 +6,24 @@
     "longestStreak": 8,
     "languageDistribution": {
       "Kotlin": 7,
-      "Rust": 1,
-      "Java": 4
+      "Java": 4,
+      "Rust": 1
     },
     "monthlyActivity": {
       "2025-09": 12
     }
   },
   "commits": {
+    "2025-09-22": [
+      {
+        "title": "Palindrome Number",
+        "notes": "Math everywhere =)",
+        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/palindrome-number"
+      }
+    ],
     "2025-09-21": [
       {
         "title": "Two Numbers",
@@ -22,6 +32,36 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/add-two-numbers"
+      }
+    ],
+    "2025-09-24": [
+      {
+        "title": "Valid Parentheses",
+        "notes": "Stacks for the rescue! Interesting challenge.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/valid-parentheses"
+      }
+    ],
+    "2025-09-25": [
+      {
+        "title": "Longest Common Prefix v1",
+        "notes": "Solution using horizontal scanning strategy.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/longest-common-prefix"
+      }
+    ],
+    "2025-09-26": [
+      {
+        "title": "Even Fibonacci Numbers",
+        "notes": "Used the iterative approach for the fibonnaci calculation.\nRecursive one seem overkill here.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/0ae136e045e2914b78ef3507e47cf30f9c95d153",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=2"
       }
     ],
     "2025-09-28": [
@@ -52,14 +92,14 @@
         "reference": "https://www.codewars.com/kata/59f3178e3640cef6d90000d5"
       }
     ],
-    "2025-09-22": [
+    "2025-09-14": [
       {
-        "title": "Palindrome Number",
-        "notes": "Math everywhere =)",
-        "link": "https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45",
-        "language": "Kotlin",
+        "title": "intro to Knuth's method",
+        "notes": "First assignment of Coursera's Algorithms Part 1 course.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
+        "language": "Java",
         "type_of": "algo",
-        "reference": "https://leetcode.com/problems/palindrome-number"
+        "reference": "https://www.coursera.org/learn/algorithms-part1"
       }
     ],
     "2025-09-27": [
@@ -72,16 +112,6 @@
         "reference": "https://projecteuler.net/problem=3"
       }
     ],
-    "2025-09-14": [
-      {
-        "title": "intro to Knuth's method",
-        "notes": "First assignment of Coursera's Algorithms Part 1 course.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://www.coursera.org/learn/algorithms-part1"
-      }
-    ],
     "2025-09-15": [
       {
         "title": "calculate multiples of 3 or 5",
@@ -90,36 +120,6 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=1"
-      }
-    ],
-    "2025-09-25": [
-      {
-        "title": "Longest Common Prefix v1",
-        "notes": "Solution using horizontal scanning strategy.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/longest-common-prefix"
-      }
-    ],
-    "2025-09-24": [
-      {
-        "title": "Valid Parentheses",
-        "notes": "Stacks for the rescue! Interesting challenge.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9",
-        "language": "Kotlin",
-        "type_of": "algo",
-        "reference": "https://leetcode.com/problems/valid-parentheses"
-      }
-    ],
-    "2025-09-26": [
-      {
-        "title": "Even Fibonacci Numbers",
-        "notes": "Used the iterative approach for the fibonnaci calculation.\nRecursive one seem overkill here.",
-        "link": "https://github.com/josimar-silva/kaizen/commit/0ae136e045e2914b78ef3507e47cf30f9c95d153",
-        "language": "Java",
-        "type_of": "algo",
-        "reference": "https://projecteuler.net/problem=2"
       }
     ],
     "2025-09-23": [
