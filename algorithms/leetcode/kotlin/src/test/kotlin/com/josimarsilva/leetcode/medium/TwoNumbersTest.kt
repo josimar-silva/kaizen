@@ -1,14 +1,12 @@
 package com.josimarsilva.leetcode.medium
 
 
-import com.josimarsilva.leetcode.medium.ListNode
-import com.josimarsilva.leetcode.medium.TwoNumbers
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
-import org.assertj.core.api.Assertions.assertThat
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TwoNumbersTest {
