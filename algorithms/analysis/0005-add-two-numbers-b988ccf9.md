@@ -1,7 +1,7 @@
 ## Algorithm: Add Two Numbers
 
 **Source:** [Leet Code](https://leetcode.com/problems/add-two-numbers/)  
-**Commit:** [b988ccf](https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9)
+**Commit:** [b988ccf9](https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9)
 
 ---
 
@@ -29,7 +29,7 @@ You are given two non-empty linked lists representing two non-negative integers.
 
 - For small inputs, like two linked lists with 3 nodes each, the algorithm performs about 3 operations.
 - For medium inputs, like two lists with 50 nodes each, it performs about 50 operations.
-- For large inputs, with 100 nodes each (the maximum specified in the constraints), it performs about 100 operations. The time and space required grow in direct proportion to the length of the longest input list.
+- For large inputs, with 100 nodes each, it performs about 100 operations. The time and space required grow in direct proportion to the length of the longest input list.
 
 👉 **Rule of thumb:** *If you double the length of the input linked lists, you double the time it takes to compute the sum and the memory used to store the result.*
 
