@@ -58,8 +58,8 @@ reviews:
   # Specify file patterns to include or exclude in a review using glob patterns (e.g., !dist/**, src/**). These patterns also apply to 'git sparse-checkout', including specified patterns and ignoring excluded ones (starting with '!') when cloning the repository.
   # Default: []
   path_filters: [
-    !algorithms/**,
-    !system-design/**
+    "!algorithms/**/*",
+    "!system-design/**/*"
   ]
 
   # Path Instructions - Provide specific additional guidelines for code review based on file paths.
@@ -70,8 +70,8 @@ reviews:
   auto_review:
     enabled: true
     labels: [
-      !automated,
-      !dev-dependencies
+      "!automated",
+      "!dev-dependencies"
     ]
     ignore_usernames: [
       radagastbot
@@ -155,7 +155,8 @@ knowledge_base:
 # =============================================================================
 code_generation:
   unit_tests:
-    path_instructions: [
-      "website/**/*.ts",
-      "kaizen-parser/**/*.rs"
-    ]
+    path_instructions:
+      - path: "website/**/*.ts"
+        instructions: "Unit tests should use Jest, test cases should be granular and concise"
+      - path: "kaizen-parser/**/*.rs"
+        instructions: "Unit tests should follow Arrange, Act, Assert, be readable and maintable"
