@@ -5,19 +5,19 @@
     "currentStreak": 11,
     "longestStreak": 11,
     "languageDistribution": {
-      "Rust": 2,
       "Kotlin": 9,
+      "Rust": 2,
       "Java": 4
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 1
+      "2025-10": 1,
+      "2025-09": 14
     },
     "sourceDistribution": {
       "codewars": 2,
-      "project-euler": 4,
       "leetcode": 8,
-      "coursera": 1
+      "coursera": 1,
+      "project-euler": 4
     },
     "mostActiveDay": "Friday"
   },
@@ -30,6 +30,7 @@
         "language": "Rust",
         "type_of": "algo",
         "reference": "https://www.codewars.com/kata/54edbc7200b811e956000556",
+        "analysis": "algorithms/analysis/0015-count-sheep-53c3415.md",
         "source": "codewars"
       }
     ],
@@ -41,6 +42,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/longest-substring-without-repeating-characters",
+        "analysis": "algorithms/analysis/0014-longest-substring-with-unique-characters-f1361bc.md",
         "source": "leetcode"
       }
     ],
@@ -52,6 +54,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/divide-two-integers/",
+        "analysis": "algorithms/analysis/0013-divide-two-integers-614cccf.md",
         "source": "leetcode"
       }
     ],
@@ -63,6 +66,7 @@
         "language": "Java",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=4",
+        "analysis": "algorithms/analysis/0012-largest-palindrome-product-40e1dc9.md",
         "source": "project-euler"
       }
     ],
@@ -74,6 +78,7 @@
         "language": "Java",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=3",
+        "analysis": "algorithms/analysis/0011-largest-prime-factor-d7f3c75.md",
         "source": "project-euler"
       }
     ],
@@ -85,6 +90,7 @@
         "language": "Java",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=2",
+        "analysis": "algorithms/analysis/0010-even-fibonacci-numbers-0ae136e.md",
         "source": "project-euler"
       }
     ],
@@ -96,6 +102,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/longest-common-prefix",
+        "analysis": "algorithms/analysis/0009-longest-common-prefix-v1-ebda9ed.md",
         "source": "leetcode"
       }
     ],
@@ -107,6 +114,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/valid-parentheses",
+        "analysis": "algorithms/analysis/0008-valid-parentheses-6c1646f.md",
         "source": "leetcode"
       }
     ],
@@ -118,6 +126,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/regular-expression-matching",
+        "analysis": "algorithms/analysis/0007-regular-expression-matching-v1-e25695d.md",
         "source": "leetcode"
       }
     ],
@@ -129,6 +138,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/palindrome-number",
+        "analysis": "algorithms/analysis/0006-palindrome-number-bd8281b.md",
         "source": "leetcode"
       }
     ],
@@ -140,6 +150,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/add-two-numbers",
+        "analysis": "algorithms/analysis/0005-add-two-numbers-b988ccf.md",
         "source": "leetcode"
       }
     ],
@@ -151,6 +162,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/two-sum/description/",
+        "analysis": "algorithms/analysis/0003-two-sum-e4765a6.md",
         "source": "leetcode"
       },
       {
@@ -160,6 +172,7 @@
         "language": "Rust",
         "type_of": "algo",
         "reference": "https://www.codewars.com/kata/59f3178e3640cef6d90000d5",
+        "analysis": "algorithms/analysis/0004-find-the-sum-of-integer-combinations-c940900.md",
         "source": "codewars"
       }
     ],
@@ -171,6 +184,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://projecteuler.net/problem=1",
+        "analysis": "algorithms/analysis/0002-sum-multiples-of-3-or-5-7ded72a.md",
         "source": "project-euler"
       }
     ],
@@ -182,6 +196,7 @@
         "language": "Java",
         "type_of": "algo",
         "reference": "https://www.coursera.org/learn/algorithms-part1",
+        "analysis": "algorithms/analysis/0001-intro-to-knuths-method-4e48e34.md",
         "source": "coursera"
       }
     ]
