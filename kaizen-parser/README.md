@@ -20,6 +20,7 @@ For `kaizen-parser` to correctly extract information, Git commit messages must f
 ```
 algo(<date>): <title>
 notes: <developer’s notes (can span multiple lines)>
+Ref.: <Link to the problem reference> (Optional)
 language: <programming language>
 ```
 
@@ -28,13 +29,14 @@ Or for system design entries:
 ```
 sysdes(<date>): <title>
 notes: <developer’s notes (can span multiple lines)>
+Ref.: <Link to the problem reference> (Optional)
 language: <programming language>
 ```
 
 **Rules:**
 -   The first line must start with `algo(<date>): <title>` or `sysdes(<date>): <title>`.
-    -   `<date>` should be in `YYYY-MM-DD` format.
-    -   `<title>` is the name of the algorithm or system design topic.
+-   `<date>` should be in `YYYY-MM-DD` format.
+-   `<title>` is the name of the algorithm or system design topic.
 -   Lines starting with `notes:` contain the developer’s notes. These can span multiple lines until another section (like `language:`) or the end of the message.
 -   The line starting with `language:` specifies the programming language used.
 
@@ -143,6 +145,46 @@ The CLI generates a JSON file with commit data grouped by date. Example:
   ]
 }
 ```
+
+## Architecture
+
+The project follows a modular, feature-based architecture inspired by Clean Architecture principles. The goal is to separate the core business logic from the implementation details, making the codebase more maintainable, testable, and scalable.
+
+The `src` directory is organized as follows:
+
+```text
+src
+├── adapters/
+│   ├── cli/
+│   │   ├── args.rs
+│   │   └── commands.rs
+│   ├── git/
+│   │   └── commits.rs
+│   └── output/
+│       └── json.rs
+├── domain/
+│   ├── git/
+│   │   ├── entities.rs
+│   │   └── ports.rs
+│   └── kaizen/
+│       ├── entities.rs
+│       └── functions/
+│           └── parser.rs
+│           └── stats.rs
+├── lib.rs
+└── main.rs
+```
+
+-   **`domain`**: This module contains the core business logic and entities of the application. It is completely independent of any external libraries or implementation details.
+-   `domain/git`: Defines the data structures (like `Commit`) and interfaces (`ports`) for Git-related operations.
+-   `domain/kaizen`: Contains the primary business logic for parsing, analyzing, and calculating stats for the Kaizen journal.
+
+-   **`adapters`**: This module contains the concrete implementations of the interfaces defined in the domain. It's the layer that interacts with the "outside world."
+-   `adapters/cli`: Handles command-line argument parsing and orchestrates the application flow.
+-   `adapters/git`: Provides a concrete implementation for the `git` ports using the `git2` library.
+-   `adapters/output`: Contains implementations for writing the output data, such as the `json_writer`.
+
+This structure ensures that the core logic in the `domain` can be tested independently and can be easily adapted to different input/output mechanisms or even different version control systems in the future.
 
 ## Development and Testing
 
