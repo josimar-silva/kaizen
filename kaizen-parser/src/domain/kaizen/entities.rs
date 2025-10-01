@@ -18,6 +18,8 @@ pub struct KaizenStats {
 	pub language_distribution: HashMap<String, usize>,
 	#[serde(rename = "monthlyActivity")]
 	pub monthly_activity:      HashMap<String, usize>,
+	#[serde(rename = "sourceDistribution")]
+	pub source_distribution:   HashMap<String, usize>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
