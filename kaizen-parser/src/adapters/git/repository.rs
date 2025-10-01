@@ -9,7 +9,7 @@ pub struct Git2RepositoryProvider;
 #[derive(Debug)]
 pub struct RepositoryHandle {
 	repository: GitRepository,
-	_temp_dir:  Option<TempDir>,
+	temp_dir:   Option<TempDir>,
 }
 
 impl RepositoryHandle {
@@ -18,7 +18,7 @@ impl RepositoryHandle {
 	}
 
 	pub fn temp_dir(&self) -> &Option<TempDir> {
-		&self._temp_dir
+		&self.temp_dir
 	}
 }
 
@@ -52,7 +52,7 @@ impl Git2RepositoryProvider {
 				root_path,
 				display_path,
 			},
-			_temp_dir:  temp_dir,
+			temp_dir,
 		})
 	}
 }
