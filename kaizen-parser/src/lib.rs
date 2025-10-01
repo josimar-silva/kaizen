@@ -4,6 +4,7 @@ pub mod domain;
 use std::path::PathBuf;
 
 use clap::{Parser, Subcommand};
+use log::info;
 
 use crate::adapters::git::commits::GitCommitProvider;
 use crate::adapters::output::json::JsonFileOutputWriter;
@@ -50,7 +51,7 @@ pub struct ParseArgs {
 pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 	match cli.command {
 		Command::Parse(args) => {
-			println!("Parsing repository: {}", args.repository);
+			info!("Parsing repository: {}", args.repository);
 
 			let commit_provider = GitCommitProvider {
 				url: args.repository.clone(),
@@ -75,9 +76,9 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 			let commits_by_date =
 				parse_commits(&commits, &repo_path, &analysis_files)?;
 
-			println!("Calculating stats...");
+			info!("Calculating stats...");
 			let stats = calculate_stats(&commits_by_date);
-			println!("Stats calculated!");
+			info!("Stats calculated!");
 
 			let kaizen_data = KaizenData {
 				stats,
@@ -86,7 +87,7 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 
 			output_writer.write(&kaizen_data)?;
 
-			println!("Repository parsed successfully!");
+			info!("Repository parsed successfully!");
 		}
 	}
 
