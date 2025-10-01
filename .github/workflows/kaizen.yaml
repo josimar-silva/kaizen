@@ -59,7 +59,8 @@ jobs:
         run: |
           ./parser parse \
             --repository https://github.com/josimar-silva/kaizen \
-            --output data.json
+            --output data.json \
+            --analysis-dirs algorithms/analysis,system-design/analysis
         env:
           RUST_LOG: info
 
