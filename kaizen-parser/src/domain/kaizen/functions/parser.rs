@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-
+use ordermap::OrderMap;
 use rayon::prelude::*;
 use regex::Regex;
 
@@ -18,7 +17,7 @@ pub fn parse_commits(
 	let lang_re = Regex::new(r"(?m)^language: (?P<language>.*)")?;
 	let ref_re = Regex::new(r"Ref\.:\s*(?P<reference>https?://\S+)")?;
 
-	let intermediate_data: HashMap<String, Vec<(usize, CommitData)>> = commits
+	let intermediate_data: OrderMap<String, Vec<(usize, CommitData)>> = commits
 		.par_iter()
 		.enumerate()
 		.filter_map(|(index, commit)| {
@@ -68,13 +67,13 @@ pub fn parse_commits(
 			})
 		})
 		.fold(
-			HashMap::new,
-			|mut acc: HashMap<String, Vec<(usize, CommitData)>>, (date, data)| {
+			OrderMap::new,
+			|mut acc: OrderMap<String, Vec<(usize, CommitData)>>, (date, data)| {
 				acc.entry(date).or_default().push(data);
 				acc
 			},
 		)
-		.reduce(HashMap::new, |mut a, b| {
+		.reduce(OrderMap::new, |mut a, b| {
 			for (k, v) in b {
 				a.entry(k).or_default().extend(v);
 			}
@@ -85,20 +84,10 @@ pub fn parse_commits(
 }
 
 fn sort_and_map_commits_by_date(
-	intermediate_data: HashMap<String, Vec<(usize, CommitData)>>,
+	intermediate_data: OrderMap<String, Vec<(usize, CommitData)>>,
 ) -> CommitsByDate {
-	let mut commits_by_date_vec: Vec<(String, Vec<(usize, CommitData)>)> =
-		intermediate_data.into_iter().collect();
-	commits_by_date_vec.sort_by(|(date_a, _), (date_b, _)| {
-		let date_a_parsed =
-			chrono::NaiveDate::parse_from_str(date_a, "%Y-%m-%d").unwrap();
-		let date_b_parsed =
-			chrono::NaiveDate::parse_from_str(date_b, "%Y-%m-%d").unwrap();
-		date_a_parsed.cmp(&date_b_parsed)
-	});
-
-	let mut commits_by_date: CommitsByDate = HashMap::new();
-	for (date, mut indexed_commits) in commits_by_date_vec {
+	let mut commits_by_date: CommitsByDate = OrderMap::new();
+	for (date, mut indexed_commits) in intermediate_data {
 		indexed_commits.sort_by_key(|(index, _)| *index);
 		let sorted_commits =
 			indexed_commits.into_iter().map(|(_, data)| data).collect();

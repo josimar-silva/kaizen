@@ -2,9 +2,10 @@ use std::collections::HashMap;
 use std::{fs, io};
 
 use kaizen::adapters::output::json::JsonFileOutputWriter;
-use kaizen::domain::git::entities::CommitData;
+use kaizen::domain::git::entities::{CommitData, CommitsByDate};
 use kaizen::domain::kaizen::entities::{KaizenData, KaizenStats};
 use kaizen::domain::kaizen::ports::OutputWriter;
+use ordermap::OrderMap;
 use tempfile::tempdir;
 
 #[test]
@@ -16,7 +17,7 @@ fn test_json_file_output_writer() -> Result<(), io::Error> {
 		path: file_path.clone(),
 	};
 
-	let mut commits: HashMap<String, Vec<CommitData>> = HashMap::new();
+	let mut commits: CommitsByDate = OrderMap::new();
 	commits.insert("2025-01-01".to_string(), vec![CommitData {
 		title:     "Test Title".to_string(),
 		notes:     "Test notes.".to_string(),

@@ -89,7 +89,7 @@ fn calculate_longest_streak(data: &CommitsByDate) -> i64 {
 
 #[cfg(test)]
 mod tests {
-	use std::collections::HashMap;
+	use ordermap::OrderMap;
 
 	use super::*;
 	use crate::domain::git::entities::CommitData;
@@ -107,7 +107,7 @@ mod tests {
 	}
 	#[test]
 	fn test_calculate_stats_basic() {
-		let mut data: CommitsByDate = HashMap::new();
+		let mut data: CommitsByDate = OrderMap::new();
 		data.insert("2025-09-20".to_string(), vec![create_commit_data("Rust")]);
 		data.insert("2025-09-21".to_string(), vec![
 			create_commit_data("Go"),
@@ -125,7 +125,7 @@ mod tests {
 
 	#[test]
 	fn test_calculate_longest_streak() {
-		let mut data: CommitsByDate = HashMap::new();
+		let mut data: CommitsByDate = OrderMap::new();
 		data.insert("2025-09-18".to_string(), vec![create_commit_data("Rust")]);
 		data.insert("2025-09-19".to_string(), vec![create_commit_data("Rust")]);
 		data.insert("2025-09-21".to_string(), vec![create_commit_data("Rust")]); // break
@@ -138,14 +138,14 @@ mod tests {
 
 	#[test]
 	fn test_calculate_longest_streak_no_commits() {
-		let data: CommitsByDate = HashMap::new();
+		let data: CommitsByDate = OrderMap::new();
 		let longest_streak = calculate_longest_streak(&data);
 		assert_eq!(longest_streak, 0);
 	}
 
 	#[test]
 	fn test_calculate_longest_streak_single_day() {
-		let mut data: CommitsByDate = HashMap::new();
+		let mut data: CommitsByDate = OrderMap::new();
 		data.insert("2025-09-21".to_string(), vec![create_commit_data("Rust")]);
 		let longest_streak = calculate_longest_streak(&data);
 		assert_eq!(longest_streak, 1);
@@ -153,7 +153,7 @@ mod tests {
 
 	#[test]
 	fn test_calculate_current_streak() {
-		let mut data: CommitsByDate = HashMap::new();
+		let mut data: CommitsByDate = OrderMap::new();
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 
 		// Streak of 3
@@ -169,7 +169,7 @@ mod tests {
 
 	#[test]
 	fn test_calculate_current_streak_no_commit_today() {
-		let mut data: CommitsByDate = HashMap::new();
+		let mut data: CommitsByDate = OrderMap::new();
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 
 		data.insert("2025-09-20".to_string(), vec![create_commit_data("Rust")]);
@@ -181,7 +181,7 @@ mod tests {
 
 	#[test]
 	fn test_calculate_current_streak_no_commits() {
-		let data: CommitsByDate = HashMap::new();
+		let data: CommitsByDate = OrderMap::new();
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 		let current_streak = calculate_current_streak(&data, today);
 		assert_eq!(current_streak, 0);

@@ -1,6 +1,5 @@
-use std::collections::HashMap;
 use std::path::PathBuf;
-
+use ordermap::OrderMap;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone)]
@@ -28,4 +27,4 @@ pub struct Commit {
 	pub message: String,
 }
 
-pub type CommitsByDate = HashMap<String, Vec<CommitData>>;
+pub type CommitsByDate = OrderMap<String, Vec<CommitData>>;
