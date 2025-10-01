@@ -1,20 +1,15 @@
 use git2::{Repository, Sort};
-use tempfile::Builder;
-use url::Url;
 
-use crate::domain::git::entities::Commit;
+use crate::domain::git::entities::{Commit, GitRepository};
 use crate::domain::git::ports::CommitProvider;
 
-pub struct GitCommitProvider {
-	pub url: String,
-}
+pub struct GitCommitProvider;
 
 impl CommitProvider for GitCommitProvider {
 	type Error = git2::Error;
 
-	fn fetch(&self) -> Result<Vec<Commit>, Self::Error> {
-		let temp_dir = Builder::new().prefix("kaizen-parser-").tempdir().unwrap();
-		let repo = Repository::clone(&self.url, temp_dir.path())?;
+	fn fetch(&self, repository: &GitRepository) -> Result<Vec<Commit>, Self::Error> {
+		let repo = Repository::open(&repository.root_path)?;
 
 		let mut revwalk = repo.revwalk()?;
 		revwalk.push_head()?;
@@ -33,49 +28,67 @@ impl CommitProvider for GitCommitProvider {
 
 		Ok(commits)
 	}
-
-	fn get_repo_path(&self) -> Result<String, Box<dyn std::error::Error>> {
-		if self.url.starts_with("http") {
-			let url = Url::parse(&self.url)?;
-			Ok(url
-				.path()
-				.trim_start_matches('/')
-				.trim_end_matches(".git")
-				.to_string())
-		} else {
-			Ok(self.url.clone())
-		}
-	}
 }
 
 #[cfg(test)]
 mod tests {
+	use git2::Signature;
+	use tempfile::tempdir;
+
 	use super::*;
+	use crate::domain::git::entities::GitRepository;
 
-	#[test]
-	fn test_get_repo_path_with_http_url() {
-		let provider = GitCommitProvider {
-			url: "https://github.com/owner/repo.git".to_string(),
-		};
-		let repo_path = provider.get_repo_path().unwrap();
-		assert_eq!(repo_path, "owner/repo");
+	fn create_commit(
+		repo: &Repository,
+		message: &str,
+		parent: Option<&git2::Commit>,
+	) -> git2::Oid {
+		let tree_id = repo.treebuilder(None).unwrap().write().unwrap();
+		let tree = repo.find_tree(tree_id).unwrap();
+		let signature = Signature::now("Test User", "test@example.com").unwrap();
+		let parents = parent.map_or(vec![], |p| vec![p]);
+		repo.commit(
+			Some("HEAD"),
+			&signature,
+			&signature,
+			message,
+			&tree,
+			&parents,
+		)
+		.unwrap()
 	}
 
 	#[test]
-	fn test_get_repo_path_with_local_path() {
-		let provider = GitCommitProvider {
-			url: "/path/to/local/repo".to_string(),
-		};
-		let repo_path = provider.get_repo_path().unwrap();
-		assert_eq!(repo_path, "/path/to/local/repo");
-	}
+	fn test_fetch_commits_from_local_repo() {
+		// Arrange
+		let dir = tempdir().unwrap();
+		let path = dir.path();
+		let repo = Repository::init(path).unwrap();
 
-	#[test]
-	fn test_get_repo_path_with_http_url_no_git_suffix() {
-		let provider = GitCommitProvider {
-			url: "https://github.com/owner/repo".to_string(),
+		let c1_oid = create_commit(&repo, "feat: initial commit", None);
+		let c1 = repo.find_commit(c1_oid).unwrap();
+		create_commit(
+			&repo,
+			"algo(2025-01-01): Test Algo\nnotes: note1\nlanguage: Rust",
+			Some(&c1),
+		);
+
+		let git_repository = GitRepository {
+			root_path:    path.to_path_buf(),
+			display_path: "local/repo".to_string(),
 		};
-		let repo_path = provider.get_repo_path().unwrap();
-		assert_eq!(repo_path, "owner/repo");
+
+		let provider = GitCommitProvider;
+
+		// Act
+		let commits = provider.fetch(&git_repository).unwrap();
+
+		// Assert
+		assert_eq!(commits.len(), 2);
+		assert_eq!(
+			commits[0].message,
+			"algo(2025-01-01): Test Algo\nnotes: note1\nlanguage: Rust"
+		);
+		assert_eq!(commits[1].message, "feat: initial commit");
 	}
 }

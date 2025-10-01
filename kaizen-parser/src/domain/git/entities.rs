@@ -1,6 +1,13 @@
 use std::collections::HashMap;
+use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone)]
+pub struct GitRepository {
+	pub root_path:    PathBuf,
+	pub display_path: String,
+}
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct CommitData {

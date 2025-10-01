@@ -6,6 +6,7 @@ use std::path::PathBuf;
 use clap::{Parser, Subcommand};
 
 use crate::adapters::git::commits::GitCommitProvider;
+use crate::adapters::git::repository::Git2RepositoryProvider;
 use crate::adapters::output::json::JsonFileOutputWriter;
 use crate::domain::git::ports::CommitProvider;
 use crate::domain::kaizen::entities::KaizenData;
@@ -52,16 +53,19 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 		Command::Parse(args) => {
 			println!("Parsing repository: {}", args.repository);
 
-			let commit_provider = GitCommitProvider {
-				url: args.repository.clone(),
-			};
+			let repo_provider = Git2RepositoryProvider;
+			let repo_handle = repo_provider.provide(&args.repository)?;
+			let git_repo = repo_handle.repository();
+
+			let commit_provider = GitCommitProvider;
 			let output_writer = JsonFileOutputWriter { path: args.output };
 
-			let commits = commit_provider.fetch()?;
+			let commits = commit_provider.fetch(git_repo)?;
 
-			let repo_path = commit_provider.get_repo_path()?;
+			let repo_path = &git_repo.display_path;
 
 			let analysis_files = AnalysisFiles::new(
+				git_repo,
 				args.analysis_dirs.as_deref().unwrap_or_default(),
 			)
 			.map_err(|e| {
@@ -73,7 +77,7 @@ pub fn run(cli: Cli) -> Result<(), Box<dyn std::error::Error>> {
 			})?;
 
 			let commits_by_date =
-				parse_commits(&commits, &repo_path, &analysis_files)?;
+				parse_commits(&commits, repo_path, &analysis_files)?;
 
 			println!("Calculating stats...");
 			let stats = calculate_stats(&commits_by_date);

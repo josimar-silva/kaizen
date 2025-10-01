@@ -1,7 +1,6 @@
-use crate::domain::git::entities::Commit;
+use crate::domain::git::entities::{Commit, GitRepository};
 
 pub trait CommitProvider {
 	type Error;
-	fn fetch(&self) -> Result<Vec<Commit>, Self::Error>;
-	fn get_repo_path(&self) -> Result<String, Box<dyn std::error::Error>>;
+	fn fetch(&self, repository: &GitRepository) -> Result<Vec<Commit>, Self::Error>;
 }
