@@ -2,8 +2,8 @@ use git2::{Repository, Sort};
 use tempfile::Builder;
 use url::Url;
 
-use crate::domain::commit::Commit;
-use crate::domain::ports::CommitProvider;
+use crate::domain::git::entities::Commit;
+use crate::domain::git::ports::CommitProvider;
 
 pub struct GitCommitProvider {
 	pub url: String,

@@ -3,8 +3,8 @@ use std::collections::HashMap;
 use rayon::prelude::*;
 use regex::Regex;
 
-use crate::domain::analysis::AnalysisFiles;
-use crate::domain::commit::{Commit, CommitData, CommitsByDate};
+use crate::domain::git::entities::{Commit, CommitData, CommitsByDate};
+use crate::domain::kaizen::functions::analysis::AnalysisFiles;
 
 pub fn parse_commits(
 	commits: &[Commit],
@@ -115,7 +115,6 @@ mod tests {
 	use tempfile::tempdir;
 
 	use super::*;
-	use crate::domain::commit::Commit;
 
 	#[test]
 	fn test_parse_commits() {

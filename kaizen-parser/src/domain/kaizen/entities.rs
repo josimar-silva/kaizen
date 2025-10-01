@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use crate::domain::commit::CommitsByDate;
+use crate::domain::git::entities::CommitsByDate;
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct KaizenStats {

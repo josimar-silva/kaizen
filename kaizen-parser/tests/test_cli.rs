@@ -1,7 +1,7 @@
 use std::fs;
 
 use git2::{Repository, Signature};
-use kaizen::domain::kaizen::KaizenData;
+use kaizen::domain::kaizen::entities::KaizenData;
 use kaizen::{Cli, Command, ParseArgs, run};
 use tempfile::tempdir;
 
