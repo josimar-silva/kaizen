@@ -1,6 +1,8 @@
 use git2::{Repository, Sort};
 
-use crate::domain::git::entities::{Commit, GitRepository};
+use crate::domain::git::entities::{
+	ALGORITHMS_DIR, Commit, GitRepository, SYSTEM_DESIGN_DIR,
+};
 use crate::domain::git::ports::CommitProvider;
 
 pub struct GitCommitProvider;
@@ -20,9 +22,36 @@ impl CommitProvider for GitCommitProvider {
 			let oid = oid?;
 			let commit = repo.find_commit(oid)?;
 			let message = commit.message().unwrap_or("").to_string();
+
+			let mut files: Vec<String> = Vec::new();
+			let tree = commit.tree()?;
+			let parent_tree = commit.parents().nth(0).and_then(|p| p.tree().ok());
+
+			let diff =
+				repo.diff_tree_to_tree(parent_tree.as_ref(), Some(&tree), None)?;
+
+			diff.foreach(
+				&mut |delta, _| {
+					let new_file_path = delta.new_file().path();
+					if let Some(path) = new_file_path {
+						let path_str = path.to_string_lossy();
+						if path_str.starts_with(ALGORITHMS_DIR) ||
+							path_str.starts_with(SYSTEM_DESIGN_DIR)
+						{
+							files.push(path_str.to_string());
+						}
+					}
+					true
+				},
+				None,
+				None,
+				None,
+			)?;
+
 			commits.push(Commit {
 				id: oid.to_string(),
 				message,
+				files,
 			});
 		}
 

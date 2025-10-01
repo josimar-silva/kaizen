@@ -103,6 +103,7 @@ mod tests {
 			type_of:   "algo".to_string(),
 			reference: None,
 			analysis:  None,
+			source:    None,
 		}
 	}
 	#[test]
