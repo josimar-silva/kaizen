@@ -20,6 +20,8 @@ pub struct KaizenStats {
 	pub monthly_activity:      HashMap<String, usize>,
 	#[serde(rename = "sourceDistribution")]
 	pub source_distribution:   HashMap<String, usize>,
+	#[serde(rename = "mostActiveDay")]
+	pub most_active_day:       Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
