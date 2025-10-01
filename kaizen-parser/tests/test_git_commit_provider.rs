@@ -1,6 +1,6 @@
 use git2::{Repository, Signature};
-use kaizen::adapters::git_provider::GitCommitProvider;
-use kaizen::domain::ports::CommitProvider;
+use kaizen::adapters::git::commits::GitCommitProvider;
+use kaizen::domain::git::ports::CommitProvider;
 use tempfile::tempdir;
 
 fn create_commit(

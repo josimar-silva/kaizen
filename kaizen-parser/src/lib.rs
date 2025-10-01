@@ -5,13 +5,14 @@ use std::path::PathBuf;
 
 use clap::{Parser, Subcommand};
 
-use crate::adapters::git_provider::GitCommitProvider;
-use crate::adapters::json_writer::JsonFileOutputWriter;
-use crate::domain::analysis::AnalysisFiles;
-use crate::domain::kaizen::KaizenData;
-use crate::domain::parser::parse_commits;
-use crate::domain::ports::{CommitProvider, OutputWriter};
-use crate::domain::stats::calculate_stats;
+use crate::adapters::git::commits::GitCommitProvider;
+use crate::adapters::output::json::JsonFileOutputWriter;
+use crate::domain::git::ports::CommitProvider;
+use crate::domain::kaizen::entities::KaizenData;
+use crate::domain::kaizen::functions::analysis::AnalysisFiles;
+use crate::domain::kaizen::functions::parser::parse_commits;
+use crate::domain::kaizen::functions::stats::calculate_stats;
+use crate::domain::kaizen::ports::OutputWriter;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]

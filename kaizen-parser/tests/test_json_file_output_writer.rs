@@ -1,10 +1,10 @@
 use std::collections::HashMap;
 use std::{fs, io};
 
-use kaizen::adapters::json_writer::JsonFileOutputWriter;
-use kaizen::domain::commit::CommitData;
-use kaizen::domain::kaizen::{KaizenData, KaizenStats};
-use kaizen::domain::ports::OutputWriter;
+use kaizen::adapters::output::json::JsonFileOutputWriter;
+use kaizen::domain::git::entities::CommitData;
+use kaizen::domain::kaizen::entities::{KaizenData, KaizenStats};
+use kaizen::domain::kaizen::ports::OutputWriter;
 use tempfile::tempdir;
 
 #[test]

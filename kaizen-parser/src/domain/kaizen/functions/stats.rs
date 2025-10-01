@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 use chrono::NaiveDate;
 
-use crate::domain::commit::CommitsByDate;
-use crate::domain::kaizen::KaizenStats;
+use crate::domain::git::entities::CommitsByDate;
+use crate::domain::kaizen::entities::KaizenStats;
 
 pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	let entries: Vec<_> = data.iter().collect();
@@ -92,7 +92,7 @@ mod tests {
 	use std::collections::HashMap;
 
 	use super::*;
-	use crate::domain::commit::CommitData;
+	use crate::domain::git::entities::CommitData;
 
 	fn create_commit_data(language: &str) -> CommitData {
 		CommitData {

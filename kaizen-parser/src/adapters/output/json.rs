@@ -2,8 +2,8 @@ use std::fs::File;
 use std::io::{self, Write};
 use std::path::PathBuf;
 
-use crate::domain::kaizen::KaizenData;
-use crate::domain::ports::OutputWriter;
+use crate::domain::kaizen::entities::KaizenData;
+use crate::domain::kaizen::ports::OutputWriter;
 
 pub struct JsonFileOutputWriter {
 	pub path: PathBuf,
