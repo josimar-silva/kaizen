@@ -1,4 +1,5 @@
 use std::fs;
+use std::path::PathBuf;
 
 use git2::{Repository, Signature};
 use kaizen::domain::kaizen::entities::KaizenData;
@@ -171,6 +172,53 @@ fn test_cli_parse_command_with_analysis_file()
 			repository:    repo_dir.path().to_str().unwrap().to_string(),
 			output:        output_file.clone(),
 			analysis_dirs: Some(vec![analysis_dir.to_path_buf()]),
+		}),
+	};
+	run(cli)?;
+
+	let content = fs::read_to_string(output_file)?;
+	let kaizen_data: KaizenData = serde_json::from_str(&content)?;
+
+	// Assert
+	let day_commits = kaizen_data.commits.get("2025-09-15").unwrap();
+	assert!(day_commits[0].analysis.is_some());
+	let analysis_path =
+		std::path::Path::new(day_commits[0].analysis.as_ref().unwrap());
+	assert!(analysis_path.ends_with(analysis_file_name));
+
+	Ok(())
+}
+
+#[test]
+fn test_cli_parse_command_with_relative_analysis_dir()
+-> Result<(), Box<dyn std::error::Error>> {
+	// Arrange
+	let repo_dir = tempdir()?;
+	let repo = Repository::init(repo_dir.path())?;
+	let commit_oid = create_commit(
+		&repo,
+		"algo(2025-09-15): Test Algo with Analysis\nlanguage: Rust",
+		None,
+	);
+
+	let analysis_dir = repo_dir.path().join("algorithms").join("analysis");
+	fs::create_dir_all(&analysis_dir)?;
+
+	let commit_hash = commit_oid.to_string();
+	let short_hash = &commit_hash[0..7];
+	let analysis_file_name = format!("0001-test-algo-with-analysis-{short_hash}.md");
+	let analysis_file_path = analysis_dir.join(&analysis_file_name);
+	fs::write(&analysis_file_path, "## Test Analysis")?;
+
+	let output_dir = tempdir()?;
+	let output_file = output_dir.path().join("data.json");
+
+	// Act
+	let cli = Cli {
+		command: Command::Parse(ParseArgs {
+			repository:    repo_dir.path().to_str().unwrap().to_string(),
+			output:        output_file.clone(),
+			analysis_dirs: Some(vec![PathBuf::from("algorithms/analysis")]),
 		}),
 	};
 	run(cli)?;
