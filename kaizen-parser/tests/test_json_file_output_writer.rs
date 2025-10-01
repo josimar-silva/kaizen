@@ -36,6 +36,7 @@ fn test_json_file_output_writer() -> Result<(), io::Error> {
 		longest_streak:        1,
 		language_distribution: HashMap::new(),
 		monthly_activity:      HashMap::new(),
+		source_distribution:   HashMap::new(),
 	};
 	stats.language_distribution.insert("Rust".to_string(), 1);
 	stats.monthly_activity.insert("2025-01".to_string(), 1);

@@ -11,15 +11,6 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	let total_algorithms =
 		entries.iter().map(|(_, algorithms)| algorithms.len()).sum();
 
-	let mut language_distribution: HashMap<String, usize> = HashMap::new();
-	for (_, algorithms) in &entries {
-		for algorithm in algorithms.iter() {
-			*language_distribution
-				.entry(algorithm.language.clone())
-				.or_insert(0) += 1;
-		}
-	}
-
 	let mut monthly_activity: HashMap<String, usize> = HashMap::new();
 	for (date, algorithms) in &entries {
 		let month = date[..7].to_string();
@@ -29,6 +20,7 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	let today = chrono::Local::now().naive_local().date();
 	let current_streak = calculate_current_streak(data, today);
 	let longest_streak = calculate_longest_streak(data);
+	let (language_distribution, source_distribution) = calculate_distributions(data);
 
 	KaizenStats {
 		total_algorithms,
@@ -37,7 +29,30 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 		longest_streak,
 		language_distribution,
 		monthly_activity,
+		source_distribution,
 	}
+}
+
+fn calculate_distributions(
+	commits: &CommitsByDate,
+) -> (HashMap<String, usize>, HashMap<String, usize>) {
+	let mut language_distribution: HashMap<String, usize> = HashMap::new();
+	let mut source_distribution: HashMap<String, usize> = HashMap::new();
+
+	for (_, algorithms) in commits {
+		for algorithm in algorithms.iter() {
+			*language_distribution
+				.entry(algorithm.language.clone())
+				.or_insert(0) += 1;
+
+			if let Some(source) = &algorithm.source {
+				let formatted_source = source.to_string();
+				*source_distribution.entry(formatted_source).or_insert(0) += 1;
+			}
+		}
+	}
+
+	(language_distribution, source_distribution)
 }
 
 fn calculate_current_streak(commits: &CommitsByDate, today: NaiveDate) -> i64 {
@@ -106,6 +121,23 @@ mod tests {
 			source:    None,
 		}
 	}
+
+	fn create_commit_data_with_source(
+		language: &str,
+		source: Option<String>,
+	) -> CommitData {
+		CommitData {
+			title: "Test".to_string(),
+			notes: "Test notes".to_string(),
+			link: "http://example.com".to_string(),
+			language: language.to_string(),
+			type_of: "algo".to_string(),
+			reference: None,
+			analysis: None,
+			source,
+		}
+	}
+
 	#[test]
 	fn test_calculate_stats_basic() {
 		let mut data: CommitsByDate = OrderMap::new();
@@ -186,5 +218,30 @@ mod tests {
 		let today = NaiveDate::from_ymd_opt(2025, 9, 21).unwrap();
 		let current_streak = calculate_current_streak(&data, today);
 		assert_eq!(current_streak, 0);
+	}
+
+	#[test]
+	fn test_calculate_stats_source_distribution() {
+		let mut data: CommitsByDate = OrderMap::new();
+		data.insert("2025-09-20".to_string(), vec![
+			create_commit_data_with_source("Rust", Some("leetcode".to_string())),
+			create_commit_data_with_source(
+				"Python",
+				Some("project-euler".to_string()),
+			),
+		]);
+		data.insert("2025-09-21".to_string(), vec![
+			create_commit_data_with_source("Go", Some("leetcode".to_string())),
+			create_commit_data_with_source("Java", Some("codewars".to_string())),
+			create_commit_data_with_source("C++", None),
+		]);
+
+		let stats = calculate_stats(&data);
+
+		assert_eq!(stats.source_distribution.len(), 3);
+		assert_eq!(stats.source_distribution.get("leetcode"), Some(&2));
+		assert_eq!(stats.source_distribution.get("project-euler"), Some(&1));
+		assert_eq!(stats.source_distribution.get("codewars"), Some(&1));
+		assert_eq!(stats.source_distribution.get("None"), None);
 	}
 }
