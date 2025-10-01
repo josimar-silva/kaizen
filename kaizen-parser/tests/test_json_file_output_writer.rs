@@ -26,6 +26,7 @@ fn test_json_file_output_writer() -> Result<(), io::Error> {
 		type_of:   "algo".to_string(),
 		reference: None,
 		analysis:  None,
+		source:    None,
 	}]);
 
 	let mut stats = KaizenStats {

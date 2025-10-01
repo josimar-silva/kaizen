@@ -2,8 +2,22 @@ use ordermap::OrderMap;
 use rayon::prelude::*;
 use regex::Regex;
 
-use crate::domain::git::entities::{Commit, CommitData, CommitsByDate};
+use crate::domain::git::entities::{
+	ALGORITHMS_DIR, Commit, CommitData, CommitsByDate, SYSTEM_DESIGN_DIR,
+};
 use crate::domain::kaizen::functions::analysis::AnalysisFiles;
+
+fn extract_source_from_path(file_path: &str) -> Option<String> {
+	if file_path.starts_with(ALGORITHMS_DIR) ||
+		file_path.starts_with(SYSTEM_DESIGN_DIR)
+	{
+		let parts: Vec<&str> = file_path.split('/').collect();
+		if parts.len() > 2 {
+			return Some(parts[1].to_lowercase().replace(' ', "-"));
+		}
+	}
+	None
+}
 
 pub fn parse_commits(
 	commits: &[Commit],
@@ -51,6 +65,10 @@ pub fn parse_commits(
 					format!("https://github.com/{}/commit/{}", repo_path, commit.id);
 
 				let analysis = analysis_files.get(&commit.id).cloned();
+				let source = commit
+					.files
+					.iter()
+					.find_map(|file_path| extract_source_from_path(file_path));
 
 				(
 					date,
@@ -62,6 +80,7 @@ pub fn parse_commits(
 						type_of,
 						reference,
 						analysis,
+						source,
 					}),
 				)
 			})
@@ -108,11 +127,45 @@ mod tests {
 	use crate::domain::git::entities::GitRepository;
 
 	#[test]
+	fn test_extract_source_from_path() {
+		assert_eq!(
+			extract_source_from_path("algorithms/leetcode/rust/two-sum.rs"),
+			Some("leetcode".to_string())
+		);
+		assert_eq!(
+			extract_source_from_path("algorithms/project-euler/kotlin/problem-1.kt"),
+			Some("project-euler".to_string())
+		);
+		assert_eq!(
+			extract_source_from_path("algorithms/codewars/java/kyu-6.java"),
+			Some("codewars".to_string())
+		);
+		assert_eq!(
+			extract_source_from_path(
+				"system-design/grokking-system-design/url-short.md"
+			),
+			Some("grokking-system-design".to_string())
+		);
+		assert_eq!(
+			extract_source_from_path("system-design/some-design.md"),
+			None
+		);
+		assert_eq!(extract_source_from_path("README.md"), None);
+		assert_eq!(
+			extract_source_from_path(
+				"algorithms/some-source with spaces/rust/file.rs"
+			),
+			Some("some-source-with-spaces".to_string())
+		);
+	}
+
+	#[test]
 	fn test_parse_commits() {
 		let commits = vec![
 			Commit {
 				id:      String::from("abc000"),
 				message: String::from("feat: some other feature"),
+				files:   vec![],
 			},
 			Commit {
 				id:      String::from("abc001"),
@@ -120,6 +173,7 @@ mod tests {
 					"algo(2025-09-08): Two Sum\nnotes: Solved with hash \
 					 map.\nlanguage: Rust",
 				),
+				files:   vec!["algorithms/leetcode/rust/two_sum.rs".to_string()],
 			},
 			Commit {
 				id:      String::from("abc002"),
@@ -127,10 +181,12 @@ mod tests {
 					"sysdes(2025-09-08): Web Crawler\nnotes: First draft.\nWill \
 					 improve it later.\nlanguage: Go",
 				),
+				files:   vec!["system-design/web-crawler.md".to_string()],
 			},
 			Commit {
 				id:      String::from("abc003"),
 				message: String::from("fix: a bug fix"),
+				files:   vec![],
 			},
 			Commit {
 				id:      String::from("abc004"),
@@ -138,24 +194,28 @@ mod tests {
 					"algo(2025-09-09): Binary Search\nnotes: Recursive \
 					 solution.\nlanguage: Python",
 				),
+				files:   vec!["algorithms/project-euler/python/problem_x.py".to_string()],
 			},
             Commit {
 				id:      String::from("abc005"),
 				message: String::from(
 					"algo(2025-09-10): Bubble Sort\nnotes: Simple but inefficient.\nlanguage: C++\nRef.: https://example.com/bubble-sort",
 				),
+				files:   vec!["algorithms/codewars/cpp/bubble_sort.cpp".to_string()],
 			},
             Commit {
 				id:      String::from("abc006"),
 				message: String::from(
 					"algo(2025-09-11): Quick Sort\nnotes: A more complex solution.\nRef.: https://example.com/quick-sort\nlanguage: Rust",
 				),
+				files:   vec!["algorithms/leetcode/rust/quick_sort.rs".to_string()],
 			},
             Commit {
 				id:      String::from("abc007"),
 				message: String::from(
 					"algo(2025-09-12): Coursera Assignment\nnotes: First assignment of Coursera's Algorithms Part 1 course. Ref.: https://www.coursera.org/learn/algorithms-part1\nlanguage: Java",
 				),
+				files:   vec!["algorithms/coursera/java/assignment.java".to_string()],
 			},
 		];
 
@@ -181,6 +241,7 @@ mod tests {
 			"https://github.com/owner/repo/commit/abc001"
 		);
 		assert_eq!(day1_commits[0].reference, None);
+		assert_eq!(day1_commits[0].source, Some("leetcode".to_string()));
 
 		assert_eq!(day1_commits[1].title, "Web Crawler");
 		assert_eq!(day1_commits[1].language, "Go");
@@ -194,6 +255,7 @@ mod tests {
 			"https://github.com/owner/repo/commit/abc002"
 		);
 		assert_eq!(day1_commits[1].reference, None);
+		assert_eq!(day1_commits[1].source, None);
 
 		// Check 2025-09-09
 		let day2_commits = result.get("2025-09-09").unwrap();
@@ -207,6 +269,7 @@ mod tests {
 			"https://github.com/owner/repo/commit/abc004"
 		);
 		assert_eq!(day2_commits[0].reference, None);
+		assert_eq!(day2_commits[0].source, Some("project-euler".to_string()));
 
 		// Check 2025-09-10
 		let day3_commits = result.get("2025-09-10").unwrap();
@@ -223,6 +286,7 @@ mod tests {
 			day3_commits[0].reference,
 			Some("https://example.com/bubble-sort".to_string())
 		);
+		assert_eq!(day3_commits[0].source, Some("codewars".to_string()));
 
 		// Check 2025-09-11
 		let day4_commits = result.get("2025-09-11").unwrap();
@@ -239,6 +303,7 @@ mod tests {
 			day4_commits[0].reference,
 			Some("https://example.com/quick-sort".to_string())
 		);
+		assert_eq!(day4_commits[0].source, Some("leetcode".to_string()));
 
 		// Check 2025-09-12
 		let day5_commits = result.get("2025-09-12").unwrap();
@@ -258,6 +323,7 @@ mod tests {
 			day5_commits[0].reference,
 			Some("https://www.coursera.org/learn/algorithms-part1".to_string())
 		);
+		assert_eq!(day5_commits[0].source, Some("coursera".to_string()));
 	}
 
 	#[test]
@@ -270,6 +336,7 @@ mod tests {
 			message: String::from(
 				"algo(2025-09-15): Test with Analysis\nlanguage: Rust",
 			),
+			files:   vec!["algorithms/leetcode/rust/test.rs".to_string()],
 		}];
 
 		let analysis_dir = tempdir()?;
@@ -294,6 +361,7 @@ mod tests {
 			day_commits[0].analysis,
 			Some(analysis_file_name.to_string())
 		);
+		assert_eq!(day_commits[0].source, Some("leetcode".to_string()));
 
 		Ok(())
 	}
