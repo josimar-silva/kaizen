@@ -1,20 +1,26 @@
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 
+use crate::domain::git::entities::GitRepository;
+
 pub struct AnalysisFiles {
 	files_by_hash: HashMap<String, String>,
 }
 
 impl AnalysisFiles {
-	pub fn new(analysis_dirs: &[PathBuf]) -> Result<Self, std::io::Error> {
+	pub fn new(
+		git_repo: &GitRepository,
+		relative_dirs: &[PathBuf],
+	) -> Result<Self, std::io::Error> {
 		let mut files_by_hash = HashMap::new();
 
-		for dir in analysis_dirs {
-			if !dir.exists() {
+		for dir in relative_dirs {
+			let absolute_dir = git_repo.root_path.join(dir);
+			if !absolute_dir.exists() {
 				continue;
 			}
 
-			let files = std::fs::read_dir(dir)?
+			let files = std::fs::read_dir(absolute_dir)?
 				.filter_map(|entry| entry.ok().map(|e| e.path()))
 				.filter(|p| {
 					p.is_file() &&
@@ -23,8 +29,12 @@ impl AnalysisFiles {
 
 			for file_path in files {
 				if let Some(hash) = Self::extract_hash_from_filename(&file_path) {
-					files_by_hash
-						.insert(hash, file_path.to_string_lossy().into_owned());
+					let relative_path = file_path
+						.strip_prefix(&git_repo.root_path)
+						.unwrap_or(&file_path)
+						.to_string_lossy()
+						.into_owned();
+					files_by_hash.insert(hash, relative_path);
 				}
 			}
 		}
@@ -61,6 +71,7 @@ mod tests {
 	use tempfile::tempdir;
 
 	use super::*;
+	use crate::domain::git::entities::GitRepository;
 
 	#[test]
 	fn test_analysis_files_new() -> Result<(), std::io::Error> {
@@ -69,16 +80,20 @@ mod tests {
 		let file_path = dir.path().join("0001-some-algo-abc1234.md");
 		fs::write(&file_path, "test content")?;
 
-		let dirs = vec![dir.path().to_path_buf()];
+		let git_repo = GitRepository {
+			root_path:    dir.path().to_path_buf(),
+			display_path: "test/repo".to_string(),
+		};
+		let dirs = vec![PathBuf::from("")];
 
 		// Act
-		let analysis_files = AnalysisFiles::new(&dirs)?;
+		let analysis_files = AnalysisFiles::new(&git_repo, &dirs)?;
 
 		// Assert
 		assert_eq!(analysis_files.files_by_hash.len(), 1);
 		assert_eq!(
 			analysis_files.files_by_hash.get("abc1234"),
-			Some(&file_path.to_string_lossy().to_string())
+			Some(&"0001-some-algo-abc1234.md".to_string())
 		);
 
 		Ok(())
@@ -143,10 +158,14 @@ mod tests {
 		fs::write(&md_file_path, "md content")?;
 		fs::write(&txt_file_path, "txt content")?;
 
-		let dirs = vec![dir.path().to_path_buf()];
+		let git_repo = GitRepository {
+			root_path:    dir.path().to_path_buf(),
+			display_path: "test/repo".to_string(),
+		};
+		let dirs = vec![PathBuf::from("")];
 
 		// Act
-		let analysis_files = AnalysisFiles::new(&dirs)?;
+		let analysis_files = AnalysisFiles::new(&git_repo, &dirs)?;
 
 		// Assert
 		assert_eq!(analysis_files.files_by_hash.len(), 1);

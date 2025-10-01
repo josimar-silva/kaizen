@@ -111,10 +111,12 @@ fn sort_and_map_commits_by_date(
 #[cfg(test)]
 mod tests {
 	use std::fs;
+	use std::path::PathBuf;
 
 	use tempfile::tempdir;
 
 	use super::*;
+	use crate::domain::git::entities::GitRepository;
 
 	#[test]
 	fn test_parse_commits() {
@@ -168,7 +170,11 @@ mod tests {
 			},
 		];
 
-		let analysis_files = AnalysisFiles::new(&[]).unwrap();
+		let git_repo = GitRepository {
+			root_path:    PathBuf::new(),
+			display_path: "owner/repo".to_string(),
+		};
+		let analysis_files = AnalysisFiles::new(&git_repo, &[]).unwrap();
 		let result = parse_commits(&commits, "owner/repo", &analysis_files).unwrap();
 
 		assert_eq!(result.len(), 5);
@@ -283,8 +289,11 @@ mod tests {
 		let analysis_file_path = analysis_dir.path().join(&analysis_file_name);
 		fs::write(&analysis_file_path, "## Test Analysis")?;
 
-		let analysis_files =
-			AnalysisFiles::new(&[analysis_dir.path().to_path_buf()])?;
+		let git_repo = GitRepository {
+			root_path:    analysis_dir.path().to_path_buf(),
+			display_path: "owner/repo".to_string(),
+		};
+		let analysis_files = AnalysisFiles::new(&git_repo, &[PathBuf::from("")])?;
 
 		// Act
 		let result = parse_commits(&commits, "owner/repo", &analysis_files)?;
@@ -294,7 +303,7 @@ mod tests {
 		assert_eq!(day_commits.len(), 1);
 		assert_eq!(
 			day_commits[0].analysis,
-			Some(analysis_file_path.to_str().unwrap().to_string())
+			Some(analysis_file_name.to_string())
 		);
 
 		Ok(())
