@@ -60,6 +60,8 @@ jobs:
           ./parser parse \
             --repository https://github.com/josimar-silva/kaizen \
             --output data.json
+        env:
+          RUST_LOG: info
 
       - name: ⬆️ Update website data
         run: mv -f data.json website/public
