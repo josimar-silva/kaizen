@@ -1,9 +1,14 @@
 use std::collections::HashMap;
 
-use chrono::NaiveDate;
+use chrono::{Datelike, NaiveDate, Weekday};
 
 use crate::domain::git::entities::CommitsByDate;
 use crate::domain::kaizen::entities::KaizenStats;
+
+struct TemporalDistributions {
+	monthly_activity: HashMap<String, usize>,
+	most_active_day:  Option<String>,
+}
 
 pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	let entries: Vec<_> = data.iter().collect();
@@ -11,16 +16,12 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 	let total_algorithms =
 		entries.iter().map(|(_, algorithms)| algorithms.len()).sum();
 
-	let mut monthly_activity: HashMap<String, usize> = HashMap::new();
-	for (date, algorithms) in &entries {
-		let month = date[..7].to_string();
-		*monthly_activity.entry(month).or_insert(0) += algorithms.len();
-	}
-
 	let today = chrono::Local::now().naive_local().date();
 	let current_streak = calculate_current_streak(data, today);
 	let longest_streak = calculate_longest_streak(data);
+
 	let (language_distribution, source_distribution) = calculate_distributions(data);
+	let temporal_distributions = calculate_temporal_distributions(data);
 
 	KaizenStats {
 		total_algorithms,
@@ -28,8 +29,9 @@ pub fn calculate_stats(data: &CommitsByDate) -> KaizenStats {
 		current_streak,
 		longest_streak,
 		language_distribution,
-		monthly_activity,
+		monthly_activity: temporal_distributions.monthly_activity,
 		source_distribution,
+		most_active_day: temporal_distributions.most_active_day,
 	}
 }
 
@@ -46,13 +48,47 @@ fn calculate_distributions(
 				.or_insert(0) += 1;
 
 			if let Some(source) = &algorithm.source {
-				let formatted_source = source.to_string();
-				*source_distribution.entry(formatted_source).or_insert(0) += 1;
+				*source_distribution.entry(source.clone()).or_insert(0) += 1;
 			}
 		}
 	}
 
 	(language_distribution, source_distribution)
+}
+
+fn calculate_temporal_distributions(data: &CommitsByDate) -> TemporalDistributions {
+	let mut monthly_activity: HashMap<String, usize> = HashMap::new();
+	let mut day_of_week_counts: HashMap<Weekday, usize> = HashMap::new();
+
+	for (date_str, algorithms) in data {
+		if let Ok(date) = NaiveDate::parse_from_str(date_str, "%Y-%m-%d") {
+			// Monthly activity
+			let month = date.format("%Y-%m").to_string();
+			*monthly_activity.entry(month).or_insert(0) += algorithms.len();
+
+			// Day of week activity
+			*day_of_week_counts.entry(date.weekday()).or_insert(0) +=
+				algorithms.len();
+		}
+	}
+
+	let most_active_day = day_of_week_counts
+		.into_iter()
+		.max_by_key(|&(_, count)| count)
+		.map(|(weekday, _)| match weekday {
+			Weekday::Mon => "Monday".to_string(),
+			Weekday::Tue => "Tuesday".to_string(),
+			Weekday::Wed => "Wednesday".to_string(),
+			Weekday::Thu => "Thursday".to_string(),
+			Weekday::Fri => "Friday".to_string(),
+			Weekday::Sat => "Saturday".to_string(),
+			Weekday::Sun => "Sunday".to_string(),
+		});
+
+	TemporalDistributions {
+		monthly_activity,
+		most_active_day,
+	}
 }
 
 fn calculate_current_streak(commits: &CommitsByDate, today: NaiveDate) -> i64 {
@@ -154,6 +190,31 @@ mod tests {
 		assert_eq!(stats.language_distribution.get("Rust"), Some(&2));
 		assert_eq!(stats.language_distribution.get("Go"), Some(&1));
 		assert_eq!(stats.monthly_activity.get("2025-09"), Some(&3));
+		assert_eq!(stats.most_active_day, Some("Sunday".to_string()));
+	}
+
+	#[test]
+	fn test_calculate_stats_most_active_day() {
+		let mut data: CommitsByDate = OrderMap::new();
+		// Monday
+		data.insert("2025-10-06".to_string(), vec![
+			create_commit_data("Rust"),
+			create_commit_data("Go"),
+		]);
+		// Tuesday
+		data.insert("2025-10-07".to_string(), vec![create_commit_data("Python")]);
+		// Wednesday (most active with 3 commits)
+		data.insert("2025-10-01".to_string(), vec![
+			create_commit_data("Java"),
+			create_commit_data("C++"),
+			create_commit_data("Rust"),
+		]);
+		// Thursday
+		data.insert("2025-10-02".to_string(), vec![create_commit_data("Go")]);
+
+		let stats = calculate_stats(&data);
+
+		assert_eq!(stats.most_active_day, Some("Wednesday".to_string()));
 	}
 
 	#[test]
