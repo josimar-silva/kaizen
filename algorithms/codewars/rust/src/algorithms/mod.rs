@@ -1,1 +1,3 @@
-pub mod find_int_combinations;
+mod easy;
+mod medium;
+mod hard;
