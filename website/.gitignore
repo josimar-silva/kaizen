@@ -27,6 +27,7 @@ monocart-report/
 # dynamically generated
 /src/lib/data/posts-manifest.json
 /src/lib/data/categories.ts
+/public/solution/
 
 # misc
 .DS_Store
