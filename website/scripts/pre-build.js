@@ -28,8 +28,25 @@ try {
           } else if (type === "sysdes") {
             type = "system-design";
           }
-
           if (analysis) {
+            // Validate analysis path
+            if (!analysis.endsWith(".md")) {
+              console.warn(
+                `Warning: Analysis file ${analysis} is not a markdown file. Skipping.`,
+              );
+              return { ...rest, type };
+            }
+            // Prevent path traversal
+            const normalizedPath = path.normalize(analysis);
+            if (
+              normalizedPath.includes("..") ||
+              path.isAbsolute(normalizedPath)
+            ) {
+              console.error(
+                `Error: Analysis path ${analysis} contains path traversal or is absolute. Skipping.`,
+              );
+              return { ...rest, type };
+            }
             const sourceAnalysisPath = path.join(
               __dirname,
               "..",
@@ -41,8 +58,13 @@ try {
               publicSolutionDir,
               destinationAnalysisFileName,
             );
-
             if (fs.existsSync(sourceAnalysisPath)) {
+              // Warn if overwriting existing file
+              if (fs.existsSync(destinationAnalysisPath)) {
+                console.warn(
+                  `Warning: Overwriting existing file: ${destinationAnalysisFileName}`,
+                );
+              }
               fs.copyFileSync(sourceAnalysisPath, destinationAnalysisPath);
               console.log(
                 `Copied analysis file: ${destinationAnalysisFileName}`,
@@ -51,6 +73,7 @@ try {
               console.warn(
                 `Warning: Analysis file not found at ${sourceAnalysisPath}`,
               );
+              return { ...rest, type };
             }
             return {
               ...rest,
@@ -58,7 +81,6 @@ try {
               analysis: `/solution/${destinationAnalysisFileName}`,
             };
           }
-
           return { ...rest, type };
         },
       );
