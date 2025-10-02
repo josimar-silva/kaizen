@@ -12,7 +12,7 @@
   </a>
   <!-- WEBSITE -->
   <a href="./website">
-    <img src="https://img.shields.io/badge/kaizen_website-v0.2.2-purple.svg" alt="kaizen parser" />
+    <img src="https://img.shields.io/badge/kaizen_website-v0.3.0-purple.svg" alt="kaizen parser" />
   </a>
   <!-- Kaizen Nightly Builds -->
   <a href="https://github.com/josimar-silva/kaizen/actions/workflows/kaizen.yaml">
