@@ -129,16 +129,10 @@ describe("Timeline", () => {
     commits: mockCommits,
   };
 
-  it("should render the solution and problem buttons when links are available", () => {
+  it("should navigate to the solution page on click", () => {
     render(<Timeline {...defaultProps} />);
-    const solutionButton = screen.getByTestId("solution-button-2023-01-01-0");
-    const problemButton = screen.getByTestId("problem-button-2023-01-01-0");
-
-    expect(solutionButton).toBeInTheDocument();
-    expect(solutionButton).toHaveAttribute("href", "link1");
-
-    expect(problemButton).toBeInTheDocument();
-    expect(problemButton).toHaveAttribute("href", "https://example.com/link1");
+    const algo1Link = screen.getByRole("link", { name: /Algo 1/i });
+    expect(algo1Link).toHaveAttribute("href", "/solution/2023-01-01/0");
   });
 
   it("should render search and filter controls", () => {

@@ -10,9 +10,9 @@ import {
   Layers,
   Search,
 } from "lucide-react";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
-import { AlgorithmDetailModal } from "@/components/algorithm-detail-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -49,21 +49,6 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
   const [selectedType, setSelectedType] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"date" | "language" | "title">("date");
   const [itemsToShow, setItemsToShow] = useState(10);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedAlgorithmIndex, setSelectedAlgorithmIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleAlgorithmClick = (date: string, algorithmIndex: number) => {
-    setSelectedDate(date);
-    setSelectedAlgorithmIndex(algorithmIndex);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedDate(null);
-    setSelectedAlgorithmIndex(0);
-  };
 
   const filteredAndSortedData = useMemo(() => {
     let entries = Object.entries(commits).flatMap(([date, algorithms]) =>
@@ -306,15 +291,16 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="border border-border rounded-lg p-3 sm:p-4 bg-muted/10 hover:bg-muted/20 transition-all duration-200 cursor-pointer group"
-                        onClick={() => handleAlgorithmClick(date, index)}
+                        className="border border-border rounded-lg p-3 sm:p-4 bg-muted/10 hover:bg-muted/20 transition-all duration-200 group"
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
                           <div className="flex-1 space-y-3 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                              <h3 className="font-semibold text-card-foreground text-base sm:text-lg group-hover:text-accent transition-colors leading-tight">
-                                {algorithm.title}
-                              </h3>
+                              <Link href={`/solution/${date}/${index}`}>
+                                <h3 className="font-semibold text-card-foreground text-base sm:text-lg hover:text-accent transition-colors leading-tight">
+                                  {algorithm.title}
+                                </h3>
+                              </Link>
                               <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs text-muted-foreground">
                                 <div className="flex items-center gap-1">
                                   {algorithm.type === "algorithm" ? (
@@ -358,7 +344,6 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center gap-2"
-                                    onClick={(e) => e.stopPropagation()}
                                     data-testid={`problem-button-${date}-${index}`}
                                   >
                                     <ExternalLink className="w-3 h-3" />
@@ -377,7 +362,6 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="flex items-center justify-center gap-2"
-                                  onClick={(e) => e.stopPropagation()}
                                   data-testid={`solution-button-${date}-${index}`}
                                 >
                                   <ExternalLink className="w-3 h-3" />
@@ -411,17 +395,6 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
             Load More ({filteredAndSortedData.length - itemsToShow} remaining)
           </Button>
         </motion.div>
-      )}
-
-      {/* Algorithm Detail Modal */}
-      {selectedDate && commits[selectedDate] && (
-        <AlgorithmDetailModal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          date={selectedDate}
-          algorithms={commits[selectedDate]}
-          initialAlgorithmIndex={selectedAlgorithmIndex}
-        />
       )}
     </div>
   );
