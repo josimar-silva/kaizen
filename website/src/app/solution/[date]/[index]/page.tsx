@@ -2,6 +2,7 @@ import { ArrowLeft, Calendar, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import AnalysisSection from "@/components/analysis-section";
 import { SolutionNavigation } from "@/components/solution-navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,11 +41,11 @@ export default function SolutionPage({ params }: PageProps) {
   const algorithms = kaizenData.commits[date] || [];
   const currentAlgorithm = algorithms[algorithmIndex];
 
-  const hasMultiple = algorithms.length > 1;
-
   if (!currentAlgorithm) {
     notFound();
   }
+
+  const hasMultiple = algorithms.length > 1;
 
   return (
     <div className="min-h-screen bg-background">
@@ -161,6 +162,10 @@ export default function SolutionPage({ params }: PageProps) {
               {currentAlgorithm.notes}
             </p>
           </div>
+
+          {currentAlgorithm.analysis && (
+            <AnalysisSection analysisPath={currentAlgorithm.analysis} />
+          )}
 
           {hasMultiple && (
             <>

@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -18,6 +18,7 @@ jest.mock("@/lib/db", () => ({
           language: "Java",
           type: "algorithm",
           reference: "https://example.com/link1",
+          analysis: "/solution/test-algo-1-analysis.md",
         },
       ],
     },
@@ -32,6 +33,13 @@ jest.mock("@/lib/style-service", () => ({
   },
 }));
 
+jest.mock("@/components/analysis-section", () => ({
+  __esModule: true,
+  default: ({ analysisPath }: { analysisPath: string }) => (
+    <div data-testid="mock-analysis-section">{`Mocked Analysis for ${analysisPath}`}</div>
+  ),
+}));
+
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -40,12 +48,14 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("SolutionPage", () => {
-  it("should render algorithm details correctly", () => {
+  it("should render algorithm details correctly", async () => {
     const props = {
       params: { date: "2023-01-01", index: "0" },
     };
 
-    render(<SolutionPage {...props} />);
+    await act(async () => {
+      render(<SolutionPage {...props} />);
+    });
 
     expect(
       screen.getByRole("heading", { level: 2, name: "Test Algo 1" }),
@@ -60,14 +70,20 @@ describe("SolutionPage", () => {
       "href",
       "link1",
     );
+    expect(screen.getByTestId("mock-analysis-section")).toBeInTheDocument();
+    expect(
+      screen.getByText("Mocked Analysis for /solution/test-algo-1-analysis.md"),
+    ).toBeInTheDocument();
   });
 
-  it("should call notFound for invalid index", () => {
+  it("should call notFound for invalid index", async () => {
     const props = {
       params: { date: "2023-01-01", index: "99" },
     };
 
-    expect(() => render(<SolutionPage {...props} />)).toThrow();
+    await expect(async () =>
+      render(<SolutionPage {...props} />),
+    ).rejects.toThrow();
     expect(notFound).toHaveBeenCalled();
   });
 });
