@@ -1,16 +1,15 @@
-## Algorithm: Longest Common Prefix v1
-
-**Source:** [Leet Code](https://leetcode.com/problems/longest-common-prefix)  
-**Commit:** [ebda9ed](https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d)
-
+---
+title: Longest Common Prefix v1
+commit: ebda9ed
+url: https://github.com/josimar-silva/kaizen/commit/ebda9ed449bd2813c9786ded4dfe82bb80939e7d
 ---
 
-### Problem
+#### Problem
 Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string `""`.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm uses a horizontal scanning approach.
@@ -27,7 +26,7 @@ Write a function to find the longest common prefix string amongst an array of st
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - The algorithm takes the first string as the initial guess for the longest common prefix.
 - It then compares this guess with every other string in the list.
@@ -38,7 +37,7 @@ Write a function to find the longest common prefix string amongst an array of st
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** The horizontal scanning approach is a simple and intuitive way to solve the problem. Its efficiency is reasonable for many cases.
 - **Limits:** The performance can be slow in cases where the longest common prefix is very short, but the strings themselves are very long. For example, `["longstring...a", "longstring...b"]`.

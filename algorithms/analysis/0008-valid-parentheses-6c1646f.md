@@ -1,16 +1,15 @@
-## Algorithm: Valid Parentheses
-
-**Source:** [Leet Code](https://leetcode.com/problems/valid-parentheses)  
-**Commit:** [6c1646f](https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9)
-
+---
+title: Valid Parentheses
+commit: 6c1646f
+url: https://github.com/josimar-silva/kaizen/commit/6c1646fb3dfaac6cec1885410c79135c6d5147a9
 ---
 
-### Problem
+#### Problem
 Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]`, determine if the input string is valid. An input string is valid if open brackets are closed by the same type of brackets and in the correct order.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm iterates through the input string `s` once from beginning to end.
@@ -24,7 +23,7 @@ Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For any given string of parentheses, the algorithm looks at each character only once.
 - It uses a stack (like a pile of plates) to keep track of the opening brackets it has seen.
@@ -35,7 +34,7 @@ Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This stack-based approach is the standard and most efficient way to solve this problem. It is optimal in terms of time and space complexity.
 - **Limits:** The solution is limited by the maximum size of the stack, which in this case is tied to the length of the input string. Given the constraints (string length up to 10^4), this is not an issue.

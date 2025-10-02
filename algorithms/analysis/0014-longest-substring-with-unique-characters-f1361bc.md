@@ -1,16 +1,15 @@
-## Algorithm: Longest Substring Without Repeating Characters
-
-**Source:** [Leet Code](https://leetcode.com/problems/longest-substring-without-repeating-characters)
-**Commit:** [f1361bc](https://github.com/josimar-silva/kaizen/commit/f1361bc3e08f9c6d3374046bee4fce423893eaec)
-
+---
+title: Longest Substring Without Repeating Characters
+commit: f1361bc
+url: https://github.com/josimar-silva/kaizen/commit/f1361bc3e08f9c6d3374046bee4fce423893eaec
 ---
 
-### Problem
+#### Problem
 Given a string `s`, find the length of the longest substring that does not contain any repeating characters.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**
 - The algorithm iterates through the string a single time using a `rightPointer`.
@@ -25,7 +24,7 @@ Given a string `s`, find the length of the longest substring that does not conta
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 The algorithm uses a "sliding window" approach to efficiently find the longest substring without repeating characters. Imagine you're reading the string from left to right.
 
@@ -39,7 +38,7 @@ The algorithm uses a "sliding window" approach to efficiently find the longest s
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** The O(n) time complexity is highly efficient and optimal for this problem, as every character must be inspected at least once. It's perfectly suitable for real-world use cases within the given constraints (up to 5 * 10^4 characters).
 - **Limits:** The algorithm has no significant limits for the given constraints. The space usage is minimal and tied to the size of the character set, not the length of the string itself, which prevents memory issues with very long strings.

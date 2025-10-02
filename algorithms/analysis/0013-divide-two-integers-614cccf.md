@@ -1,17 +1,15 @@
-## Algorithm: Divide Two Integers
-
-**Source:** [Leet Code](https://leetcode.com/problems/divide-two-integers/)  
-**Commit:** [614cccf5](https://github.com/josimar-silva/kaizen/commit/614cccf589da7170f56256b59e62f766f960dbf2) 
-**Language:** Kotlin 
-
+---
+title: Divide Two Integers
+commit: 614cccf5
+url: https://github.com/josimar-silva/kaizen/commit/614cccf589da7170f56256b59e62f766f960dbf2
 ---
 
-### Problem
+#### Problem
 Given two integers `dividend` and `divisor`, divide two integers without using multiplication, division, and mod operator. The integer division should truncate toward zero. Return the quotient after dividing dividend by divisor. Handle edge cases like `Int.MIN_VALUE / -1` which should return `Int.MAX_VALUE`.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm uses an outer `while` loop that reduces the `currentDividend`.
@@ -26,7 +24,7 @@ Given two integers `dividend` and `divisor`, divide two integers without using m
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs, like `10 / 3`, the algorithm is very fast, performing only a few subtractions.
 - For medium inputs, like `1000 / 7`, it still performs very few operations. Instead of subtracting 7 one by one, it quickly subtracts 7*2, then 7*4, then 7*8, and so on, until it finds the largest chunk to subtract.
@@ -36,7 +34,7 @@ Given two integers `dividend` and `divisor`, divide two integers without using m
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This optimized solution is highly efficient, with logarithmic time complexity and constant space complexity. It's the standard optimal approach for this problem given the constraints.
 - **Limits:** The solution correctly handles the 32-bit signed integer range and the specific overflow case of `Int.MIN_VALUE / -1`.

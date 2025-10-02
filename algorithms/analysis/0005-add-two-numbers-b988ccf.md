@@ -1,16 +1,15 @@
-## Algorithm: Add Two Numbers
-
-**Source:** [Leet Code](https://leetcode.com/problems/add-two-numbers/)  
-**Commit:** [b988ccf9](https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9)
-
+---
+title: Add Two Numbers
+commit: b988ccf9
+url: https://github.com/josimar-silva/kaizen/commit/b988ccf91ada66aab51fb7aa93fbd9957b677aa9
 ---
 
-### Problem
+#### Problem
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm iterates through the input linked lists `l1` and `l2` once.
@@ -25,7 +24,7 @@ You are given two non-empty linked lists representing two non-negative integers.
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs, like two linked lists with 3 nodes each, the algorithm performs about 3 operations.
 - For medium inputs, like two lists with 50 nodes each, it performs about 50 operations.
@@ -35,7 +34,7 @@ You are given two non-empty linked lists representing two non-negative integers.
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This solution is optimal in terms of time and space complexity. Since we need to visit each node in the input lists at least once to know the numbers, we cannot do better than linear time. Similarly, we must create a new linked list for the result.
 - **Limits:** The solution correctly handles lists of different lengths and the final carry-over.

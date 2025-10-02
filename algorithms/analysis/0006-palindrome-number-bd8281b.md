@@ -1,16 +1,15 @@
-## Algorithm: Palindrome Number
-
-**Source:** [Leet Code](https://leetcode.com/problems/palindrome-number)  
-**Commit:** [bd8281b](https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45)
-
+---
+title: Palindrome Number
+commit: bd8281b
+url: https://github.com/josimar-silva/kaizen/commit/bd8281b0811e1f3c3deb3c184b698cf1df77ef45
 ---
 
-### Problem
+#### Problem
 Given an integer `x`, return `true` if `x` is a palindrome, and `false` otherwise. An integer is a palindrome when it reads the same backward as forward.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm iteratively reverses the second half of the number.
@@ -26,7 +25,7 @@ Given an integer `x`, return `true` if `x` is a palindrome, and `false` otherwis
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs, like `121`, the algorithm is almost instantaneous. It performs only a couple of operations.
 - For medium inputs, like `123454321`, the number of operations is still very small, around 4-5 iterations. The growth is very slow.
@@ -36,7 +35,7 @@ Given an integer `x`, return `true` if `x` is a palindrome, and `false` otherwis
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This solution is highly efficient and perfectly suitable for real-world use. The logarithmic time complexity and constant space complexity make it very performant.
 - **Limits:** The algorithm is limited by the constraints of the integer type (`-2^31 <= x <= 2^31 - 1`). It correctly handles these limits.

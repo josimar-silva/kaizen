@@ -1,16 +1,15 @@
-## Algorithm: Regular Expression Matching v1
-
-**Source:** [Leet Code](https://leetcode.com/problems/regular-expression-matching/)  
-**Commit:** [e25695d](https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c)
-
+---
+title: Regular Expression Matching v1
+commit: e25695d
+url: https://github.com/josimar-silva/kaizen/commit/e25695d646863007dd48a0cffa001397e80c915c
 ---
 
-### Problem
+#### Problem
 Given an input string `s` and a pattern `p`, implement regular expression matching with support for `.` and `*`, where `.` matches any single character and `*` matches zero or more of the preceding element. The matching should cover the entire input string.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The solution uses recursion with memoization (top-down dynamic programming).
@@ -27,7 +26,7 @@ Given an input string `s` and a pattern `p`, implement regular expression matchi
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs, like a string and pattern of length 5, the algorithm is very fast.
 - For the given constraints (lengths up to 20), the number of operations would be at most around `20 * 20 = 400`, which is very small.
@@ -37,7 +36,7 @@ Given an input string `s` and a pattern `p`, implement regular expression matchi
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This solution is efficient enough for the given constraints. For much larger inputs, the `O(S * P)` complexity might become an issue.
 - **Limits:** The recursive nature of the solution could lead to a stack overflow for very long strings/patterns, but this is not an issue with the given constraints.

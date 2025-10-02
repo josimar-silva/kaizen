@@ -1,17 +1,16 @@
-## Algorithm: <Name of Algorithm>
-
-**Source:** <Problem link / book / challenge>  
-**Commit:** [<short-hash>](<commit-url>)
-
+---
+title: <Name of Algorithm>
+commit: <short-hash>
+url: <commit-url>
 ---
 
-### Problem
+#### Problem
 <Short description of the problem the algorithm solves.>  
 Example: “Find the largest palindrome made from the product of two n-digit numbers.”
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - <Break down loops/recursions/steps>  
@@ -23,7 +22,7 @@ Example: “Find the largest palindrome made from the product of two n-digit num
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs: <rough number of operations / what it feels like>.  
 - For medium inputs: <show growth with concrete numbers>.  
@@ -33,7 +32,7 @@ Example: “Find the largest palindrome made from the product of two n-digit num
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** Is this good enough for real use?  
 - **Limits:** Where does it break down?  

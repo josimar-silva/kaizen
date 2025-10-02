@@ -1,12 +1,10 @@
-## Algorithm: Sum of Multiples of 3 or 5
-
-**Source:** [Project Euler](https://projecteuler.net/problem=1)  
-**Commit:** [7ded72a](https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c)  
-**Language:** Kotlin  
-
+---
+title: Sum of Multiples of 3 or 5
+commit: 7ded72a
+url: https://github.com/josimar-silva/kaizen/commit/7ded72ad7cd016340b7042671bbae9ff1442fe2c
 ---
 
-### Problem
+#### Problem
 If we list all natural numbers below 10 that are multiples of 3 or 5, we get:  
 `3, 5, 6, 9` → their sum is `23`.  
 
@@ -14,7 +12,7 @@ The goal is to **find the sum of all multiples of 3 or 5 below 1000** (or a give
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity (Technical):**  
 - Loop iterates through all numbers from `1` to `max`.  
@@ -27,7 +25,7 @@ The goal is to **find the sum of all multiples of 3 or 5 below 1000** (or a give
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - The algorithm **checks every number one by one**.  
 - Each check is very fast (just division remainder).  
@@ -42,7 +40,7 @@ This grows **linearly**: if you double the limit, it takes about **twice as long
 
 ---
 
-### Reflection
+#### Conclusion
 
 - This brute-force solution is **perfectly fine for small ranges** like Euler’s 1000.  
 - For very large ranges (e.g., `10^12`), iterating over all numbers would be too slow.  

@@ -1,16 +1,15 @@
-## Algorithm: Largest Palindrome Product
-
-**Source:** [Project Euler](https://projecteuler.net/problem=4)  
-**Commit:** [40e1dc9](https://github.com/josimar-silva/kaizen/commit/40e1dc994b9c8ee310be7620529376c3048574b8)
-
+---
+title: Largest Palindrome Product
+commit: 40e1dc9
+url: https://github.com/josimar-silva/kaizen/commit/40e1dc994b9c8ee310be7620529376c3048574b8
 ---
 
-### Problem
+#### Problem
 A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99. Find the largest palindrome made from the product of two 3-digit numbers.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm uses two nested loops to check the product of all pairs of n-digit numbers.
@@ -26,7 +25,7 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - The algorithm multiplies every possible pair of 3-digit numbers (from 999x999 down to 100x100).
 - For each product, it checks if the number reads the same forwards and backwards.
@@ -37,7 +36,7 @@ A palindromic number reads the same both ways. The largest palindrome made from 
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** The brute-force approach is simple to implement and works well for a small number of digits like 3. However, it does not scale well.
 - **Limits:** For a larger number of digits (e.g., 5 or 6), this solution would become too slow to be practical.

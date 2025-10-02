@@ -1,12 +1,10 @@
-## Algorithm: Random Word (Knuth’s Method / Reservoir Sampling)
-
-**Source:** [Coursera](https://www.coursera.org/learn/algorithms-part1)  
-**Commit:** [4e48e34](https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6)  
-**Language:** Java  
-
+---
+title: Random Word (Knuth’s Method / Reservoir Sampling)
+commit: 4e48e34
+url: https://github.com/josimar-silva/kaizen/commit/4e48e34a4372e6015c2af1655438b72534f32fc6
 ---
 
-### Problem
+#### Problem
 Write a program `RandomWord.java` that reads a sequence of words from standard input and prints **one of them uniformly at random**.  
 Constraints:  
 - Do not store the words in an array or list.  
@@ -14,7 +12,7 @@ Constraints:
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - Reads each word once.  
@@ -27,7 +25,7 @@ Constraints:
 
 ---
 
-### Layman’s Terms
+##### Layman’s Terms
 
 - The program looks at each word **once and only once**.  
 - It doesn’t remember all the words — just the current “champion.”  
@@ -41,7 +39,7 @@ Constraints:
 
 ---
 
-### Reflection
+#### Conclusion
 
 This is a textbook example of an **elegant algorithm**:  
 - Efficient (linear time, constant space).  

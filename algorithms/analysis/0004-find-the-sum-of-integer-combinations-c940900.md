@@ -1,16 +1,15 @@
-## Algorithm: Find the Sum of Integer Combinations
-
-**Source:** [Code Wars](https://www.codewars.com/kata/59f3178e3640cef6d90000d5)  
-**Commit:** [c940900](https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb)
-
+---
+title: Find the Sum of Integer Combinations
+commit: c940900
+url: https://github.com/josimar-silva/kaizen/commit/c9409009142947b339cb41e1a4b4afed628be1eb
 ---
 
-### Problem
+#### Problem
 Given an array of positive integers and a number `n`, count all combinations with repetition of integers from the array that sum to `n`. The length of the sub-arrays in the combinations must be less than or equal to the length of the initial array.
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm uses three nested loops.
@@ -25,7 +24,7 @@ Given an array of positive integers and a number `n`, count all combinations wit
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs, like `find([3, 6, 9, 12], 12)`, the algorithm is very fast.
 - For medium inputs, the performance will depend on both the size of the input array and the target number. If either `N` or `T` gets large, the number of operations can grow quickly.
@@ -35,7 +34,7 @@ Given an array of positive integers and a number `n`, count all combinations wit
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** This dynamic programming solution is effective for moderate constraints. It correctly solves the problem by building up a table of solutions to subproblems.
 - **Limits:** The `O(N^2 * T)` time complexity and `O(N * T)` space complexity mean that this solution is not suitable for problems with very large input arrays or target numbers.

@@ -1,16 +1,15 @@
-## Algorithm: Count Sheep
-
-**Source:** https://www.codewars.com/kata/54edbc7200b811e956000556
-**Commit:** [53c3415](<commit-url>)
-
+---
+title: Count Sheep
+commit: 53c3415
+url: https://github.com/josimar-silva/kaizen/commit/53c3415
 ---
 
-### Problem
+#### Problem
 Counts the number of sheep present in an array (where `true` means present).
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The `iter().filter().count()` operation iterates through the input slice exactly once.
@@ -22,7 +21,7 @@ Counts the number of sheep present in an array (where `true` means present).
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - For small inputs: If you have 10 sheep, the function checks each of the 10 spots once. It's very quick.
 - For medium inputs: If you have 1,000 sheep, it checks each of the 1,000 spots once. Still very fast.
@@ -31,7 +30,7 @@ Counts the number of sheep present in an array (where `true` means present).
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** The current implementation is highly efficient, performing a single pass over the input data. This is optimal for this problem.
 - **Limits:** The input `&[bool]` can theoretically be very large. However, the return type `u8` limits the maximum count to 255. If the number of `true` values exceeds 255, the result will be truncated due to the `as u8` cast.

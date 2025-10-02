@@ -1,16 +1,15 @@
-## Algorithm: Largest Prime Factor
-
-**Source:** [Project Euler](https://projecteuler.net/problem=3)  
-**Commit:** [d7f3c75](https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e)
-
+---
+title: Largest Prime Factor
+commit: d7f3c75
+url: https://github.com/josimar-silva/kaizen/commit/d7f3c7529dc25f7834074b45eab6dce469f4612e
 ---
 
-### Problem
+#### Problem
 The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime factor of the number 600851475143?
 
 ---
 
-### Big O Analysis
+#### Big O Analysis
 
 **Time Complexity:**  
 - The algorithm iterates through potential factors (`divider`) in a `while` loop.
@@ -24,7 +23,7 @@ The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime factor
 
 ---
 
-### Layman’s Terms
+#### Layman’s Terms
 
 - The algorithm tries to find the smallest prime numbers that divide the input number.
 - It starts with 2 and checks if it divides the number. If it does, it keeps dividing by 2 until it can't anymore.
@@ -35,7 +34,7 @@ The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime factor
 
 ---
 
-### Reflection
+#### Conclusion
 
 - **Efficiency:** The O(sqrt(n)) time complexity is generally considered efficient for this type of problem, especially for numbers within the range of standard integer types.
 - **Limits:** The solution works well for the given Project Euler problem. For extremely large numbers (e.g., those used in cryptography), more advanced factorization algorithms like the Pollard's rho algorithm or the quadratic sieve would be necessary.
