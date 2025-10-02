@@ -4,24 +4,61 @@ const path = require("path");
 const dataJsonPath = path.join(__dirname, "..", "public", "data.json");
 const outputDir = path.join(__dirname, "..", "src", "lib");
 const outputPath = path.join(outputDir, "db.ts");
+const publicSolutionDir = path.join(__dirname, "..", "public", "solution");
 
 try {
+  // Ensure public/solution directory exists
+  if (!fs.existsSync(publicSolutionDir)) {
+    fs.mkdirSync(publicSolutionDir, { recursive: true });
+  }
+
   // 1. Read data.json
   const rawData = fs.readFileSync(dataJsonPath, "utf-8");
   const jsonData = JSON.parse(rawData); // { stats: {}, commits: {} }
 
-  // 2. Transform commits data
+  // 2. Transform commits data and copy analysis markdown files
   const transformedCommits = {};
   for (const date in jsonData.commits) {
     if (Object.hasOwn(jsonData.commits, date)) {
       transformedCommits[date] = jsonData.commits[date].map(
-        ({ type_of, ...rest }) => {
+        ({ type_of, analysis, ...rest }) => {
           let type = type_of;
           if (type === "algo") {
             type = "algorithm";
           } else if (type === "sysdes") {
             type = "system-design";
           }
+
+          if (analysis) {
+            const sourceAnalysisPath = path.join(
+              __dirname,
+              "..",
+              "..",
+              analysis,
+            );
+            const destinationAnalysisFileName = path.basename(analysis);
+            const destinationAnalysisPath = path.join(
+              publicSolutionDir,
+              destinationAnalysisFileName,
+            );
+
+            if (fs.existsSync(sourceAnalysisPath)) {
+              fs.copyFileSync(sourceAnalysisPath, destinationAnalysisPath);
+              console.log(
+                `Copied analysis file: ${destinationAnalysisFileName}`,
+              );
+            } else {
+              console.warn(
+                `Warning: Analysis file not found at ${sourceAnalysisPath}`,
+              );
+            }
+            return {
+              ...rest,
+              type,
+              analysis: `/solution/${destinationAnalysisFileName}`,
+            };
+          }
+
           return { ...rest, type };
         },
       );

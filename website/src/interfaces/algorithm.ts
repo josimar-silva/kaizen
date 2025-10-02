@@ -5,4 +5,5 @@ export interface Algorithm {
   language: string;
   type: "algorithm" | "system-design";
   reference?: string;
+  analysis?: string;
 }
