@@ -26,3 +26,4 @@ USER nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist/website /usr/share/nginx/html
+COPY --from=builder /app/public/solution /usr/share/nginx/html/solution
