@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 16,
-    "totalDays": 15,
-    "currentStreak": 0,
-    "longestStreak": 12,
+    "totalAlgorithms": 17,
+    "totalDays": 16,
+    "currentStreak": 13,
+    "longestStreak": 13,
     "languageDistribution": {
-      "Java": 5,
-      "Kotlin": 9,
-      "Rust": 2
+      "Rust": 2,
+      "Kotlin": 10,
+      "Java": 5
     },
     "monthlyActivity": {
-      "2025-10": 2,
+      "2025-10": 3,
       "2025-09": 14
     },
     "sourceDistribution": {
-      "leetcode": 8,
-      "codewars": 2,
       "coursera": 1,
+      "codewars": 2,
+      "leetcode": 9,
       "project-euler": 5
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-03": [
+      {
+        "title": "Swap Nodes in Paris",
+        "notes": "Linked lists inner workings always amazed me.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/2f3ce8c504ba2c2bdad628f1c1c40309c32e4b3b",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/swap-nodes-in-pairs",
+        "analysis": "algorithms/analysis/0017-swap-nodes-in-pairs-2f3ce8c.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-02": [
       {
         "title": "Smallest Multiple",
