@@ -2,7 +2,7 @@
   "stats": {
     "totalAlgorithms": 17,
     "totalDays": 16,
-    "currentStreak": 13,
+    "currentStreak": 0,
     "longestStreak": 13,
     "languageDistribution": {
       "Rust": 2,
