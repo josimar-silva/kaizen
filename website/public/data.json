@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 17,
-    "totalDays": 16,
-    "currentStreak": 0,
-    "longestStreak": 13,
+    "totalAlgorithms": 18,
+    "totalDays": 17,
+    "currentStreak": 14,
+    "longestStreak": 14,
     "languageDistribution": {
-      "Rust": 2,
-      "Kotlin": 10,
-      "Java": 5
+      "Kotlin": 11,
+      "Java": 5,
+      "Rust": 2
     },
     "monthlyActivity": {
-      "2025-10": 3,
-      "2025-09": 14
+      "2025-09": 14,
+      "2025-10": 4
     },
     "sourceDistribution": {
       "coursera": 1,
+      "project-euler": 5,
       "codewars": 2,
-      "leetcode": 9,
-      "project-euler": 5
+      "leetcode": 10
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-04": [
+      {
+        "title": "Roman to Integer",
+        "notes": "Who knew Roman Numberals could be so much fun? 🔱",
+        "link": "https://github.com/josimar-silva/kaizen/commit/b7eeb780f8de984f65062f945b2991df45d2c27b",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/roman-to-integer/?envType=problem-list-v2&envId=vmiccs4g",
+        "analysis": "algorithms/analysis/0018-roman-to-integer-b7eeb78.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-03": [
       {
         "title": "Swap Nodes in Paris",
