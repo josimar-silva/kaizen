@@ -39,7 +39,7 @@
     <img src="https://github.com/josimar-silva/kaizen/actions/workflows/codeql.yaml/badge.svg" alt="CodeQL" />
   </a>
   <!-- Docker Builds -->
-  <a href="https://github.com/josimar-silva/kaizen/actions/workflows/deploy-website.yaml">
+  <a href="https://github.com/josimar-silva/kaizen/actions/workflows/docker-website.yaml">
     <img src="https://github.com/josimar-silva/kaizen/actions/workflows/docker-website.yaml/badge.svg" alt="Docker" />
   </a>
   <!-- Deploy -->
