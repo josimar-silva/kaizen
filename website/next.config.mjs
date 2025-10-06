@@ -13,7 +13,7 @@ const nextConfig = {
     unoptimized: true,
   },
   env: {
-    APP_VERSION: "0.3.0",
+    APP_VERSION: "0.4.0",
   },
 };
 
