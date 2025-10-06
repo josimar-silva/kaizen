@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { CalendarHeatmap } from "@/components/calendar-heatmap";
 import { Footer } from "@/components/footer";
+import { KaizenStats } from "@/components/kaizen-stats";
 import { ScrollHeader } from "@/components/scroll-header";
 import { Timeline } from "@/components/timeline";
 import { kaizenData } from "@/lib/db";
@@ -78,6 +79,9 @@ export default function HomePage() {
             <CalendarHeatmap data={data} />
           </div>
         </section>
+
+        {/* Kaizen in Numbers Section */}
+        <KaizenStats stats={data.stats} />
 
         {/* Timeline Section */}
         <section className="space-y-4 sm:space-y-6">

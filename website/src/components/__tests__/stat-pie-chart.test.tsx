@@ -15,17 +15,14 @@ describe("StatPieChart", () => {
   const mockData = [
     {
       name: "Algorithm",
+      displayName: "Algorithm",
       value: 19,
     },
   ];
 
   it("should render the title", () => {
     render(
-      <StatPieChart
-        title="Test Title"
-        data={mockData}
-        colors={() => "#000000"}
-      />,
+      <StatPieChart title="Test Title" data={mockData} colors={["#000000"]} />,
     );
     expect(screen.getByText("Test Title")).toBeInTheDocument();
   });
