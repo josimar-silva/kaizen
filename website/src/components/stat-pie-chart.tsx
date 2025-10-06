@@ -42,6 +42,8 @@ export function StatPieChart({
   data,
   colors,
 }: Readonly<StatPieChartProps>) {
+  const palette = colors.length > 0 ? colors : ["#808080"];
+
   return (
     <Card className="border-border/50">
       <CardHeader className="pb-3">
@@ -69,11 +71,7 @@ export function StatPieChart({
                 {data.map((entry, index) => (
                   <Cell
                     key={`cell-${entry.name}`}
-                    fill={
-                      colors.length > 0
-                        ? colors[index % colors.length]
-                        : "#808080"
-                    }
+                    fill={palette[index % palette.length]}
                   />
                 ))}
               </Pie>
@@ -86,7 +84,7 @@ export function StatPieChart({
             <div key={item.name} className="flex items-center gap-1 text-xs">
               <div
                 className="h-2 w-2 rounded-full"
-                style={{ backgroundColor: colors[index % colors.length] }}
+                style={{ backgroundColor: palette[index % palette.length] }}
               />
               <span className="text-muted-foreground">{item.displayName}</span>
             </div>
