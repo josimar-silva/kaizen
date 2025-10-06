@@ -104,11 +104,16 @@ try {
     ) / 10;
 
   const commitDates = Object.keys(transformedCommits);
-  const firstCommitDate =
-    commitDates.length > 0 ? commitDates[commitDates.length - 1] : null;
-  const daysSinceFirstActivity = firstCommitDate
+  const earliestCommitDate =
+    commitDates.length > 0
+      ? commitDates.reduce(
+          (min, current) => (current < min ? current : min),
+          commitDates[0],
+        )
+      : null;
+  const daysSinceFirstActivity = earliestCommitDate
     ? Math.floor(
-        (Date.now() - new Date(firstCommitDate).getTime()) /
+        (Date.now() - new Date(earliestCommitDate).getTime()) /
           (1000 * 60 * 60 * 24),
       )
     : 0;
