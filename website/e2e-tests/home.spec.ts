@@ -24,4 +24,29 @@ test.describe("Homepage", () => {
       new RegExp(expectedVersionText),
     );
   });
+
+  test("should display the 'Progress Overview' section with key stats", async ({
+    page,
+  }) => {
+    await expect(page.getByText("Progress Overview")).toBeVisible();
+
+    // Check for the 4 main stat cards
+    await expect(page.getByTestId("avg-solution-description")).toHaveText(
+      "Avg/Week",
+    );
+    await expect(page.getByTestId("best-streak-description")).toHaveText(
+      "Best Streak",
+    );
+    await expect(page.getByTestId("first-commit-description")).toHaveText(
+      "Since First Commit",
+    );
+    await expect(page.getByTestId("most-active-day-description")).toHaveText(
+      "Most Active Day",
+    );
+
+    // Check for chart titles
+    await expect(page.getByTestId("chart-types")).toHaveText("Types");
+    await expect(page.getByTestId("chart-sources")).toHaveText("Sources");
+    await expect(page.getByTestId("chart-languages")).toHaveText("Languages");
+  });
 });

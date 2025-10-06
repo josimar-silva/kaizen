@@ -1,6 +1,13 @@
 "use client";
 
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  TooltipProps,
+} from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -16,7 +23,7 @@ interface StatPieChartProps {
   colors: string[];
 }
 
-const StatTooltip = ({ active, payload }: any) => {
+const StatTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload?.length) {
     return (
       <div className="rounded-md border bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95">
@@ -38,7 +45,10 @@ export function StatPieChart({
   return (
     <Card className="border-border/50">
       <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle
+          className="text-sm font-medium text-muted-foreground"
+          data-testid={`chart-${title.toLowerCase()}`}
+        >
           {title}
         </CardTitle>
       </CardHeader>
@@ -59,7 +69,11 @@ export function StatPieChart({
                 {data.map((entry, index) => (
                   <Cell
                     key={`cell-${entry.name}`}
-                    fill={colors[index % colors.length]}
+                    fill={
+                      colors.length > 0
+                        ? colors[index % colors.length]
+                        : "#808080"
+                    }
                   />
                 ))}
               </Pie>

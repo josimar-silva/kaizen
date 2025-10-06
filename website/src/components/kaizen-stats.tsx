@@ -7,6 +7,11 @@ interface KaizenStatsProps {
 }
 
 export function KaizenStats({ stats }: Readonly<KaizenStatsProps>) {
+  const typeDisplayNames: Record<string, string> = {
+    algorithm: "Algorithm",
+    "system-design": "System Design",
+  };
+
   const languageChartData = Object.entries(stats.languageDistribution).map(
     ([language, count]) => ({
       name: language,
@@ -18,7 +23,7 @@ export function KaizenStats({ stats }: Readonly<KaizenStatsProps>) {
   const typeChartData = Object.entries(stats.typeDistribution).map(
     ([type, count]) => ({
       name: type,
-      displayName: type === "algorithm" ? "Algorithm" : "System Design",
+      displayName: typeDisplayNames[type] ?? type,
       value: count,
     }),
   );
@@ -47,28 +52,48 @@ export function KaizenStats({ stats }: Readonly<KaizenStatsProps>) {
           <div className="text-lg sm:text-2xl font-bold text-accent">
             {stats.avgSolutionsPerWeek}
           </div>
-          <p className="text-xs text-muted-foreground">Avg/Week</p>
+          <p
+            className="text-xs text-muted-foreground"
+            data-testid="avg-solution-description"
+          >
+            Avg/Week
+          </p>
         </div>
 
         <div className="rounded-lg border border-border bg-card/30 p-4 text-center">
           <div className="text-lg sm:text-2xl font-bold text-accent">
             {stats.longestStreak} days
           </div>
-          <p className="text-xs text-muted-foreground">Best Streak</p>
+          <p
+            className="text-xs text-muted-foreground"
+            data-testid="best-streak-description"
+          >
+            Best Streak
+          </p>
         </div>
 
         <div className="rounded-lg border border-border bg-card/30 p-4 text-center">
           <div className="text-lg sm:text-2xl font-bold text-accent">
-            {stats.daysSinceLastActivity} days
+            {stats.daysSinceFirstActivity} days
           </div>
-          <p className="text-xs text-muted-foreground">Since First Commit</p>
+          <p
+            className="text-xs text-muted-foreground"
+            data-testid="first-commit-description"
+          >
+            Since First Commit
+          </p>
         </div>
 
         <div className="rounded-lg border border-border bg-card/30 p-4 text-center">
           <div className="text-lg sm:text-2xl font-bold text-accent">
             {stats.mostActiveDay}
           </div>
-          <p className="text-xs text-muted-foreground">Most Active Day</p>
+          <p
+            className="text-xs text-muted-foreground"
+            data-testid="most-active-day-description"
+          >
+            Most Active Day
+          </p>
         </div>
       </div>
 
