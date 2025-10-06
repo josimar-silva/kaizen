@@ -7,6 +7,11 @@ export interface Stats {
   longestStreak: number;
   languageDistribution: Record<string, number>;
   monthlyActivity: Record<string, number>;
+  sourceDistribution: Record<string, number>;
+  mostActiveDay: string;
+  typeDistribution: Record<string, number>;
+  avgSolutionsPerWeek: number;
+  daysSinceFirstActivity: number;
 }
 
 export type Commits = Record<string, Algorithm[]>;
