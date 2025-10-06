@@ -1,7 +1,6 @@
 import "@testing-library/jest-dom";
 
 import { act, render, screen } from "@testing-library/react";
-import { notFound } from "next/navigation";
 import React from "react";
 
 import SolutionPage from "./page";
@@ -44,7 +43,9 @@ jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
   }),
-  notFound: jest.fn(),
+  notFound: jest.fn(() => {
+    throw new Error("Not Found");
+  }),
 }));
 
 describe("SolutionPage", () => {
@@ -83,7 +84,6 @@ describe("SolutionPage", () => {
 
     await expect(async () =>
       render(<SolutionPage {...props} />),
-    ).rejects.toThrow();
-    expect(notFound).toHaveBeenCalled();
+    ).rejects.toThrow("Not Found");
   });
 });
