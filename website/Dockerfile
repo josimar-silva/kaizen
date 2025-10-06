@@ -16,7 +16,7 @@ COPY . .
 
 RUN pnpm build
 
-FROM nginxinc/nginx-unprivileged:alpine@sha256:2bae49de8b7394f1ef4b6ddc5d8a6d07467d82883d20fb54556ce90b445870f9 AS runner
+FROM nginxinc/nginx-unprivileged:alpine@sha256:46d9e0e89e4b8925a14df6aa6a5bdb64ab102a7ecc87a4bf02f4d100168ccf30 AS runner
 USER root
 RUN apk --no-cache upgrade
 
