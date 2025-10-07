@@ -2,19 +2,19 @@
 
 # Install dependencies
 install:
-	pnpm install
+	npm install
 
 # Install dependencies for CI environment
 ci:
-    pnpm install --no-frozen-lockfile --strict-peer-dependencies
+    npm ci
 
 # Start the development server
 dev:
-	pnpm dev
+	npm run dev
 
 # Build the project for production
 build:
-	pnpm build
+	npm run build
 
 # Build the app docker image
 build-image:
@@ -22,7 +22,7 @@ build-image:
 
 # Start the production server
 start:
-	pnpm start
+	npm run start
 
 # Start the dockerized application
 start-container:
@@ -30,7 +30,7 @@ start-container:
 
 # Run linting
 lint:
-	pnpm lint
+	npm run lint
 
 # Checks code for linting and formatting issues
 check:
@@ -39,22 +39,22 @@ check:
 
 # Format the source code using prettier
 format:
-    pnpm lint:fix
+    npm run lint:fix
     npx prettier . --write
 
 # Run unit tests
 test:
-	pnpm test
+	npm run test
 
 # Run UI tests for all browsers
 test-e2e: build
 	rm -rf test-results
-	pnpm test-e2e # Run playwright test
+	npm run test-e2e # Run playwright test
 
 # Run UI tests on a specific
 test-e2e-on BROWSER:
 	rm -rf test-results
-	pnpm exec playwright test --project "{{BROWSER}}"
+	npm exec playwright test --project "{{BROWSER}}"
 
 # Prepare for a new release
 pre-release:
@@ -80,7 +80,7 @@ pre-release:
 
     new_version=$(echo ${current_version} | sed 's/-SNAPSHOT//')
     echo "Bumping version to ${new_version}..."
-    pnpm version --no-git-tag-version ${new_version}
+    npm version --no-git-tag-version ${new_version}
 
     echo "Updating APP_VERSION in next.config.mjs"
     sed -i "s/APP_VERSION: \"[0-9.]*\"/APP_VERSION: \"${new_version}\"/" next.config.mjs

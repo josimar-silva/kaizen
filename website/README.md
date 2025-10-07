@@ -23,7 +23,7 @@ It consumes a `data.json` file to render a GitHub-style activity calendar and a 
 - **Animations**: [Framer Motion](https://www.framer.com/motion/) for smooth transitions.
 - **Linting & Formatting**: [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)
 - **Testing**: [Jest](https://jestjs.io/) for unit tests and [Playwright](https://playwright.dev/) for end-to-end tests.
-- **Package Manager**: [pnpm](https://pnpm.io/)
+- **Package Manager**: [npm](https://www.npmjs.com/)
 - **Task Runner**: [Just](https://just.systems/)
 
 ## 🏁 Getting Started
@@ -33,7 +33,6 @@ Follow these instructions to get the project running on your local machine.
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v22.x or later)
-- [pnpm](https://pnpm.io/installation)
 
 ### Installation
 
@@ -42,9 +41,9 @@ Follow these instructions to get the project running on your local machine.
     ```bash
     cd website
     ```
-3.  Install the dependencies using `pnpm`:
+3.  Install the dependencies using `npm`:
     ```bash
-    pnpm install
+    npm install
     ```
     Alternatively, you can use the `just` command:
     ```bash

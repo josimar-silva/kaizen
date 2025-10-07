@@ -1,20 +1,17 @@
 FROM node:22.20.0-trixie-slim@sha256:535ba2ed7dcf0dec29b0af4cac2b87ccdd935880212d4b9537e767b078ce1ca3 AS deps
 WORKDIR /app
 
-# Install pnpm globally
-RUN npm install -g pnpm
-
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json* ./
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile --strict-peer-dependencies --ignore-scripts
+RUN npm ci --ignore-scripts
 
 # Rebuild the source code only when needed
 FROM deps AS builder
 WORKDIR /app
 COPY . .
 
-RUN pnpm build
+RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:alpine@sha256:3245911073f8a6f8f5257aa08339096f90ef8d5db70f502f8ffeb2b9ecd5ca18 AS runner
 USER root
