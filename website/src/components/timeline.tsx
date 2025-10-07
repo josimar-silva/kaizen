@@ -347,7 +347,7 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                                     data-testid={`problem-button-${date}-${index}`}
                                   >
                                     <ExternalLink className="w-3 h-3" />
-                                    Problem
+                                    Reference
                                   </a>
                                 </Button>
                               )}
@@ -365,7 +365,7 @@ export function Timeline({ commits }: Readonly<TimelineProps>) {
                                   data-testid={`solution-button-${date}-${index}`}
                                 >
                                   <ExternalLink className="w-3 h-3" />
-                                  Solution
+                                  Source Code
                                 </a>
                               </Button>
                             </div>
