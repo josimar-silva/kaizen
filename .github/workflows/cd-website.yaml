@@ -150,8 +150,7 @@ jobs:
 
       - name: ⬆️ Increment package version
         run: |
-          corepack enable
-          pnpm version ${{ env.NEXT_PACKAGE_VERSION }} --no-git-tag-version
+          npm version ${{ env.NEXT_PACKAGE_VERSION }} --no-git-tag-version
 
       - name: 📤 Push new package version to repo
         run: |
