@@ -8,7 +8,7 @@ on:
   push:
     branches:
       - main
-    paths:
+    paths: 
       - 'website/**'
 
 permissions:
@@ -46,21 +46,8 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22.20.0"
-
-      - name: ⚒️ Instal pnpm
-        run: npm install -g pnpm
-
-      - name: 🔍 Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 💾 Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-store-
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
 
       - name: ⚒️ Setup just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -99,21 +86,8 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22.20.0"
-
-      - name: ⚒️ Instal pnpm
-        run: npm install -g pnpm
-
-      - name: 🔍 Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 💾 Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-store-          
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
 
       - name: ⚒️ Setup just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -159,21 +133,8 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22.20.0"
-
-      - name: ⚒️ Instal pnpm
-        run: npm install -g pnpm
-
-      - name: 🔍 Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 💾 Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-store-
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
 
       - name: ⚒️ Setup just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -234,21 +195,8 @@ jobs:
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: "22.20.0"
-
-      - name: ⚒️ Instal pnpm
-        run: npm install -g pnpm
-
-      - name: 🔍 Get pnpm store directory
-        id: pnpm-cache
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 💾 Cache pnpm store
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/website/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-store-               
+          cache: 'npm'
+          cache-dependency-path: website/package-lock.json
 
       - name: ⚒️ Setup just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -333,7 +281,7 @@ jobs:
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-sonar-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-sonar
 
       - name: 🏷️ Get package version

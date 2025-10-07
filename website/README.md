@@ -11,9 +11,9 @@ It consumes a `data.json` file to render a GitHub-style activity calendar and a 
 
 - **Calendar Heatmap**: A GitHub-style contribution graph providing an at-a-glance overview of daily activity. Darker cells indicate more contributions.
 - **Timeline View**: A reverse chronological feed of all entries, showing titles, notes, and the programming language used.
-- **Algorithm Detail Modal**: A modal view that displays the full notes, language, and a link to the code on GitHub for each entry.
+- **Solution Page**: A page that displays the full notes, language, analysis, and a link to the source code on GitHub for each entry.
 - **Filtering and Searching**: The timeline can be searched by title or notes and filtered by programming language and entry type (algorithm or system design).
-- **Statistics**: The header displays key stats, including total entries, active days, and the current/longest streak.
+- **Statistics**: The home page displays key stats, including total entries, active days, and the current/longest streak.
 - **Responsive Design**: The interface is fully responsive and optimized for both desktop and mobile devices.
 
 ## 🚀 Tech Stack
@@ -45,6 +45,7 @@ Follow these instructions to get the project running on your local machine.
     ```bash
     npm install
     ```
+
     Alternatively, you can use the `just` command:
     ```bash
     just install
