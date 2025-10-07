@@ -89,7 +89,7 @@ pre-release:
     sed -i "s/kaizen_website-v[0-9.]*/kaizen_website-v${new_version}/" ../README.md
 
     echo "Committing version bump..."
-    git add package.json next.config.mjs ../README.md
+    git add package.json package-lock.json next.config.mjs ../README.md
     git commit -m "chore(release): prepare website for release v${new_version}"
 
     echo "Pre-release for version ${new_version} is ready."
