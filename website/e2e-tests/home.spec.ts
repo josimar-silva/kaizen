@@ -49,4 +49,16 @@ test.describe("Homepage", () => {
     await expect(page.getByTestId("chart-sources")).toHaveText("Sources");
     await expect(page.getByTestId("chart-languages")).toHaveText("Languages");
   });
+
+  test("should display the GitHub icon link", async ({ page }) => {
+    const githubLink = page.getByLabel("GitHub Repository");
+    await expect(githubLink).toBeVisible();
+    await expect(githubLink).toHaveAttribute(
+      "href",
+      "https://github.com/josimar-silva/kaizen",
+    );
+    await expect(githubLink).toHaveAttribute("target", "_blank");
+    await expect(githubLink).toHaveAttribute("rel", "noopener noreferrer");
+    await expect(githubLink.locator("svg")).toBeVisible();
+  });
 });
