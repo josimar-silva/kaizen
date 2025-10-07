@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 20,
-    "totalDays": 19,
-    "currentStreak": 0,
-    "longestStreak": 16,
+    "totalAlgorithms": 21,
+    "totalDays": 20,
+    "currentStreak": 17,
+    "longestStreak": 17,
     "languageDistribution": {
-      "Kotlin": 13,
-      "Rust": 2,
-      "Java": 5
+      "Kotlin": 14,
+      "Java": 5,
+      "Rust": 2
     },
     "monthlyActivity": {
-      "2025-10": 6,
+      "2025-10": 7,
       "2025-09": 14
     },
     "sourceDistribution": {
-      "leetcode": 12,
-      "codewars": 2,
+      "coursera": 1,
+      "leetcode": 13,
       "project-euler": 5,
-      "coursera": 1
+      "codewars": 2
     },
-    "mostActiveDay": "Sunday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-07": [
+      {
+        "title": "String To Integer v1",
+        "notes": "Naive implementation of string to integer parser.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/298c9fddc3e0e9f5a0fd8f35ed2fdf8dada99cc7",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/string-to-integer-atoi",
+        "analysis": "algorithms/analysis/0021-string-to-integer-298c9fd.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-06": [
       {
         "title": "Ransom Note",
