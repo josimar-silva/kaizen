@@ -2,7 +2,7 @@
   "stats": {
     "totalAlgorithms": 21,
     "totalDays": 20,
-    "currentStreak": 17,
+    "currentStreak": 0,
     "longestStreak": 17,
     "languageDistribution": {
       "Kotlin": 14,
@@ -10,16 +10,16 @@
       "Rust": 2
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 7
+      "2025-10": 7,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "leetcode": 13,
-      "coursera": 1,
       "codewars": 2,
-      "project-euler": 5
+      "coursera": 1,
+      "project-euler": 5,
+      "leetcode": 13
     },
-    "mostActiveDay": "Sunday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
     "2025-10-07": [
