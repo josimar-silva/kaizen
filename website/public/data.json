@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 21,
-    "totalDays": 20,
-    "currentStreak": 0,
-    "longestStreak": 17,
+    "totalAlgorithms": 22,
+    "totalDays": 21,
+    "currentStreak": 18,
+    "longestStreak": 18,
     "languageDistribution": {
-      "Kotlin": 14,
       "Java": 5,
-      "Rust": 2
+      "Rust": 2,
+      "Kotlin": 15
     },
     "monthlyActivity": {
-      "2025-10": 7,
+      "2025-10": 8,
       "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 2,
-      "coursera": 1,
+      "leetcode": 14,
       "project-euler": 5,
-      "leetcode": 13
+      "coursera": 1,
+      "codewars": 2
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Sunday"
   },
   "commits": {
+    "2025-10-08": [
+      {
+        "title": "Longest Palindrome",
+        "notes": "Although an array could reduce runtime here, I'm compromising with a hashset due its readable API. 😝",
+        "link": "https://github.com/josimar-silva/kaizen/commit/0828b3b609f8109dda3ea09fc20e382fa31758c9",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/longest-palindrome",
+        "analysis": "algorithms/analysis/0022-longest-palindrome-0828b3b.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-07": [
       {
         "title": "String To Integer v1",
