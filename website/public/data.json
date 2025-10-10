@@ -1,27 +1,38 @@
 {
   "stats": {
-    "totalAlgorithms": 23,
-    "totalDays": 22,
-    "currentStreak": 0,
-    "longestStreak": 19,
+    "totalAlgorithms": 24,
+    "totalDays": 23,
+    "currentStreak": 20,
+    "longestStreak": 20,
     "languageDistribution": {
-      "Kotlin": 15,
       "Rust": 3,
+      "Kotlin": 16,
       "Java": 5
     },
     "monthlyActivity": {
-      "2025-10": 9,
+      "2025-10": 10,
       "2025-09": 14
     },
     "sourceDistribution": {
       "codewars": 3,
-      "leetcode": 14,
-      "project-euler": 5,
-      "coursera": 1
+      "leetcode": 15,
+      "coursera": 1,
+      "project-euler": 5
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-10": [
+      {
+        "title": "Container with Most Water",
+        "notes": "Geometry is has been so long. 🟩",
+        "link": "https://github.com/josimar-silva/kaizen/commit/a5469127c01551655557f2e37fd2895c2213e837",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/container-with-most-water",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-09": [
       {
         "title": "find odd int",
