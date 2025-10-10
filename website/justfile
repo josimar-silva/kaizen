@@ -10,7 +10,7 @@ ci:
 
 # Start the development server
 dev:
-	npm run dev
+	npm run dev -- --experimental-https
 
 # Build the project for production
 build:
