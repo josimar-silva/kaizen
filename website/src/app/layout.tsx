@@ -34,7 +34,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <title>Kaizen – Continuous Improvement Journal</title>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/devicon.min.css"
