@@ -10,7 +10,9 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    unoptimized: false,
+    loader: "custom",
+    loaderFile: "./image-loader.ts",
   },
   env: {
     APP_VERSION: "0.5.0",
