@@ -6,6 +6,7 @@ const pwaConfig = withPWA({
   disable: process.env.NODE_ENV === "development",
   register: true,
   scope: "/",
+  buildExcludes: [/middleware-manifest\.json$/, /build-manifest\.json$/],
 });
 
 const nextConfig = {
