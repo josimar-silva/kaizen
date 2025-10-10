@@ -29,6 +29,7 @@ export default function HomePage() {
                     alt="Kaizen Logo"
                     width={40}
                     height={40}
+                    quality={100}
                     className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full p-1 shadow-sm"
                     priority
                   />
