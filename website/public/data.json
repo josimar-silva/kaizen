@@ -14,10 +14,10 @@
       "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 3,
+      "project-euler": 5,
       "leetcode": 15,
-      "coursera": 1,
-      "project-euler": 5
+      "codewars": 3,
+      "coursera": 1
     },
     "mostActiveDay": "Friday"
   },
@@ -30,6 +30,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/container-with-most-water",
+        "analysis": "algorithms/analysis/0024-container-with-most-water-a546912.md",
         "source": "leetcode"
       }
     ],
