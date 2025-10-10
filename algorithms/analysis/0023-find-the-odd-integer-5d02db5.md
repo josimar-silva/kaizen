@@ -7,7 +7,6 @@ url: https://github.com/josimar-silva/kaizen/commit/5d02db5f15e451b47c71f8bab244
 #### Problem
 Given an array of integers, find the one that appears an odd number of times.
 Constraint: There will always be only one integer that appears an odd number of times.
-
 ---
 
 #### Big O Analysis
