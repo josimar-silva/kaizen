@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: "One algorithm a day, keeps the rust away",
   keywords: ["kaizen", "algorithms", "system-design"],
   authors: [{ name: "Josimar Silva" }],
+  manifest: "/manifest.json",
   icons: {
     icon: "/icons/icon.svg",
     apple: "/icons/apple-touch-icon.png",
