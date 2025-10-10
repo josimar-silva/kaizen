@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   keywords: ["kaizen", "algorithms", "system-design"],
   authors: [{ name: "Josimar Silva" }],
   icons: {
-    icon: "/favicon/favicon.ico",
-    apple: "/favicon/apple-touch-icon.png",
+    icon: "/icons/icon.svg",
+    apple: "/icons/apple-touch-icon.png",
   },
 };
 
