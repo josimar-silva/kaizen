@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 25,
-    "totalDays": 24,
+    "totalAlgorithms": 26,
+    "totalDays": 25,
     "currentStreak": 21,
-    "longestStreak": 21,
+    "longestStreak": 22,
     "languageDistribution": {
-      "Java": 5,
-      "Kotlin": 17,
-      "Rust": 3
+      "Rust": 3,
+      "Kotlin": 18,
+      "Java": 5
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 11
+      "2025-10": 12,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "leetcode": 16,
+      "leetcode": 17,
+      "coursera": 1,
       "codewars": 3,
-      "project-euler": 5,
-      "coursera": 1
+      "project-euler": 5
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-12": [
+      {
+        "title": "Merge Two Sorted Lists",
+        "notes": "LinkedList, we meet again.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/c37834954bcea84d0f4613df8a685d74156f6c4c",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/merge-two-sorted-lists",
+        "analysis": "algorithms/analysis/0026-merge-two-sorted-lists-c378349.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-11": [
       {
         "title": "Three Sum",
