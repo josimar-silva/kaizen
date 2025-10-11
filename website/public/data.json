@@ -1,20 +1,20 @@
 {
   "stats": {
-    "totalAlgorithms": 24,
-    "totalDays": 23,
-    "currentStreak": 0,
-    "longestStreak": 20,
+    "totalAlgorithms": 25,
+    "totalDays": 24,
+    "currentStreak": 21,
+    "longestStreak": 21,
     "languageDistribution": {
-      "Kotlin": 16,
       "Java": 5,
+      "Kotlin": 17,
       "Rust": 3
     },
     "monthlyActivity": {
       "2025-09": 14,
-      "2025-10": 10
+      "2025-10": 11
     },
     "sourceDistribution": {
-      "leetcode": 15,
+      "leetcode": 16,
       "codewars": 3,
       "project-euler": 5,
       "coursera": 1
@@ -22,6 +22,18 @@
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-11": [
+      {
+        "title": "Three Sum",
+        "notes": "Sum, Sum, Sum.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/17e69010a4b3d36659f17da325ab15ebd7444de7",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/3sum/submissions",
+        "analysis": "algorithms/analysis/0025-three-sum-17e6901.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-10": [
       {
         "title": "Container with Most Water",
