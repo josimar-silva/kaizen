@@ -76,7 +76,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.37.0",
     "@estruyf/github-actions-reporter": "1.10.0",
-    "@playwright/test": "1.56.0",
+    "@playwright/test": "1.56.1",
     "@swc/core": "1.13.20",
     "@swc/jest": "0.2.39",
     "@tailwindcss/postcss": "4.1.14",
