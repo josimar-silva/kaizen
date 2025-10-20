@@ -1,27 +1,63 @@
 {
   "stats": {
-    "totalAlgorithms": 29,
-    "totalDays": 28,
+    "totalAlgorithms": 32,
+    "totalDays": 31,
     "currentStreak": 0,
-    "longestStreak": 25,
+    "longestStreak": 28,
     "languageDistribution": {
       "Java": 5,
-      "Kotlin": 20,
+      "Kotlin": 23,
       "Rust": 4
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 15
+      "2025-10": 18,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 4,
       "project-euler": 5,
-      "leetcode": 19,
+      "codewars": 4,
+      "leetcode": 22,
       "coursera": 1
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-18": [
+      {
+        "title": "Best Time to Buy and Sell Stock",
+        "notes": "Money, Money, Money 💰📈",
+        "link": "https://github.com/josimar-silva/kaizen/commit/caa74cd29c2d0ccf53420e2ebc1a70e0ad1e6a49",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock",
+        "analysis": "algorithms/analysis/0032-best-time-to-buy-and-sell-stock-caa74cd.md",
+        "source": "leetcode"
+      }
+    ],
+    "2025-10-17": [
+      {
+        "title": "Valid Palindrome",
+        "notes": "\"Ada,Dad,Tenet,Hannah\" ◀️",
+        "link": "https://github.com/josimar-silva/kaizen/commit/6a8734f3701211baec0a54355a1ee4f4a0e01bb4",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/valid-palindrome",
+        "analysis": "algorithms/analysis/0031-valid-palindrome-6a8734f.md",
+        "source": "leetcode"
+      }
+    ],
+    "2025-10-16": [
+      {
+        "title": "Linked List Cycle",
+        "notes": "The old tale of the \"Tortoise and the hare\" 🐢🐇",
+        "link": "https://github.com/josimar-silva/kaizen/commit/c1482f08ac88d31b184c9d532c47eb4d87f0b432",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/linked-list-cycle",
+        "analysis": "algorithms/analysis/0030-linked-list-cycle-c1482f0.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-15": [
       {
         "title": "Climb Stairs",
