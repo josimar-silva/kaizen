@@ -1,27 +1,63 @@
 {
   "stats": {
-    "totalAlgorithms": 32,
-    "totalDays": 31,
-    "currentStreak": 0,
-    "longestStreak": 28,
+    "totalAlgorithms": 35,
+    "totalDays": 34,
+    "currentStreak": 31,
+    "longestStreak": 31,
     "languageDistribution": {
-      "Java": 5,
-      "Kotlin": 23,
-      "Rust": 4
+      "Rust": 4,
+      "Kotlin": 26,
+      "Java": 5
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 18
+      "2025-10": 21,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "coursera": 1,
+      "codewars": 4,
+      "leetcode": 25,
       "project-euler": 5,
-      "leetcode": 22,
-      "codewars": 4
+      "coursera": 1
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Sunday"
   },
   "commits": {
+    "2025-10-21": [
+      {
+        "title": "Majority Element",
+        "notes": "Kotlin 🤯",
+        "link": "https://github.com/josimar-silva/kaizen/commit/d89efdd70a9d28363ad0b7a7bf08ec5b07df9270",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/majority-element",
+        "analysis": "algorithms/analysis/0035-majority-element-d89efdd.md",
+        "source": "leetcode"
+      }
+    ],
+    "2025-10-20": [
+      {
+        "title": "Balanced Binary Tree",
+        "notes": "The older unanswered question: DFS or BFS? 🌲🌳🌲",
+        "link": "https://github.com/josimar-silva/kaizen/commit/59a4bd50d2a6f11c04e9a73a2532240c422b4a9d",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/maximum-depth-of-binary-tree",
+        "analysis": "algorithms/analysis/0034-maximum-depth-of-binary-tree-59a4bd5.md",
+        "source": "leetcode"
+      }
+    ],
+    "2025-10-19": [
+      {
+        "title": "Balanced Binary Tree",
+        "notes": "Trees, we meet again. 🌲🌳🌲",
+        "link": "https://github.com/josimar-silva/kaizen/commit/f7f6cf0060d769b28be5474a3040a98042500368",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/balanced-binary-tree",
+        "analysis": "algorithms/analysis/0033-balanced-binary-tree-f7f6cf0.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-18": [
       {
         "title": "Best Time to Buy and Sell Stock",
