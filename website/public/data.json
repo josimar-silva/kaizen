@@ -14,10 +14,10 @@
       "2025-10": 18
     },
     "sourceDistribution": {
-      "codewars": 4,
-      "leetcode": 22,
       "coursera": 1,
-      "project-euler": 5
+      "project-euler": 5,
+      "leetcode": 22,
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
