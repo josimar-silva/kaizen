@@ -1,6 +1,6 @@
 {
   "name": "kaizen-journal",
-  "version": "0.6.1-SNAPSHOT",
+  "version": "0.6.1",
   "private": true,
   "license": "MIT",
   "scripts": {
