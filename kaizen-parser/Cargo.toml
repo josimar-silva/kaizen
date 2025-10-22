@@ -1,6 +1,6 @@
 [package]
 name = "kaizen"
-version = "0.4.1"
+version = "0.4.2-SNAPSHOT"
 description = "Parser for Kaizen journal commits"
 authors = ["Josimar Silva <me@josimar-silva.com>"]
 edition = "2024"
@@ -32,7 +32,7 @@ ordermap = { version = "1.0.0", features = ["serde"] }
 openssl = { version = "0.10.73", features = ["vendored"] }
 
 [dev-dependencies]
-kaizen = { path = ".", version = "0.4.1" }
+kaizen = { path = ".", version = "0.4.2-SNAPSHOT" }
 
 [profile.release]
 lto = "fat"
