@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 36,
-    "totalDays": 35,
-    "currentStreak": 0,
-    "longestStreak": 32,
+    "totalAlgorithms": 37,
+    "totalDays": 36,
+    "currentStreak": 33,
+    "longestStreak": 33,
     "languageDistribution": {
+      "Kotlin": 28,
       "Rust": 4,
-      "Kotlin": 27,
       "Java": 5
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 22
+      "2025-10": 23,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "project-euler": 5,
-      "leetcode": 26,
       "codewars": 4,
+      "leetcode": 27,
+      "project-euler": 5,
       "coursera": 1
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-23": [
+      {
+        "title": "Needle in a haystack",
+        "notes": "KMP and Boyer-Moore algorithms got my curiosity. May implement\nthen in next.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/3b1e94e74604fa3678fa67c4a8f5cec4177ca30c",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string",
+        "analysis": "algorithms/analysis/0037-needle-in-a-haystack-3b1e94e.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-22": [
       {
         "title": "Invert Binary Tree",
