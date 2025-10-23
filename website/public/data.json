@@ -5,8 +5,8 @@
     "currentStreak": 33,
     "longestStreak": 33,
     "languageDistribution": {
-      "Kotlin": 28,
       "Rust": 4,
+      "Kotlin": 28,
       "Java": 5
     },
     "monthlyActivity": {
@@ -14,12 +14,12 @@
       "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 4,
       "leetcode": 27,
+      "codewars": 4,
       "project-euler": 5,
       "coursera": 1
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
     "2025-10-23": [
