@@ -7,7 +7,7 @@
     "prebuild": "node scripts/pre-build.js",
     "build": "next build",
     "predev": "node scripts/pre-build.js",
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix",
     "start": "next start",
