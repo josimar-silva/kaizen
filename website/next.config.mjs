@@ -14,9 +14,7 @@ const nextConfig = {
   distDir: "dist/website",
   trailingSlash: true,
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  turbopack: {},
   typescript: {
     ignoreBuildErrors: true,
   },
