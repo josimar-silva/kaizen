@@ -101,7 +101,7 @@ jobs:
         run: just test
 
       - name: ⬆️ Upload coverage report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: test-coverage
           path: website/coverage/
@@ -148,7 +148,7 @@ jobs:
         run: just build
 
       - name: ⬆️ Upload static website artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: website-${{ github.sha }}
           path: website/dist/website/
@@ -224,7 +224,7 @@ jobs:
         run: npx playwright install chrome
 
       - name: ⬇️ Download generated distribution
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
           name: website-${{ github.sha }}
           path: website/dist/website
@@ -237,7 +237,7 @@ jobs:
 
       - name: ⬆️ Upload coverage report
         if: matrix.browser == 'chromium'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: test-e2e-coverage-${{ matrix.browser }}
           path: website/e2e-tests-report/coverage/ui-lcov.info
@@ -266,13 +266,13 @@ jobs:
           fetch-depth: 0
 
       - name: ⬇️ Download test coverage report
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
           name: test-coverage
           path: website/coverage/
 
       - name: ⬇️ Download test-e2e coverage report
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
           name: test-e2e-coverage-chromium
           path: website/e2e-tests-report/coverage
