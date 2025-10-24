@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 37,
-    "totalDays": 36,
-    "currentStreak": 0,
-    "longestStreak": 33,
+    "totalAlgorithms": 38,
+    "totalDays": 37,
+    "currentStreak": 34,
+    "longestStreak": 34,
     "languageDistribution": {
-      "Kotlin": 28,
       "Java": 5,
-      "Rust": 4
+      "Rust": 4,
+      "Kotlin": 29
     },
     "monthlyActivity": {
       "2025-09": 14,
-      "2025-10": 23
+      "2025-10": 24
     },
     "sourceDistribution": {
       "coursera": 1,
-      "leetcode": 27,
-      "codewars": 4,
-      "project-euler": 5
+      "project-euler": 5,
+      "leetcode": 28,
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-24": [
+      {
+        "title": "Number of Islands",
+        "notes": "\"No man is an Island\" 🏝️\n(When I think I got BFS and DFS, LeetCode reminds me otherwise...)",
+        "link": "https://github.com/josimar-silva/kaizen/commit/4d9421ea107c5f8bff95a079e6624c398633f7c7",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/number-of-islands",
+        "analysis": "algorithms/analysis/0038-number-of-islands-4d9421e.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-23": [
       {
         "title": "Needle in a haystack",
