@@ -1,27 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 38,
-    "totalDays": 37,
+    "totalAlgorithms": 39,
+    "totalDays": 38,
     "currentStreak": 0,
-    "longestStreak": 34,
+    "longestStreak": 35,
     "languageDistribution": {
       "Java": 5,
-      "Rust": 4,
-      "Kotlin": 29
+      "Kotlin": 30,
+      "Rust": 4
     },
     "monthlyActivity": {
-      "2025-10": 24,
-      "2025-09": 14
+      "2025-09": 14,
+      "2025-10": 25
     },
     "sourceDistribution": {
-      "project-euler": 5,
-      "codewars": 4,
       "coursera": 1,
-      "leetcode": 28
+      "project-euler": 5,
+      "leetcode": 29,
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-10-25": [
+      {
+        "title": "Remove Element",
+        "notes": "Two pointers for the win.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/faccd84cd89e9ec1a923c7729890cb71318e120c",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/remove-element",
+        "analysis": "algorithms/analysis/0039-remove-element-faccd84.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-24": [
       {
         "title": "Number of Islands",
