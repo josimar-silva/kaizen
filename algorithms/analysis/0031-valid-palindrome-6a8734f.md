@@ -1,7 +1,7 @@
 ---
 title: Valid Palindrome
 commit: 6a8734f
-url: https://github.com/josimarsilva/kaizen/commit/6a8734f3701211baec0a54355a1ee4f4a0e01bb4
+url: https://github.com/josimar-silva/kaizen/commit/6a8734f3701211baec0a54355a1ee4f4a0e01bb4
 ---
 
 #### Problem

@@ -1,7 +1,7 @@
 ---
 title: "Climbing Stairs: A Journey Through Dynamic Programming"
 commit: d0c2f0a
-url: https://github.com/josimarsilva/kaizen/commit/d0c2f0aab01310291cabafa9d559724f8289bc1e
+url: https://github.com/josimar-silva/kaizen/commit/d0c2f0aab01310291cabafa9d559724f8289bc1e
 ---
 
 #### Problem

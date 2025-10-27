@@ -1,7 +1,7 @@
 ---
 title: Maximum Depth of a Binary Tree
 commit: 59a4bd5
-url: https://github.com/josimarsilva/kaizen/commit/59a4bd50d2a6f11c04e9a73a2532240c422b4a9d
+url: https://github.com/josimar-silva/kaizen/commit/59a4bd50d2a6f11c04e9a73a2532240c422b4a9d
 ---
 
 #### Problem

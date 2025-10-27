@@ -1,7 +1,7 @@
 ---
 title: Needle in a Haystack
 commit: 3b1e94e
-url: https://github.com/josimarsilva/kaizen/commit/3b1e94e74604fa3678fa67c4a8f5cec4177ca30c
+url: https://github.com/josimar-silva/kaizen/commit/3b1e94e74604fa3678fa67c4a8f5cec4177ca30c
 ---
 
 #### Problem

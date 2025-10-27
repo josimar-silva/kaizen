@@ -1,7 +1,7 @@
 ---
 title: Majority Element
 commit: d89efdd
-url: https://github.com/josimarsilva/kaizen/commit/d89efdd70a9d28363ad0b7a7bf08ec5b07df9270
+url: https://github.com/josimar-silva/kaizen/commit/d89efdd70a9d28363ad0b7a7bf08ec5b07df9270
 ---
 
 #### Problem

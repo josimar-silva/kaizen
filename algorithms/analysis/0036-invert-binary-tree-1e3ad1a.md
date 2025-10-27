@@ -1,7 +1,7 @@
 ---
 title: Invert Binary Tree
 commit: 1e3ad1a
-url: https://github.com/josimarsilva/kaizen/commit/1e3ad1a417ab4e5e4af6bce397a15a99a6ec3ec7
+url: https://github.com/josimar-silva/kaizen/commit/1e3ad1a417ab4e5e4af6bce397a15a99a6ec3ec7
 ---
 
 #### Problem

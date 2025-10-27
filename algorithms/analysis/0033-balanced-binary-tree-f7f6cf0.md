@@ -1,7 +1,7 @@
 ---
 title: Balanced Binary Tree
 commit: f7f6cf0
-url: https://github.com/josimarsilva/kaizen/commit/f7f6cf0060d769b28be5474a3040a98042500368
+url: https://github.com/josimar-silva/kaizen/commit/f7f6cf0060d769b28be5474a3040a98042500368
 ---
 
 #### Problem

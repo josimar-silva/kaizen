@@ -1,7 +1,7 @@
 ---
 title: Linked List Cycle
 commit: c1482f0
-url: https://github.com/josimarsilva/kaizen/commit/c1482f08ac88d31b184c9d532c47eb4d87f0b432
+url: https://github.com/josimar-silva/kaizen/commit/c1482f08ac88d31b184c9d532c47eb4d87f0b432
 ---
 
 #### Problem

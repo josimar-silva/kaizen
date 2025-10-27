@@ -1,7 +1,7 @@
 ---
 title: Best Time to Buy and Sell Stock
 commit: caa74cd
-url: https://github.com/josimarsilva/kaizen/commit/caa74cd29c2d0ccf53420e2ebc1a70e0ad1e6a49
+url: https://github.com/josimar-silva/kaizen/commit/caa74cd29c2d0ccf53420e2ebc1a70e0ad1e6a49
 ---
 
 #### Problem

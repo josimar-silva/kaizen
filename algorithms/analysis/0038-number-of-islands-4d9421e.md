@@ -1,7 +1,7 @@
 ---
 title: Number of Islands (BFS and DFS)
 commit: 4d9421e
-url: https://github.com/josimarsilva/kaizen/commit/4d9421ea107c5f8bff95a079e6624c398633f7c7
+url: https://github.com/josimar-silva/kaizen/commit/4d9421ea107c5f8bff95a079e6624c398633f7c7
 ---
 
 #### Problem
