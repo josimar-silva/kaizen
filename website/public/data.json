@@ -1,27 +1,51 @@
 {
   "stats": {
-    "totalAlgorithms": 40,
-    "totalDays": 39,
-    "currentStreak": 0,
-    "longestStreak": 36,
+    "totalAlgorithms": 42,
+    "totalDays": 41,
+    "currentStreak": 38,
+    "longestStreak": 38,
     "languageDistribution": {
       "Kotlin": 31,
-      "Java": 5,
-      "Rust": 4
+      "Rust": 4,
+      "Java": 7
     },
     "monthlyActivity": {
-      "2025-10": 26,
+      "2025-10": 28,
       "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 4,
-      "coursera": 1,
+      "project-euler": 7,
       "leetcode": 30,
-      "project-euler": 5
+      "codewars": 4,
+      "coursera": 1
     },
-    "mostActiveDay": "Sunday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
+    "2025-10-28": [
+      {
+        "title": "10 001st Prime",
+        "notes": "Primes go wild!",
+        "link": "https://github.com/josimar-silva/kaizen/commit/35d7880ff9bcf19fe9b80cb070b26aa4991805a1",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=7",
+        "analysis": "algorithms/analysis/0042-ten-thousand-first-prime-35d7880.md",
+        "source": "project-euler"
+      }
+    ],
+    "2025-10-27": [
+      {
+        "title": "Sum Square Difference",
+        "notes": "Some many formulas 🤯!",
+        "link": "https://github.com/josimar-silva/kaizen/commit/ec6b4dceb87a700151dd22a55bb44731fdc26c09",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://projecteuler.net/problem=6",
+        "analysis": "algorithms/analysis/0041-sum-square-difference-ec6b4dc.md",
+        "source": "project-euler"
+      }
+    ],
     "2025-10-26": [
       {
         "title": "Remove Duplicates from Sorted Array",
