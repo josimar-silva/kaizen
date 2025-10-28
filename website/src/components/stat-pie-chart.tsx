@@ -80,7 +80,7 @@ export function StatPieChart({
           </ResponsiveContainer>
         </div>
         <div className="mt-2 flex flex-wrap justify-center gap-2">
-          {data.slice(0, 3).map((item, index) => (
+          {data.map((item, index) => (
             <div key={item.name} className="flex items-center gap-1 text-xs">
               <div
                 className="h-2 w-2 rounded-full"
