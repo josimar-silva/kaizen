@@ -1,7 +1,7 @@
 ---
 title: Sum Square Difference
 commit: ec6b4dc
-url: https://github.com/josimarsilva/kaizen/commit/ec6b4dceb87a700151dd22a55bb44731fdc26c09
+url: https://github.com/josimar-silva/kaizen/commit/ec6b4dceb87a700151dd22a55bb44731fdc26c09
 ---
 
 #### Problem

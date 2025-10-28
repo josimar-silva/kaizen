@@ -1,7 +1,7 @@
 ---
 title: <Name of Algorithm>
 commit: <short-hash>
-url: <commit-url>
+url: https://github.com/josimar-silva/kaizen/commit/<commit-hash>
 ---
 
 #### Problem
