@@ -6,12 +6,12 @@
     "longestStreak": 36,
     "languageDistribution": {
       "Java": 5,
-      "Kotlin": 31,
-      "Rust": 4
+      "Rust": 4,
+      "Kotlin": 31
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 26
+      "2025-10": 26,
+      "2025-09": 14
     },
     "sourceDistribution": {
       "project-euler": 5,
