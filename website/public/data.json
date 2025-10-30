@@ -10,16 +10,16 @@
       "Java": 7
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 28
+      "2025-10": 28,
+      "2025-09": 14
     },
     "sourceDistribution": {
       "coursera": 1,
       "leetcode": 30,
-      "project-euler": 7,
-      "codewars": 4
+      "codewars": 4,
+      "project-euler": 7
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Sunday"
   },
   "commits": {
     "2025-10-28": [
