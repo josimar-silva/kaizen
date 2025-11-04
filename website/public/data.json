@@ -5,9 +5,9 @@
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Java": 7,
       "Kotlin": 31,
-      "Rust": 4
+      "Rust": 4,
+      "Java": 7
     },
     "monthlyActivity": {
       "2025-10": 28,
@@ -16,8 +16,8 @@
     "sourceDistribution": {
       "leetcode": 30,
       "project-euler": 7,
-      "codewars": 4,
-      "coursera": 1
+      "coursera": 1,
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
