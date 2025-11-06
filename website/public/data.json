@@ -15,9 +15,9 @@
     },
     "sourceDistribution": {
       "leetcode": 30,
-      "coursera": 1,
       "codewars": 4,
-      "project-euler": 7
+      "project-euler": 7,
+      "coursera": 1
     },
     "mostActiveDay": "Friday"
   },
