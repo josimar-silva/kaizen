@@ -1,27 +1,40 @@
 {
   "stats": {
-    "totalAlgorithms": 42,
-    "totalDays": 41,
-    "currentStreak": 0,
+    "totalAlgorithms": 43,
+    "totalDays": 42,
+    "currentStreak": 1,
     "longestStreak": 38,
     "languageDistribution": {
-      "Kotlin": 31,
       "Java": 7,
-      "Rust": 4
+      "Rust": 4,
+      "Kotlin": 32
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-10": 28
+      "2025-11": 1,
+      "2025-10": 28,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "codewars": 4,
+      "leetcode": 31,
       "project-euler": 7,
-      "leetcode": 30,
+      "codewars": 4,
       "coursera": 1
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-11-07": [
+      {
+        "title": "Reverse Linked List",
+        "notes": "⏪⏪⏪⏪⏪",
+        "link": "https://github.com/josimar-silva/kaizen/commit/6aa5e19e1b6f63cb07e6114c8b68deac21d2f548",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/reverse-linked-list",
+        "analysis": "algorithms/analysis/0043-reverse-linked-list-6aa5e19.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-10-28": [
       {
         "title": "10 001st Prime",
