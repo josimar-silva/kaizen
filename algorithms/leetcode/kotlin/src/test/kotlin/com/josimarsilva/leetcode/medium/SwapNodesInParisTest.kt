@@ -1,7 +1,7 @@
 package com.josimarsilva.leetcode.medium
 
-import com.josimarsilva.leetcode.common.arrayToListNode
 import com.josimarsilva.leetcode.common.asIntArray
+import com.josimarsilva.leetcode.common.toListNode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -14,10 +14,10 @@ class SwapNodesInParisTest {
 
     @ParameterizedTest
     @MethodSource("samples")
-    fun `should swap pairs`(listNode: IntArray, expected: IntArray) {
-        val result = SwapNodesInPairs().swapPairs(arrayToListNode(listNode))
+    fun `should swap pairs`(array: IntArray, expected: IntArray) {
+        val result = SwapNodesInPairs().swapPairs(array.toListNode())
 
-        assertThat(asIntArray(result)).isEqualTo(expected)
+        assertThat(result.asIntArray()).isEqualTo(expected)
     }
 
     private fun samples(): Stream<Arguments> = Stream.of(

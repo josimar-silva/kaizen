@@ -1,6 +1,6 @@
 package com.josimarsilva.leetcode.easy;
 
-import com.josimarsilva.leetcode.common.arrayToListNode
+import com.josimarsilva.leetcode.common.toListNode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +14,7 @@ class ReverseLinkedListTest {
     @ParameterizedTest
     @MethodSource("samples")
     fun `should reverse a given linked list`(head: IntArray, expectedResult: IntArray) {
-        assertThat(reverseList(arrayToListNode(head))).isEqualTo(arrayToListNode(expectedResult))
+        assertThat(reverseList(head.toListNode())).isEqualTo(expectedResult.toListNode())
     }
 
     private fun samples(): Stream<Arguments> = Stream.of(

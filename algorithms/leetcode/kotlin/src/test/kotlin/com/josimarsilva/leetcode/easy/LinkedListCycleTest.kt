@@ -1,7 +1,7 @@
 package com.josimarsilva.leetcode.easy
 
-import com.josimarsilva.leetcode.common.arrayToListNode
 import com.josimarsilva.leetcode.common.ListNode
+import com.josimarsilva.leetcode.common.toListNode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -28,8 +28,8 @@ class LinkedListCycleTest {
 
     @ParameterizedTest
     @MethodSource("nonCyclicSamples")
-    fun `should return false given non-cyclic list`(listNode: IntArray) {
-        val head = arrayToListNode(listNode)
+    fun `should return false given non-cyclic list`(intArray: IntArray) {
+        val head = intArray.toListNode()
         assertThat(hasCycleNaive(head)).isFalse
         assertThat(hasCycle(head)).isFalse
     }
@@ -39,8 +39,8 @@ class LinkedListCycleTest {
         Arguments.of(intArrayOf(1, 2)),
     )
 
-    private fun createCyclicListNode(nodes: IntArray, pos: Int): ListNode? {
-        val head = arrayToListNode(nodes)
+    private fun createCyclicListNode(array: IntArray, pos: Int): ListNode? {
+        val head = array.toListNode()
         if (pos < 0) {
             return head
         }

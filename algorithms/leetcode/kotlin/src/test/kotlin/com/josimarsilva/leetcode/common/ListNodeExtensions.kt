@@ -1,8 +1,8 @@
 package com.josimarsilva.leetcode.common
 
-fun asIntArray(listNode: ListNode?): IntArray {
+fun ListNode?.asIntArray(): IntArray {
     val list = mutableListOf<Int>()
-    var currentNode = listNode
+    var currentNode = this
     while (currentNode != null) {
         list.add(currentNode.`val`)
         currentNode = currentNode.next
@@ -10,12 +10,12 @@ fun asIntArray(listNode: ListNode?): IntArray {
     return list.toIntArray()
 }
 
-fun arrayToListNode(array: IntArray): ListNode? {
-    if (array.isEmpty()) return null
-    val head = ListNode(array[0])
+fun IntArray.toListNode(): ListNode? {
+    if (this.isEmpty()) return null
+    val head = ListNode(this[0])
     var currentNode = head
-    for (i in 1 until array.size) {
-        val newNode = ListNode(array[i])
+    for (i in 1 until this.size) {
+        val newNode = ListNode(this[i])
         currentNode.next = newNode
         currentNode = newNode
     }
