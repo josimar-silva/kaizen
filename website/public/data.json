@@ -1,28 +1,39 @@
 {
   "stats": {
-    "totalAlgorithms": 43,
-    "totalDays": 42,
-    "currentStreak": 0,
+    "totalAlgorithms": 44,
+    "totalDays": 43,
+    "currentStreak": 2,
     "longestStreak": 38,
     "languageDistribution": {
-      "Java": 7,
       "Rust": 4,
-      "Kotlin": 32
+      "Java": 7,
+      "Kotlin": 33
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-11": 1,
-      "2025-10": 28
+      "2025-11": 2,
+      "2025-10": 28,
+      "2025-09": 14
     },
     "sourceDistribution": {
-      "leetcode": 31,
+      "codewars": 4,
+      "leetcode": 32,
       "project-euler": 7,
-      "coursera": 1,
-      "codewars": 4
+      "coursera": 1
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-11-08": [
+      {
+        "title": "Contains Duplicated",
+        "notes": "Here we are again, trading off space by time. ⏱️ vs 🌌",
+        "link": "https://github.com/josimar-silva/kaizen/commit/e69043ecd2cc4fd8c17612d74ab5f8309925d775",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/contains-duplicate",
+        "source": "leetcode"
+      }
+    ],
     "2025-11-07": [
       {
         "title": "Reverse Linked List",
