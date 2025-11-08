@@ -6,13 +6,13 @@
     "longestStreak": 38,
     "languageDistribution": {
       "Rust": 4,
-      "Java": 7,
-      "Kotlin": 33
+      "Kotlin": 33,
+      "Java": 7
     },
     "monthlyActivity": {
+      "2025-09": 14,
       "2025-11": 2,
-      "2025-10": 28,
-      "2025-09": 14
+      "2025-10": 28
     },
     "sourceDistribution": {
       "codewars": 4,
@@ -31,6 +31,7 @@
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/contains-duplicate",
+        "analysis": "algorithms/analysis/0044-contains-duplicate-e69043e.md",
         "source": "leetcode"
       }
     ],
