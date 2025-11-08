@@ -2,23 +2,23 @@
   "stats": {
     "totalAlgorithms": 43,
     "totalDays": 42,
-    "currentStreak": 1,
+    "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Kotlin": 32,
+      "Java": 7,
       "Rust": 4,
-      "Java": 7
+      "Kotlin": 32
     },
     "monthlyActivity": {
+      "2025-09": 14,
       "2025-11": 1,
-      "2025-10": 28,
-      "2025-09": 14
+      "2025-10": 28
     },
     "sourceDistribution": {
-      "codewars": 4,
+      "leetcode": 31,
       "project-euler": 7,
       "coursera": 1,
-      "leetcode": 31
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
