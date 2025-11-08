@@ -1,6 +1,7 @@
 package com.josimarsilva.leetcode.medium
 
 
+import com.josimarsilva.leetcode.common.ListNode
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest

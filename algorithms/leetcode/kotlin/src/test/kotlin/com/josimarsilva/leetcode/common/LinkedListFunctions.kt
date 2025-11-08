@@ -1,7 +1,5 @@
 package com.josimarsilva.leetcode.common
 
-import com.josimarsilva.leetcode.medium.ListNode
-
 fun asIntArray(listNode: ListNode?): IntArray {
     val list = mutableListOf<Int>()
     var currentNode = listNode

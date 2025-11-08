@@ -1,6 +1,6 @@
 package com.josimarsilva.leetcode.easy
 
-import com.josimarsilva.leetcode.medium.ListNode
+import com.josimarsilva.leetcode.common.ListNode
 
 /**
  *
