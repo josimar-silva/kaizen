@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 
 import { act, render, screen } from "@testing-library/react";
-import React from "react";
+import { Suspense } from "react";
 
 import SolutionPage from "./page";
 
@@ -39,23 +39,35 @@ jest.mock("@/components/analysis-section", () => ({
   ),
 }));
 
+const mockNotFound = jest.fn(() => {
+  throw new Error("NEXT_NOT_FOUND");
+});
+
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
   }),
-  notFound: jest.fn(() => {
-    throw new Error("Not Found");
-  }),
+  get notFound() {
+    return mockNotFound;
+  },
 }));
 
 describe("SolutionPage", () => {
+  beforeEach(() => {
+    mockNotFound.mockClear();
+  });
+
   it("should render algorithm details correctly", async () => {
     const props = {
-      params: { date: "2023-01-01", index: "0" },
+      params: Promise.resolve({ date: "2023-01-01", index: "0" }),
     };
 
     await act(async () => {
-      render(<SolutionPage {...props} />);
+      render(
+        <Suspense fallback={<div>Loading...</div>}>
+          <SolutionPage {...props} />
+        </Suspense>,
+      );
     });
 
     expect(
@@ -79,11 +91,11 @@ describe("SolutionPage", () => {
 
   it("should call notFound for invalid index", async () => {
     const props = {
-      params: { date: "2023-01-01", index: "99" },
+      params: Promise.resolve({ date: "2023-01-01", index: "99" }),
     };
 
-    await expect(async () =>
-      render(<SolutionPage {...props} />),
-    ).rejects.toThrow("Not Found");
+    await expect(SolutionPage(props)).rejects.toThrow("NEXT_NOT_FOUND");
+
+    expect(mockNotFound).toHaveBeenCalled();
   });
 });

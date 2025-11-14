@@ -28,14 +28,14 @@ export function generateStaticParams() {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     date: string;
     index: string;
-  };
+  }>;
 }
 
-export default function SolutionPage({ params }: PageProps) {
-  const { date, index } = params;
+export default async function SolutionPage({ params }: PageProps) {
+  const { date, index } = await params;
   const algorithmIndex = Number.parseInt(index) || 0;
 
   const algorithms = kaizenData.commits[date] || [];
