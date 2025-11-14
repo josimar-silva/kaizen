@@ -1,148 +1,276 @@
-# Gemini CLI Plan Mode
+# Kaizen - AGENTS.md
 
-You are Gemini CLI, an expert AI assistant operating in a special 'Plan Mode'. Your sole purpose is to research, analyze, and create detailed implementation plans. You must operate in a strict read-only capacity.
+## Project Overview
 
-Gemini CLI's primary goal is to act like a senior engineer: understand the request, investigate the codebase and relevant resources, formulate a robust strategy, and then present a clear, step-by-step plan for approval. You are forbidden from making any modifications. You are also forbidden from implementing the plan.
+**Kaizen** (改善) - meaning "continuous improvement" in Japanese - is an automated journal system that tracks and visualizes daily progress on algorithm and system design challenges. It transforms your Git commit history into a beautiful, self-updating portfolio.
 
-## Core Principles of Plan Mode
+**Core Concept:**
+1. Commit algorithm solutions using structured commit messages
+2. Automated parser extracts data from Git history
+3. Frontend visualizes progress with heatmaps and timelines
 
-*   **Strictly Read-Only:** You can inspect files, navigate code repositories, evaluate project structure, search the web, and examine documentation.
-*   **Absolutely No Modifications:** You are prohibited from performing any action that alters the state of the system. This includes:
-    *   Editing, creating, or deleting files.
-    *   Running shell commands that make changes (e.g., `git commit`, `npm install`, `mkdir`).
-    *   Altering system configurations or installing packages.
+**Live Site:** [kaizen.josimar-silva.com](https://kaizen.josimar-silva.com/)
 
-## Steps
+## Monorepo Structure
 
-1.  **Acknowledge and Analyze:** Confirm you are in Plan Mode. Begin by thoroughly analyzing the user's request and the existing codebase to build context.
-2.  **Reasoning First:** Before presenting the plan, you must first output your analysis and reasoning. Explain what you've learned from your investigation (e.g., "I've inspected the following files...", "The current architecture uses...", "Based on the documentation for [library], the best approach is..."). This reasoning section must come **before** the final plan.
-3.  **Create the Plan:** Formulate a detailed, step-by-step implementation plan. Each step should be a clear, actionable instruction.
-4.  **Present for Approval:** The final step of every plan must be to present it to the user for review and approval. Do not proceed with the plan until you have received approval. 
+This is a monorepo containing two main sub-projects:
 
-## Output Format
+```
+kaizen/
+├── kaizen-parser/       # Rust CLI - parses Git commits → data.json
+│   └── AGENTS.md       # Parser-specific AI agent instructions
+├── website/            # Next.js frontend - visualizes the data
+│   └── AGENTS.md      # Website-specific AI agent instructions
+├── algorithms/         # Algorithm solutions (organized by date)
+├── .github/workflows/  # CI/CD automation
+├── docs/              # Project documentation
+└── AGENTS.md          # This file - global project context
+```
 
-Your output must be a well-formatted markdown response containing two distinct sections in the following order:
+**Important:** For sub-project specific work, refer to the AGENTS.md file in that sub-project directory:
+- [`kaizen-parser/AGENTS.md`](./kaizen-parser/AGENTS.md) - Rust parser details
+- [`website/AGENTS.md`](./website/AGENTS.md) - Next.js website details
 
-1.  **Analysis:** A paragraph or bulleted list detailing your findings and the reasoning behind your proposed strategy.
-2.  **Plan:** A numbered list of the precise steps to be taken for implementation. The final step must always be presenting the plan for approval.
+## Technology Stack
 
-NOTE: If in plan mode, do not implement the plan. You are only allowed to plan. Confirmation comes from a user message.
+### Backend (kaizen-parser)
+- **Language:** Rust (edition 2024, MSRV 1.88.0)
+- **Purpose:** Parse Git commits and generate `data.json`
+- **Key Libraries:** git2, serde, regex, rayon, clap
 
-# Project Scope
+### Frontend (website)
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript 5.9
+- **UI:** React 19, Tailwind CSS 4, Radix UI
+- **Testing:** Jest (unit), Playwright (e2e)
 
-This project, "Kaizen," is a continuous improvement journal designed to automatically track and visualize daily progress on algorithm and system design challenges.
-
-The backend consists of a Rust-based parser (`kaizen-parser`) that runs within a daily GitHub Actions workflow. This script processes git commit messages, which follow a specific convention, to extract information about completed tasks, including developer notes and the programming language used. The extracted data is then compiled into a `data.json` file.
-
-The frontend is a Next.js and TypeScript application that consumes this `data.json` to render a minimalist and clean user interface. The main features include a GitHub-style calendar heatmap for an at-a-glance overview of activity and a detailed timeline view that lists entries chronologically. The goal is to create a self-updating portfolio that showcases daily learning and problem-solving efforts.
-
-# Project Structure
+## Monorepo Structure
 
 ```
 /
-├── .github/workflows/update-data.yml  # GitHub Action to automate data generation.
-├── algorithms/                          # Directory for algorithm solutions, organized by date.
-├── docs/                                # Project documentation and prompts.
-├── website/                             # Next.js frontend application.
-│   ├── public/data.json                 # The data file generated by the parser.
-│   └── ...                              # Other Next.js files (pages, components, etc.).
-├── kaizen-parser/                       # Rust application for parsing git commits.
-│   ├── src/main.rs                      # Main parser logic.
-│   └── Cargo.toml                       # Rust project dependencies.
-└── GEMINI.md                            # Main project overview and developer guide.
+├── .github/workflows/     # GitHub Actions for automation
+│   ├── kaizen.yaml       # Daily parser run + data generation
+│   ├── docker-website.yaml   # Docker builds
+│   └── deploy-website.yaml   # Website deployment
+├── algorithms/           # Algorithm solutions organized by date
+├── docs/                # Project documentation
+├── website/             # Next.js frontend application
+│   ├── AGENTS.md       # Website-specific instructions
+│   ├── public/data.json # Generated by parser
+│   ├── src/            # Source code
+│   ├── package.json    # Dependencies
+│   ├── justfile        # Build commands
+│   └── ...
+├── kaizen-parser/       # Rust CLI parser
+│   ├── AGENTS.md       # Parser-specific instructions
+│   ├── src/main.rs     # Main parser logic
+│   ├── Cargo.toml      # Rust dependencies
+│   ├── justfile        # Build commands
+│   └── ...
+├── AGENTS.md           # This file (global context)
+├── README.md           # Human-readable project overview
+├── cliff.toml          # Changelog configuration
+└── renovate.json       # Dependency update automation
 ```
 
-# Developer Workflow
+## Commit Message Convention
 
-## Workflow
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/) specification.
 
-1. Design
-2. Write tests
-3. Lint and Format
-4. Implement
-5. Run tests
-6. Commit
+**Format:**
+```
+<type>(<scope>): <description>
 
-## Commits
+[optional body]
 
-Commits should follow the "Atomic Commits" approach.
+[optional footer]
+```
 
-Commit messages follow https://www.conventionalcommits.org with scopes defined on cliff.toml.
+**Scopes:**
+Defined in `cliff.toml` at the project root. Common scopes include:
+- `website` - Frontend changes
+- `parser` - Backend parser changes
+- `deps` - Dependency updates
+- `ci` - CI/CD changes
+- `docs` - Documentation updates
 
-### Git Commands
+**Types:**
+- `feat` - New feature
+- `fix` - Bug fix
+- `refactor` - Code refactoring
+- `test` - Test additions/changes
+- `docs` - Documentation only
+- `chore` - Maintenance tasks
+- `style` - Code style changes
+- `perf` - Performance improvements
 
-The user prefers to use the `git pls` command to update the repository. This command is an alias for `git pull && git status`.
+**Examples:**
+```
+feat(website): add dark mode toggle
+fix(parser): correct date parsing for edge cases
+chore(deps): update Next.js to v16
+test(website): add timeline component tests
+```
+
+**Atomic Commits:**
+Keep commits focused and atomic - each commit should represent a single logical change.
+
+## Git Commands
+
+**Preferred workflow commands:**
+- `git pls` - Alias for `git pull && git status`
+- Use atomic commits for better history
+
+## Development Workflow
+
+### Standard Workflow
+1. **Design** - Plan the implementation
+2. **Write tests** - Test-driven development when possible
+3. **Lint and format** - Use `just check`
+4. **Implement** - Write the code
+5. **Run tests** - Use `just test` (and `just test-e2e` for website)
+6. **Commit** - Follow atomic commits and conventional commits
 
 ### Linting and Formatting
 
-The project uses ESLint for linting and Prettier for code formatting.
+**Website (Next.js/TypeScript):**
+- ESLint with Next.js and Prettier configs
+- Prettier for code formatting
+- Commands: `just check`, `just format`, `just lint`
 
-*   **Linting:**
-    The project uses ESLint for linting.
-    -   `pnpm lint`: Runs ESLint checks.
-    -   `pnpm lint:fix`: Runs ESLint and attempts to fix issues.
+**Parser (Rust):**
+- `cargo fmt` for code formatting
+- `cargo clippy` for linting
+- Commands: `just format`, `just lint`
 
-*   **Formatting:**
-    The project uses Prettier for code formatting.
-    -   `npx prettier . --check`: Checks for formatting issues.
-    -   `npx prettier . --write`: Formats the code.
+**Global Commands:**
+```bash
+just check   # Lint and format check
+just format  # Auto-fix linting and formatting
+just lint    # Check for linting issues
+```
 
-Convenience `just` commands are also available:
--   `just check`: Runs linting and formatting checks (`just lint` and `npx prettier . --check`).
--   `just format`: Fixes linting and formatting issues (`pnpm lint:fix` and `npx prettier . --write`).
+### Quick Start Commands
 
-### Available Scripts
+**Website:**
+```bash
+cd website
+npm install      # Install dependencies
+npm run dev      # Start dev server
+npm run build    # Production build
+npm run test     # Unit tests (Jest)
+npm run test-e2e # E2E tests (Playwright)
+```
 
-The `website` project provides the following scripts (from `package.json` and `justfile`):
+**Parser:**
+```bash
+cd kaizen-parser
+cargo build --release  # Production build
+cargo test            # Run tests
+```
 
-**`package.json` scripts:**
--   `prebuild`: Runs `scripts/pre-build.js` before `build`.
--   `build`: Builds the Next.js project for production.
--   `predev`: Runs `scripts/pre-build.js` before `dev`.
--   `dev`: Starts the Next.js development server with Turbopack.
--   `lint`: Runs ESLint checks.
--   `lint:fix`: Runs ESLint and attempts to fix issues.
--   `start`: Starts the Next.js production server (requires a build first).
--   `pretest`: Runs `scripts/pre-build.js` before `test`.
--   `test`: Runs unit tests with Jest.
--   `test-e2e`: Runs end-to-end tests with Playwright.
--   `serve`: Serves the built `dist/website` directory.
+For detailed commands, see sub-project AGENTS.md files.
 
-**`just` commands:**
--   `just install`: Installs pnpm dependencies.
--   `just ci`: Installs pnpm dependencies for CI environment (`--frozen-lockfile --strict-peer-dependencies`).
--   `just dev`: Starts the development server.
--   `just build`: Builds the project for production.
--   `just build-image`: Builds the Docker image for the website.
--   `just start`: Starts the production server.
--   `just start-container`: Starts the dockerized application.
--   `just lint`: Runs linting.
--   `just check`: Checks code for linting and formatting issues.
--   `just format`: Formats the source code.
--   `just test`: Runs unit tests.
--   `just test-e2e`: Runs UI tests for all browsers.
--   `just test-e2e-on BROWSER`: Runs UI tests on a specific browser.
--   `just pre-release`: Prepares for a new release by running checks and tests, and bumping the version.
+## Testing Strategy
 
+### Website Testing
+- **Unit Tests:** Jest with React Testing Library
+- **E2E Tests:** Playwright (Chromium, Firefox, WebKit)
+- **Coverage:** Generated for both test types
+- **Commands:** `just test`, `just test-e2e`
 
-### Testing
+### Parser Testing
+- **Unit Tests:** Cargo test framework
+- **Coverage:** Tarpaulin with Lcov output
+- **Commands:** `just test`
 
-The project utilizes two testing frameworks:
+## Code Quality & Validation
 
--   **Unit Tests**: [Jest](https://jestjs.io/)
-    -   Run with `pnpm test` or `just test`.
-    -   Coverage reports are generated.
--   **End-to-End (E2E) Tests**: [Playwright](https://playwright.dev/)
-    -   Run with `pnpm test-e2e` or `just test-e2e`.
-    -   Can be run for specific browsers using `just test-e2e-on <BROWSER>`.
-    -   Coverage reports are generated.
+The project enforces quality through:
 
+1. **Linting:** ESLint (website) + Clippy (parser)
+2. **Formatting:** Prettier (website) + rustfmt (parser)
+3. **Type Safety:** TypeScript strict mode + Rust ownership system
+4. **Testing:** Unit and E2E test coverage
+5. **CI/CD:** Automated checks on all PRs
 
-## Validation
+**Pre-release workflow:**
+```bash
+just pre-release  # In either sub-project
+```
 
-The project ensures code quality and correctness through several validation steps:
+This validates everything before creating a release commit.
 
--   **Linting and Formatting Checks**: The `just check` command (`pnpm lint` and `npx prettier . --check`) verifies adherence to code style and quality standards.
--   **Unit Tests**: The `just test` command (`pnpm test`) runs comprehensive unit tests to ensure individual components function as expected.
--   **End-to-End Tests**: The `just test-e2e` command (`pnpm test-e2e`) executes UI tests across various browsers to validate the application's functionality from a user's perspective.
--   **Pre-release Checks**: The `just pre-release` command automates a series of checks (`just check`, `just test`, `just test-e2e`) to ensure the codebase is stable and ready for a new release.
+## CI/CD & Automation
+
+### GitHub Actions Workflows
+- **`kaizen.yaml`** - Daily automated parser run and data generation
+- **`docker-website.yaml`** - Build and publish Docker images
+- **`deploy-website.yaml`** - Deploy website to production
+- **`codeql.yaml`** - Security scanning with CodeQL
+
+### Dependency Management
+- **Renovate Bot** - Automated dependency updates (config: `renovate.json`)
+- Updates are grouped by package manager and severity
+
+### Changelog
+- Generated using `cliff.toml` configuration
+- Follows conventional commits for automatic categorization
+
+## Project-Specific Conventions
+
+### Algorithm Solutions Directory
+The `algorithms/` directory contains daily algorithm solutions organized by date. While not a sub-project with builds, it's the primary data source for the parser.
+
+### Data Flow
+```
+Git Commits → kaizen-parser → data.json → website → User
+```
+
+1. Commit algorithm solutions with structured messages
+2. Parser extracts data and generates `data.json`
+3. Website reads `data.json` and renders UI
+4. GitHub Actions automates this daily
+
+### Commit Message Format for Algorithm Solutions
+See parser documentation for the specific format expected for algorithm solution commits.
+
+## Notes for AI Agents
+
+### Context Awareness
+- **Always check which sub-project you're working in** before running commands
+- Refer to the relevant sub-project AGENTS.md for detailed instructions:
+  - Working on website? → See `website/AGENTS.md`
+  - Working on parser? → See `kaizen-parser/AGENTS.md`
+- This root file provides global context only
+
+### Cross-Project Considerations
+- Changes to `data.json` schema require updates to **both** parser and website
+- Version bumps should be coordinated between sub-projects
+- Test the full data pipeline when making schema changes
+
+### Working with Just
+- Both sub-projects use `justfile` for common commands
+- Commands are consistent across sub-projects: `build`, `test`, `lint`, `format`, `check`
+- Always run commands from the appropriate sub-project directory
+
+### Common Pitfalls
+1. **Don't modify `data.json` directly** - it's generated by the parser
+2. **Run pre-build scripts** - website has automatic pre-build hooks
+3. **Respect MSRV** - Parser requires Rust 1.88.0+
+4. **Use frozen lockfiles in CI** - Both projects use locked dependencies
+
+### Repository Links
+- **Homepage:** [kaizen.josimar-silva.com](https://kaizen.josimar-silva.com/)
+- **Repository:** [github.com/josimar-silva/kaizen](https://github.com/josimar-silva/kaizen)
+- **Issue Tracker:** GitHub Issues
+- **License:** MIT
+
+## Additional Resources
+
+- **README.md** - Human-readable project overview and quick start
+- **website/README.md** - Website-specific documentation
+- **kaizen-parser/README.md** - Parser-specific documentation
+- **docs/** - Extended project documentation
+- **cliff.toml** - Commit scopes and changelog configuration
+- **CODE_OF_CONDUCT.md** - Community guidelines
