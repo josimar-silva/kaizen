@@ -13,7 +13,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:alpine@sha256:1334f319b3f53168e696b593c0307f58d68d367ac9cae1da746f5f3c4e222143 AS runner
+FROM nginxinc/nginx-unprivileged:alpine@sha256:2af55ce6348ca31e01f37f74cfb59617209b6c685a67b25e235bf45d86164d40 AS runner
 USER root
 RUN apk --no-cache upgrade
 
