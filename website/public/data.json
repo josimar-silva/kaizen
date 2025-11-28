@@ -10,15 +10,15 @@
       "Rust": 4
     },
     "monthlyActivity": {
-      "2025-10": 28,
       "2025-11": 2,
+      "2025-10": 28,
       "2025-09": 14
     },
     "sourceDistribution": {
       "leetcode": 32,
-      "project-euler": 7,
       "codewars": 4,
-      "coursera": 1
+      "coursera": 1,
+      "project-euler": 7
     },
     "mostActiveDay": "Friday"
   },
