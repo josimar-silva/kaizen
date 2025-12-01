@@ -1,28 +1,41 @@
 {
   "stats": {
-    "totalAlgorithms": 44,
-    "totalDays": 43,
-    "currentStreak": 0,
+    "totalAlgorithms": 45,
+    "totalDays": 44,
+    "currentStreak": 1,
     "longestStreak": 38,
     "languageDistribution": {
-      "Kotlin": 33,
       "Java": 7,
+      "Kotlin": 34,
       "Rust": 4
     },
     "monthlyActivity": {
-      "2025-11": 2,
+      "2025-10": 28,
       "2025-09": 14,
-      "2025-10": 28
+      "2025-11": 2,
+      "2025-12": 1
     },
     "sourceDistribution": {
-      "coursera": 1,
-      "leetcode": 32,
       "project-euler": 7,
-      "codewars": 4
+      "coursera": 1,
+      "codewars": 4,
+      "leetcode": 33
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
+    "2025-12-01": [
+      {
+        "title": "First Bad Version",
+        "notes": "Binary Search starter cookie 😀",
+        "link": "https://github.com/josimar-silva/kaizen/commit/469cf3f295a5d9217967ff0803ade697d05ec9f2",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/first-bad-version",
+        "analysis": "algorithms/analysis/0045-first-bad-version-469cf3f.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-11-08": [
       {
         "title": "Contains Duplicated",
