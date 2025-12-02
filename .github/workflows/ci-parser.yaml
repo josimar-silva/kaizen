@@ -28,7 +28,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: 📦 Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
       - name: ✅ Check
         run: cargo check --locked --verbose
@@ -53,7 +53,7 @@ jobs:
           components: clippy
       
       - name: 📦 Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       
       - name: 🔍 Check the lints
         run: cargo clippy --tests --verbose -- -D warnings
@@ -78,7 +78,7 @@ jobs:
           components: rustfmt
       
       - name: 📦 Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       
       - name: 📝 Check the formatting
         run: cargo fmt --all -- --check --verbose
@@ -100,13 +100,13 @@ jobs:
 
       - name: 📦 Checkout
         if: github.event_name != 'pull_request'
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           fetch-depth: 0
 
       - name: 📦 Checkout
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
