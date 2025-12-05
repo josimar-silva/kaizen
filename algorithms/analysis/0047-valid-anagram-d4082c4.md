@@ -1,7 +1,7 @@
 ---
 title: Valid Anagram
-commit: e448f9e
-url: https://github.com/josimar-silva/kaizen/commit/e448f9e022e02dabac9ebcc0ae96bcbe4a3f30f5
+commit: d4082c4
+url: https://github.com/josimar-silva/kaizen/commit/d4082c436e8bed6dc03a45233e9a50792fd0a6e2
 ---
 
 #### Problem

@@ -1,7 +1,7 @@
 ---
 title: Binary Search
-commit: e17d21c
-url: https://github.com/josimar-silva/kaizen/commit/e17d21caefddf026f3ec316ef64b34aa1aa7ab62
+commit: 84a63be
+url: https://github.com/josimar-silva/kaizen/commit/84a63be5f9b01a362cf5ff34d4a9c19b86ed0a98
 ---
 
 #### Problem
