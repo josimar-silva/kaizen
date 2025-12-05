@@ -6,34 +6,32 @@
     "longestStreak": 38,
     "languageDistribution": {
       "Java": 7,
-      "Kotlin": 35,
-      "": 1,
+      "Kotlin": 36,
       "Rust": 4
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-12": 2,
       "2025-10": 28,
-      "2025-11": 3
+      "2025-11": 3,
+      "2025-09": 14,
+      "2025-12": 2
     },
     "sourceDistribution": {
-      "codewars": 4,
+      "project-euler": 7,
       "coursera": 1,
-      "leetcode": 35,
-      "project-euler": 7
+      "codewars": 4,
+      "leetcode": 35
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
     "2025-12-02": [
       {
         "title": "Valid Anagram",
         "notes": "Tomato, Tomato",
-        "link": "https://github.com/josimar-silva/kaizen/commit/e448f9e022e02dabac9ebcc0ae96bcbe4a3f30f5",
+        "link": "https://github.com/josimar-silva/kaizen/commit/a997fdd6750862e0c26bf39260a51156ee182c47",
         "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/valid-anagram",
-        "analysis": "algorithms/analysis/0047-valid-anagram-e448f9e.md",
         "source": "leetcode"
       }
     ],
@@ -41,11 +39,11 @@
       {
         "title": "Binary Search",
         "notes": "🕮 🔍",
-        "link": "https://github.com/josimar-silva/kaizen/commit/e17d21caefddf026f3ec316ef64b34aa1aa7ab62",
-        "language": "",
+        "link": "https://github.com/josimar-silva/kaizen/commit/84a63be5f9b01a362cf5ff34d4a9c19b86ed0a98",
+        "language": "Kotlin",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/binary-search",
-        "analysis": "algorithms/analysis/0046-binary-search-e17d21c.md",
+        "analysis": "algorithms/analysis/0046-binary-search-84a63be.md",
         "source": "leetcode"
       }
     ],
