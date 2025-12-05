@@ -1,30 +1,42 @@
 {
   "stats": {
-    "totalAlgorithms": 46,
-    "totalDays": 45,
+    "totalAlgorithms": 47,
+    "totalDays": 46,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "": 1,
-      "Rust": 4,
       "Java": 7,
-      "Kotlin": 34
+      "Kotlin": 35,
+      "": 1,
+      "Rust": 4
     },
     "monthlyActivity": {
-      "2025-11": 3,
       "2025-09": 14,
-      "2025-12": 1,
-      "2025-10": 28
+      "2025-12": 2,
+      "2025-10": 28,
+      "2025-11": 3
     },
     "sourceDistribution": {
       "codewars": 4,
       "coursera": 1,
-      "project-euler": 7,
-      "leetcode": 34
+      "leetcode": 35,
+      "project-euler": 7
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-12-02": [
+      {
+        "title": "Valid Anagram",
+        "notes": "Tomato, Tomato",
+        "link": "https://github.com/josimar-silva/kaizen/commit/e448f9e022e02dabac9ebcc0ae96bcbe4a3f30f5",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/valid-anagram",
+        "analysis": "algorithms/analysis/0047-valid-anagram-e448f9e.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-11-30": [
       {
         "title": "Binary Search",
