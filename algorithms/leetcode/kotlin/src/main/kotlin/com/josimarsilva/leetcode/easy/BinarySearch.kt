@@ -14,6 +14,7 @@ package com.josimarsilva.leetcode.easy
  *
  * Ref.: https://leetcode.com/problems/binary-search
  */
+//Time: O(log n) Space: O(1)
 fun search(numbersOrdered: IntArray, target: Int): Int {
     if (numbersOrdered.isEmpty()) return -1
 
