@@ -10,18 +10,18 @@
       "Kotlin": 36
     },
     "monthlyActivity": {
-      "2025-11": 3,
       "2025-12": 2,
+      "2025-11": 3,
       "2025-10": 28,
       "2025-09": 14
     },
     "sourceDistribution": {
+      "coursera": 1,
       "codewars": 4,
       "project-euler": 7,
-      "coursera": 1,
       "leetcode": 35
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
     "2025-12-02": [
