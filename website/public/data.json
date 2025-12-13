@@ -1,29 +1,41 @@
 {
   "stats": {
-    "totalAlgorithms": 48,
-    "totalDays": 47,
+    "totalAlgorithms": 49,
+    "totalDays": 48,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
+      "Kotlin": 38,
       "Java": 7,
-      "Rust": 4,
-      "Kotlin": 37
+      "Rust": 4
     },
     "monthlyActivity": {
-      "2025-09": 14,
-      "2025-12": 3,
       "2025-10": 28,
-      "2025-11": 3
+      "2025-09": 14,
+      "2025-11": 3,
+      "2025-12": 4
     },
     "sourceDistribution": {
-      "project-euler": 7,
       "codewars": 4,
-      "leetcode": 36,
+      "leetcode": 37,
+      "project-euler": 7,
       "coursera": 1
     },
-    "mostActiveDay": "Friday"
+    "mostActiveDay": "Monday"
   },
   "commits": {
+    "2025-12-04": [
+      {
+        "title": "Implement Queue Using Stacks",
+        "notes": "Some minor optimizations goes a long way 📚.",
+        "link": "https://github.com/josimar-silva/kaizen/commit/2ed6edbef8ce3c31848fe63f1a12cfafc3164c42",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/implement-queue-using-stacks",
+        "analysis": "algorithms/analysis/0049-queue-using-stack-2ed6edb.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-12-03": [
       {
         "title": "Diameter of Binary Tree",
