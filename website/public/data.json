@@ -1,29 +1,41 @@
 {
   "stats": {
-    "totalAlgorithms": 47,
-    "totalDays": 46,
+    "totalAlgorithms": 48,
+    "totalDays": 47,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
+      "Java": 7,
       "Rust": 4,
-      "Kotlin": 36,
-      "Java": 7
+      "Kotlin": 37
     },
     "monthlyActivity": {
       "2025-09": 14,
-      "2025-12": 2,
+      "2025-12": 3,
       "2025-10": 28,
       "2025-11": 3
     },
     "sourceDistribution": {
-      "codewars": 4,
-      "leetcode": 35,
       "project-euler": 7,
+      "codewars": 4,
+      "leetcode": 36,
       "coursera": 1
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-12-03": [
+      {
+        "title": "Diameter of Binary Tree",
+        "notes": "Treeeessss!!! 🌲🌲🌲🌲",
+        "link": "https://github.com/josimar-silva/kaizen/commit/1ca6df4085773023d53ce980e20983e64c4a8a38",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/diameter-of-binary-tree",
+        "analysis": "algorithms/analysis/0048-diameter-of-binary-tree-1ca6df4.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-12-02": [
       {
         "title": "Valid Anagram",
