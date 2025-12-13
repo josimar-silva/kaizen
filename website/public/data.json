@@ -1,29 +1,41 @@
 {
   "stats": {
-    "totalAlgorithms": 49,
-    "totalDays": 48,
+    "totalAlgorithms": 50,
+    "totalDays": 49,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Kotlin": 38,
       "Java": 7,
+      "Kotlin": 39,
       "Rust": 4
     },
     "monthlyActivity": {
       "2025-10": 28,
       "2025-09": 14,
-      "2025-11": 3,
-      "2025-12": 4
+      "2025-12": 5,
+      "2025-11": 3
     },
     "sourceDistribution": {
-      "codewars": 4,
-      "leetcode": 37,
+      "leetcode": 38,
       "project-euler": 7,
-      "coursera": 1
+      "coursera": 1,
+      "codewars": 4
     },
-    "mostActiveDay": "Monday"
+    "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-12-05": [
+      {
+        "title": "Middle of the Linked list",
+        "notes": "Damn!! Two pointers are so handy 🤯!",
+        "link": "https://github.com/josimar-silva/kaizen/commit/347f133ad86eff9387a864865fd67d937468a200",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/middle-of-the-linked-list",
+        "analysis": "algorithms/analysis/0050-middle-of-linked-list-347f133.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-12-04": [
       {
         "title": "Implement Queue Using Stacks",
