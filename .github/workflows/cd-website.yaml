@@ -118,7 +118,7 @@ jobs:
           git push origin "kaizen-website/v${{ env.RELEASE_VERSION }}"
 
       - name: 📝 Generate changelog
-        uses: orhun/git-cliff-action@d77b37db2e3f7398432d34b72a12aa3e2ba87e51 # v4
+        uses: orhun/git-cliff-action@e16f179f0be49ecdfe63753837f20b9531642772 # v4
         with:
           config: cliff.toml
           args: -v --latest --strip header
