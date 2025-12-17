@@ -1,22 +1,22 @@
 {
   "stats": {
-    "totalAlgorithms": 50,
-    "totalDays": 49,
+    "totalAlgorithms": 51,
+    "totalDays": 50,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
       "Java": 7,
-      "Rust": 4,
-      "Kotlin": 39
+      "Kotlin": 40,
+      "Rust": 4
     },
     "monthlyActivity": {
+      "2025-12": 6,
       "2025-09": 14,
-      "2025-11": 3,
       "2025-10": 28,
-      "2025-12": 5
+      "2025-11": 3
     },
     "sourceDistribution": {
-      "leetcode": 38,
+      "leetcode": 39,
       "codewars": 4,
       "coursera": 1,
       "project-euler": 7
@@ -24,6 +24,18 @@
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-12-06": [
+      {
+        "title": "Is Subsequence?",
+        "notes": "From a \"simple\" problem to 🤯🤯!",
+        "link": "https://github.com/josimar-silva/kaizen/commit/0a3c3269f63dc72f455e1df664b5ef2078a3291c",
+        "language": "Kotlin",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/is-subsequence",
+        "analysis": "algorithms/analysis/0051-is-subsequence-0a3c326.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-12-05": [
       {
         "title": "Middle of the Linked list",
