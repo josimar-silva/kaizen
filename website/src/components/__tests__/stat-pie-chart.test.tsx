@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { StatPieChart } from "../stat-pie-chart";
 
 jest.mock("recharts", () => ({
-  ...jest.requireActual("recharts"),
   ResponsiveContainer: ({ children }: any) => <div>{children}</div>,
   PieChart: ({ children }: any) => <div>{children}</div>,
   Pie: ({ children }: any) => <div>{children}</div>,
