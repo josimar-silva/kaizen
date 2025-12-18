@@ -5,21 +5,21 @@
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Java": 7,
+      "Rust": 4,
       "Kotlin": 40,
-      "Rust": 4
+      "Java": 7
     },
     "monthlyActivity": {
-      "2025-12": 6,
       "2025-09": 14,
       "2025-10": 28,
+      "2025-12": 6,
       "2025-11": 3
     },
     "sourceDistribution": {
-      "leetcode": 39,
-      "codewars": 4,
       "coursera": 1,
-      "project-euler": 7
+      "leetcode": 39,
+      "project-euler": 7,
+      "codewars": 4
     },
     "mostActiveDay": "Friday"
   },
