@@ -1,29 +1,41 @@
 {
   "stats": {
-    "totalAlgorithms": 51,
-    "totalDays": 50,
+    "totalAlgorithms": 52,
+    "totalDays": 51,
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Rust": 4,
       "Kotlin": 40,
-      "Java": 7
+      "Rust": 4,
+      "Java": 8
     },
     "monthlyActivity": {
-      "2025-10": 28,
+      "2025-12": 7,
       "2025-09": 14,
-      "2025-12": 6,
-      "2025-11": 3
+      "2025-11": 3,
+      "2025-10": 28
     },
     "sourceDistribution": {
-      "leetcode": 39,
-      "coursera": 1,
       "project-euler": 7,
-      "codewars": 4
+      "coursera": 1,
+      "codewars": 4,
+      "leetcode": 40
     },
     "mostActiveDay": "Friday"
   },
   "commits": {
+    "2025-12-07": [
+      {
+        "title": "Flood Fill",
+        "notes": "Classic DFS problem 🌊",
+        "link": "https://github.com/josimar-silva/kaizen/commit/4aa7988a3095b4710d258b4955ce3d07cfbab51b",
+        "language": "Java",
+        "type_of": "algo",
+        "reference": "https://leetcode.com/problems/flood-fill",
+        "analysis": "algorithms/analysis/0052-flood-fill-4aa7988.md",
+        "source": "leetcode"
+      }
+    ],
     "2025-12-06": [
       {
         "title": "Is Subsequence?",
