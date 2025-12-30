@@ -1,4 +1,4 @@
-FROM node:24.12.0-trixie-slim@sha256:040d57fbb7c3d3d21080c52c23bb1bbfb0cb2a5c7d60b59c86de0eded087bbb1 AS deps
+FROM node:24.12.0-trixie-slim@sha256:b05474903f463ce4064c09986525e6588c3e66c51b69be9c93a39fb359f883ce AS deps
 WORKDIR /app
 
 COPY package.json package-lock.json ./
