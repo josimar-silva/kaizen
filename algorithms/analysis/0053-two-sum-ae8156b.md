@@ -1,7 +1,7 @@
 ---
 title: Two Sum
-commit: 1c60998
-url: https://github.com/josimar-silva/kaizen/commit/1c6099873804dd80fb8c1d3a8bc80e235a15c6c3
+commit: ae8156b
+url: https://github.com/josimar-silva/kaizen/commit/ae8156beee5ef59f27f8119176b2d4c46d8722a2
 ---
 
 #### Problem
