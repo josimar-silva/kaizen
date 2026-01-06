@@ -5,36 +5,37 @@
     "currentStreak": 0,
     "longestStreak": 38,
     "languageDistribution": {
-      "Rust": 4,
+      "Kotlin": 40,
       "Java": 9,
-      "Kotlin": 40
+      "Rust": 4
     },
     "monthlyActivity": {
+      "2026-01": 1,
+      "2025-11": 3,
       "2025-09": 14,
-      "2025-01": 1,
-      "2025-12": 7,
       "2025-10": 28,
-      "2025-11": 3
+      "2025-12": 7
     },
     "sourceDistribution": {
-      "coursera": 1,
+      "leetcode": 40,
+      "analysis": 1,
       "project-euler": 7,
-      "leetcode": 41,
+      "coursera": 1,
       "codewars": 4
     },
     "mostActiveDay": "Sunday"
   },
   "commits": {
-    "2025-01-04": [
+    "2026-01-04": [
       {
         "title": "Two Sum",
         "notes": "Two Sum Java Version",
-        "link": "https://github.com/josimar-silva/kaizen/commit/1c6099873804dd80fb8c1d3a8bc80e235a15c6c3",
+        "link": "https://github.com/josimar-silva/kaizen/commit/ae8156beee5ef59f27f8119176b2d4c46d8722a2",
         "language": "Java",
         "type_of": "algo",
         "reference": "https://leetcode.com/problems/two-sum",
-        "analysis": "algorithms/analysis/0053-two-sum-1c60998.md",
-        "source": "leetcode"
+        "analysis": "algorithms/analysis/0053-two-sum-ae8156b.md",
+        "source": "analysis"
       }
     ],
     "2025-12-07": [
