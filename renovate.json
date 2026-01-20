@@ -33,8 +33,7 @@
   },
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "rangeStrategy": "update-lockfile"
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "matchPackageNames": [
