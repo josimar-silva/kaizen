@@ -26,11 +26,16 @@
     "dependencies"
   ],
   "npmrcMerge": true,
+  "postUpdateOptions": ["npmDedupe"],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": "after 10pm on sunday"
   },
   "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "rangeStrategy": "update-lockfile"
+    },
     {
       "matchPackageNames": [
         "eslint",
