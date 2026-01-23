@@ -59,6 +59,14 @@
       ],
       "groupName": "jest packages"
     },
+    {                                                                                                                                         
+    "matchPackageNames": [                                                                                                                  
+        "playwright",                                                                                                                         
+        "@playwright/test",                                                                                                                   
+        "mcr.microsoft.com/playwright"                                                                                                        
+      ],                                                                                                                                      
+      "groupName": "playwright packages"                                                                                                      
+    },
     {
       "matchDepTypes": [
         "dependencies"
