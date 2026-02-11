@@ -45,7 +45,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
-          node-version: "24.13.0"
+          node-version: "24.13.1"
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
@@ -85,7 +85,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
-          node-version: "24.13.0"
+          node-version: "24.13.1"
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
@@ -132,7 +132,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
-          node-version: "24.13.0"
+          node-version: "24.13.1"
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
@@ -194,7 +194,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
-          node-version: "24.13.0"
+          node-version: "24.13.1"
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
