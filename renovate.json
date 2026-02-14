@@ -38,6 +38,7 @@
     {
       "matchPackageNames": [
         "eslint",
+        "@eslint/js",
         "/^eslint-plugin/",
         "/^@typescript-eslint//"
       ],
