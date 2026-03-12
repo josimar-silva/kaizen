@@ -224,7 +224,7 @@ jobs:
         run: npx playwright install chrome
 
       - name: ⬇️ Download generated distribution
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: website-${{ github.sha }}
           path: website/dist/website
@@ -266,13 +266,13 @@ jobs:
           fetch-depth: 0
 
       - name: ⬇️ Download test coverage report
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: test-coverage
           path: website/coverage/
 
       - name: ⬇️ Download test-e2e coverage report
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: test-e2e-coverage-chromium
           path: website/e2e-tests-report/coverage
