@@ -98,7 +98,7 @@
     "jest-environment-jsdom": "30.3.0",
     "monocart-reporter": "2.10.0",
     "next-pwa": "5.6.0",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.8",
     "prettier": "3.8.1",
     "serve": "14.2.6",
     "tailwindcss": "4.2.2",
