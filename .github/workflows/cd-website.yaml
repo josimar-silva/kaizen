@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: 🇳 Setup Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: "24.14.1"
 
@@ -80,7 +80,7 @@ jobs:
           fetch-depth: 0
 
       - name: 🇳 Setup Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
           node-version: "24.14.1"
 
@@ -118,7 +118,7 @@ jobs:
           git push origin "kaizen-website/v${{ env.RELEASE_VERSION }}"
 
       - name: 📝 Generate changelog
-        uses: orhun/git-cliff-action@c93ef52f3d0ddcdcc9bd5447d98d458a11cd4f72 # v4
+        uses: orhun/git-cliff-action@f50e11560dce63f7c33227798f90b924471a88b5 # v4
         with:
           config: cliff.toml
           args: -v --latest --strip header
