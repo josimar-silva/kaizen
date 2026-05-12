@@ -93,7 +93,7 @@
     "eslint-config-next": "16.2.4",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "globals": "17.4.0",
+    "globals": "17.6.0",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.4.1",
     "monocart-reporter": "2.11.2",
