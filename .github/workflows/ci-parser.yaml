@@ -115,7 +115,7 @@ jobs:
         uses: taiki-e/install-action@235121fc41c4b3219394771de379b66fe26f2897 # cargo-tarpaulin
 
       - name: 💾 Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
 
       - name: 🧪 Run tests 
         run: |
