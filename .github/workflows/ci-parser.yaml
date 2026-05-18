@@ -112,7 +112,7 @@ jobs:
           fetch-depth: 0
 
       - name: ⚙️ Setup cargo-tarpaulin
-        uses: taiki-e/install-action@235121fc41c4b3219394771de379b66fe26f2897 # cargo-tarpaulin
+        uses: taiki-e/install-action@e28af6329966c578b1492954eca54c51e26aae10 # cargo-tarpaulin
 
       - name: 💾 Cache Rust dependencies
         uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
