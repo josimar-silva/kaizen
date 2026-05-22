@@ -36,7 +36,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: "24.14.1"
+          node-version: "24.16.0"
 
       - name: 🏷️ Get package version
         id: get_version
@@ -82,7 +82,7 @@ jobs:
       - name: 🇳 Setup Node.js
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
         with:
-          node-version: "24.14.1"
+          node-version: "24.16.0"
 
       - name: ⬇️ Download build artifact
         uses: dawidd6/action-download-artifact@8305c0f1062bb0d184d09ef4493ecb9288447732 # v20
