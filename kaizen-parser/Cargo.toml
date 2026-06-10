@@ -22,7 +22,7 @@ git2 = "=0.20.4"
 regex = "=1.10.5"
 rayon = "=1.11.0"
 clap = { version = "=4.5.60", features = ["derive"] }
-tempfile = "=3.26.0"
+tempfile = "=3.27.0"
 url = "=2.5.8"
 chrono = { version = "=0.4.44", features = ["serde"] }
 log = "=0.4.29"
