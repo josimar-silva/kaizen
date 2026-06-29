@@ -29,7 +29,7 @@ log = "=0.4.33"
 env_logger = "=0.11.10"
 ordermap = { version = "=1.2.0", features = ["serde"] }
 [target.'cfg(not(windows))'.dependencies]
-openssl = { version = "=0.10.80", features = ["vendored"] }
+openssl = { version = "=0.10.81", features = ["vendored"] }
 
 [dev-dependencies]
 kaizen = { path = ".", version = "0.4.2-SNAPSHOT" }
